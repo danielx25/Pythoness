@@ -15,11 +15,25 @@ namespace RedNeuronal
 		*/
 		RNA(int nc, int *nnc, double t);
 
-		void setCriterio(bool(*funcion)(const RNA*, void*), void* arg);
+		virtual ~RNA();
 
-		void setInicio(void (*funcion)(const RNA*, void*), void* arg);
+		// retorna la entrada para una neurona.
+		virtual double funcionPropagacion(int idc_capa, int idc_neurona);
 
-		void setFinCiclo(void (*funcion)(const RNA*, void*), void* arg);
+		virtual double funcionActivacion(double entrada_red) = 0;
+
+		// result_act : valor resultante de la funcion de activacion.
+		virtual double calcularSalida(double result_act);
+
+		// algoritmo de aprendizaje para la red.
+		virtual void aprendizaje() = 0;
+
+		virtual void iniciarPesos(double min, double max);
+
+		// obtiene las salidas de todas las neuronas, exceptuando las neuronas de entrada.
+		virtual void calcularSalidas();
+
+		virtual void setEntrada(double* patron);
 
 		double* getCapa(int idc_capa) const;
 
@@ -36,6 +50,8 @@ namespace RedNeuronal
 		int getNumCapas() const;
 
 		int getNumNrns() const;
+
+		int getNumTotalNrns() const;
 
 		int* getNumNrnsCapas() const;
 
@@ -54,28 +70,6 @@ namespace RedNeuronal
 		int num_total_nrns;
 		int *num_nrns_capas;
 		int ciclos;
-		void* arg_inc; // argumento adicional para el callback ejecutado al inicio.
-		void* arg_fc; // argumento adicional para el callback terminoCiclo.
-		void* arg_ct; // argumento adicional para el callback criterioTermino.
-		void (*inicio)(const RNA*, void*); // funcion ejecutada al inicio de la ejecución de la red.
-		void (*finCiclo)(const RNA*, void*); // funcion ejecutada al final de un ciclo de la ejecución de la red.
-		bool (*criterioTermino)(const RNA*, void*); // funcion ejecutada para comprobar si se ha alcanzado el criterio de termino de la red.
-
-		// retorna la entrada para una neurona.
-		virtual double funcionPropagacion(int idc_capa, int idc_neurona) = 0;
-
-		virtual double funcionActivacion(double entrada_red) = 0;
-
-		virtual void aprendizaje() = 0;
-
-		virtual double* ejecutar(double* entrada) = 0;
-
-		virtual void entrenamiento() = 0;
-
-		virtual void iniciarPesos(double min, double max) = 0;
-
-		// obtiene las salidas de todas las neuronas, exceptuando las neuronas de entrada.
-		virtual void calcularSalidas() = 0;
 	};
 }
 

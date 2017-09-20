@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <cstdlib>
 #include <time.h>
+#include <iostream>
 #include "RNA.h"
 
 namespace RedNeuronal
@@ -20,14 +21,32 @@ namespace RedNeuronal
 		for (int i = 0; i < num_total_nrns; i++)
 		{
 			salidas[i] = 0;
-			pesos[i][i] = 0;
+			pesos[i] = new double[num_total_nrns];
+
+			for (int j = 0; j < num_total_nrns; j++)
+				pesos[i][j] = 0;
 		}
+
+		// seteamos la salida de los bias.
+		for (int i = 0; i < (num_capas - 1); i++)
+			salidas[getUltimaNeurona(i)] = 1;
+
+	}
+
+	RNA::~RNA()
+	{
+		for (int i = 0; i < num_total_nrns; i++)
+			delete[] pesos[i];
+
+		delete[] pesos;
+		delete[] salidas;
 	}
 
 	void RNA::iniciarPesos(double min, double max)
 	{
 		int idc_neurona = 0;
 		int idc_ultima_nr = 0;
+		srand(time(NULL));
 
 		for (int i = 0; i < (num_capas - 1); i++)
 		{
@@ -62,6 +81,11 @@ namespace RedNeuronal
 		return entrada_red;
 	}
 
+	double RNA::calcularSalida(double result_act)
+	{
+		return result_act;
+	}
+
 	void RNA::calcularSalidas()
 	{
 		// partimos de la segunda cap.
@@ -71,7 +95,7 @@ namespace RedNeuronal
 			int idc_ult_nrn = getUltimaNeurona(idc_capa);
 		
 			for (int idc_nrn = idc_pr_nrn; idc_nrn < num_total_nrns; idc_nrn++)
-				salidas[idc_nrn] = funcionActivacion(funcionPropagacion(idc_capa, idc_nrn));
+				salidas[idc_nrn] = calcularSalida(funcionActivacion(funcionPropagacion(idc_capa, idc_nrn)));
 
 			// la salida de los bias siempre son 1.
 			salidas[idc_ult_nrn] = 1;
@@ -79,23 +103,12 @@ namespace RedNeuronal
 			
 	}
 
-	void RNA::setInicio(void (*funcion)(const RNA*, void*), void* arg)
+	void RNA::setEntrada(double* patron)
 	{
-		inicio = funcion;
-		arg_inc = arg;
+		for (int i = 0; i < num_nrns_capas[0]; i++)
+			salidas[i] = patron[i];
 	}
 
-	void RNA::setFinCiclo(void(*funcion)(const RNA*, void*), void* arg)
-	{
-		finCiclo = funcion;
-		arg_fc = arg;
-	}
-
-	void RNA::setCriterio(bool (*funcion)(const RNA*, void*), void* arg) 
-	{ 
-		criterioTermino = funcion;
-		arg_ct = arg;
-	}
 
 	double* RNA::getCapa(int idc_capa) const
 	{
@@ -155,15 +168,16 @@ namespace RedNeuronal
 
 	double RNA::getRandom(double min, double max) const
 	{
-		srand(time(NULL));
-		double f = (double)rand() / (max + 1);
+		double f = (double)rand() / double(RAND_MAX);
 
-		return min + f * (max - min);
+		return (f * (max - min)) + min;
 	}
 
 	int RNA::getNumCapas() const { return num_capas; }
 
 	int RNA::getNumNrns() const { return num_nrns; }
+
+	int RNA::getNumTotalNrns() const { return num_total_nrns; }
 
 	double RNA::getTasaAprendizaje() const { return tasa_aprdj; }
 
