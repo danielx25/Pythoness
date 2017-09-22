@@ -60,4 +60,9 @@ namespace Entrenamientos
 		criterioTermino = funcion;
 		arg_ct = arg;
 	}
+
+	int Entrenamiento::getCiclos() const { return ciclos; }
+
+	int Entrenamiento::getNumPatrones() const { return num_ptrns; }
+
 }

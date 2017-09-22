@@ -29,11 +29,17 @@ namespace Entrenamientos
 		void setInicio(void(*funcion)(const Entrenamiento*, void*), void* arg);
 
 		void setFinCiclo(void(*funcion)(const Entrenamiento*, void*), void* arg);
+
+		int getNumPatrones() const;
+
+		int getCiclos() const;
 	protected:
 		int num_ptrns;
 		int num_cols;
+		int patron_actual; // numero del patron actual entregado a la red.
 		double max_rand;
 		double min_rand;
+		int ciclos;
 		double** epoch;
 		void* arg_inc; // argumento adicional para el callback ejecutado al inicio.
 		void* arg_fc; // argumento adicional para el callback terminoCiclo.

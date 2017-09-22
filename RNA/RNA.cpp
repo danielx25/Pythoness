@@ -72,12 +72,19 @@ namespace RedNeuronal
 		int idc_ult_nrn = getUltimaNeurona(idc_capa - 1);
 		int idc_pr_nrn = getPrimeraNeurona(idc_capa - 1);
 
+		//std::cout << "Capa " << idc_capa << " Nuerona " << idc_neurona << "\n";
+
 		for (int i = idc_pr_nrn; i < idc_ult_nrn; i++)
-			entrada_red += pesos[idc_neurona][i] * salidas[i];
+		{
+			//std::cout << "Neurona " << i << "\n";
+			entrada_red += pesos[i][idc_neurona] * salidas[i];
+			//std::cout << "Peso " << pesos[i][idc_neurona] << " salida " << salidas[i] << " Entrada red " << entrada_red << "\n";
+		}
 
 		// restamos el bias.
-		entrada_red -= pesos[idc_neurona][idc_ult_nrn] * salidas[idc_ult_nrn];
+		entrada_red -= pesos[idc_ult_nrn][idc_neurona] * salidas[idc_ult_nrn];
 
+		//std::cout << "Peso " << pesos[idc_ult_nrn][idc_neurona] << " salida " << salidas[idc_ult_nrn] << " Entrada red " << entrada_red << "\n";
 		return entrada_red;
 	}
 
@@ -94,13 +101,15 @@ namespace RedNeuronal
 			int idc_pr_nrn = getPrimeraNeurona(idc_capa);
 			int idc_ult_nrn = getUltimaNeurona(idc_capa);
 		
-			for (int idc_nrn = idc_pr_nrn; idc_nrn < num_total_nrns; idc_nrn++)
+			for (int idc_nrn = idc_pr_nrn; idc_nrn < idc_ult_nrn; idc_nrn++)
 				salidas[idc_nrn] = calcularSalida(funcionActivacion(funcionPropagacion(idc_capa, idc_nrn)));
 
 			// la salida de los bias siempre son 1.
 			salidas[idc_ult_nrn] = 1;
 		}
-			
+		
+		// calculamos la salida para la ultima neurona de salida.
+		salidas[num_total_nrns - 1] = calcularSalida(funcionActivacion(funcionPropagacion(num_capas - 1, num_total_nrns - 1)));
 	}
 
 	void RNA::setEntrada(double* patron)
@@ -182,8 +191,6 @@ namespace RedNeuronal
 	double RNA::getTasaAprendizaje() const { return tasa_aprdj; }
 
 	int* RNA::getNumNrnsCapas() const { return num_nrns_capas; }
-
-	int RNA::getIteraciones() const { return ciclos; }
 
 	double* RNA::getSalidas() const { return salidas; }
 

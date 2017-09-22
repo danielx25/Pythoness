@@ -1,8 +1,10 @@
 #pragma once
 
 #include "BP.h"
+#include "EBP.h"
 
 using namespace RedNeuronal;
+using namespace Entrenamientos;
 
 namespace PruebasRed
 {
@@ -21,13 +23,23 @@ namespace PruebasRed
 		
 		void calcularSalidas();
 		
+		void setErrores();
+
 		void calcularGradiantes();
 		
-		void ajustarPesos();
+		void aprendizaje();
+
+		void entrenamiento();
 
 		void imprimirMatriz(double** matriz, int filas, int cols);
 
 		void imprimirArray(double* arr, int cols);
+
+		void inicio(const EBP* ebp, void* arg);
+
+		void finCiclo(const EBP* ebp, void* arg);
+
+		bool criterio(const EBP* ebp, void* arg);
 	private:
 		int nc;
 		int* nnc;

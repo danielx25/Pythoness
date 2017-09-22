@@ -10,7 +10,7 @@ using namespace RedNeuronal;
 
 namespace Entrenamientos
 {
-	class EBP : Entrenamiento
+	class EBP : public Entrenamiento
 	{
 	public:
 		EBP(int patrones, int columnas, int nc, int *nnc, double t);
@@ -22,22 +22,36 @@ namespace Entrenamientos
 		~EBP();
 
 		// realiza un entrenamiento online para una red con aprendizaje backpropagation.
-		void online();
+		double** online();
 
 		// realiza un entrenamiento offline para una red con aprendizaje backpropagation.
-		void offline();
+		double** offline();
+
+		bool criterio();
+
+		void setSalida(int patron, int salida, double valor);
 
 		// setea el valor por default para el minimo para los numeros aleatoreos.
-		void EBP::setDefaultMin();
+		void setDefaultMin();
 		
 		// setea el valor por default para el maximo para los numeros aleatoreos.
-		void EBP::setDefaultMax();
+		void setDefaultMax();
+
+		void setError(double e);
+
+		double getError() const;
+
+		double getNumSalidas() const;
+
+		double* getErrores() const;
 	private:
 		BP* red;
 		int ciclos;
 		double error;
-		double criterio;
-		double** salida_deseada;
+		//double criterio;
+		double** salidas_deseadas;
+
+		void inicializarSalidas();
 	};
 }
 
