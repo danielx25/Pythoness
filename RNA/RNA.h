@@ -28,6 +28,8 @@ namespace RedNeuronal
 		// algoritmo de aprendizaje para la red.
 		virtual void aprendizaje() = 0;
 
+		virtual double* ejecutar(double* patron) = 0;
+
 		virtual void iniciarPesos(double min, double max);
 
 		// obtiene las salidas de todas las neuronas, exceptuando las neuronas de entrada.
@@ -55,8 +57,6 @@ namespace RedNeuronal
 
 		int* getNumNrnsCapas() const;
 
-		int getIteraciones() const;
-
 		double* getSalidas() const;
 
 		double** getPesos() const;
@@ -69,7 +69,6 @@ namespace RedNeuronal
 		int num_nrns;
 		int num_total_nrns;
 		int *num_nrns_capas;
-		int ciclos;
 	};
 }
 

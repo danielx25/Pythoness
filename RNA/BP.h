@@ -21,6 +21,14 @@ namespace RedNeuronal
 		*/
 		BP(int nc, int *nnc, double t, double m = 0.95, double a = 1.716, double b = 0.667);
 
+		/*
+		Constructor usado para una red con pesos ya obtenidos.
+		nc = Numero de neuronas.
+		nnc = Numero de neuronas por capa.
+		p : pesos de la red.
+		*/
+		BP(int nc, int* nnc, double** p);
+
 		~BP();
 
 		double funcionActivacion(double entrada_red);
@@ -35,15 +43,20 @@ namespace RedNeuronal
 
 		double gradianteError(double salida, double coeficiente);
 
-		double deltaPeso(int idc_nrn, int idc_nrn_anterior);
+		double deltaPeso(int idc_nrn, int idc_nrn_sig);
 
 		void ajustarPeso(int idc_nrn, int idc_capa);
 
 		void aprendizaje();
 
+		double* ejecutar(double* patron);
+
+		// calcula y setea el error de las neuronas de salida a partir de la salida deseada.
+		void calcularErrores(double* salida_deseada);
+
 		double getSumGradiante(int idc_nrn, int idc_capa);
 
-		void setErrores(double* salida_deseada);
+		void setErrores(double* errores);
 
 		void setError(int idc_nrn, double error);
 
@@ -53,22 +66,22 @@ namespace RedNeuronal
 
 		double* getErrores() const;
 
-		double* getDeltas() const;
+		double** getDeltas() const;
 
 		double* getGradiantes() const;
+
+		int getIdcNrnSalida(int idc_nrn) const;
 
 		// obtiene la suma de errores al cuadrado.
 		double getSumErr2();
 	protected:
 		double* errores;
 		double* gradiantes;
-		double* deltas;
+		double** deltas;
 		double error;
 		double momentum; // constante para la diferencia (delta) del error.
 		double th_a; // constante para la funcion tangente hiperbolica.
 		double th_b; // constante para la funcion tangente hiperbolica;
-
-		int getIdcNrnSalida(int idc_nrn) const;
 	};
 }
 
