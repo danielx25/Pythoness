@@ -120,103 +120,130 @@ namespace PruebasRed
 
 	void PruebaBP::entrenamiento()
 	{
-		string linea;
-		ifstream archv_entrenamiento("C:\\Users\\Sefirot\\Documents\\Visual Studio 2015\\Projects\\Pythoness\\Debug\\iris\\entrenamiento.data");
-		ifstream archv_validacion("C:\\Users\\Sefirot\\Documents\\Visual Studio 2015\\Projects\\Pythoness\\Debug\\iris\\validacion.data");
-		int columna = 0;
-		string valor;
-		int patron = 0;
-		int patrones = 105;
-		int num_entrada = 4;
+		/*double arr[60][4] =
+		{
+			{ 0.08333333333333333, 0.125, 0.14285714285714285, 0.07407407407407407 },
+			{ 0.0, 1.0, 0.2857142857142857, 0.37962962962962965 },
+			{ 1.0, 0.125, 0.5714285714285714, 0.5694444444444444 },
+			{ 1.0, 0.375, 0.2857142857142857, 0.5601851851851852 },
+			{ 0.8333333333333334, 0.25, 0.8571428571428571, 0.6388888888888888 },
+			{ 0.75, 0.5, 0.42857142857142855, 0.5509259259259259 },
+			{ 0.5, 0.875, 0.0, 0.4398148148148148 },
+			{ 1.0, 1.0, 1.0, 1.0 },
+			{ 0.9166666666666666, 0.125, 0.8571428571428571, 0.6296296296296297 },
+			{ 0.5, 0.0, 0.8571428571428571, 0.42592592592592593 },
+			{ 0.16666666666666666, 0.25, 0.5714285714285714, 0.28703703703703703 },
+			{ 0.5, 0.5, 0.7142857142857143, 0.5462962962962963 },
+			{ 0.75, 0.125, 0.7142857142857143, 0.5185185185185185 },
+			{ 1.0, 0.5, 0.0, 0.5092592592592593 },
+			{ 0.8333333333333334, 0.5, 0.0, 0.4444444444444444 },
+			{ 0.0, 0.875, 0.2857142857142857, 0.33796296296296297 },
+			{ 0.6666666666666666, 0.0, 0.2857142857142857, 0.3055555555555556 },
+			{ 0.4166666666666667, 0.375, 0.2857142857142857, 0.3333333333333333 },
+			{ 0.25, 0.5, 0.7142857142857143, 0.44907407407407407 },
+			{ 0.0, 0.0, 0.14285714285714285, 0.0 },
+			{ 0.5, 0.5, 0.2857142857142857, 0.4074074074074074 },
+			{ 0.25, 0.75, 1.0, 0.625 },
+			{ 0.4166666666666667, 0.5, 0.14285714285714285, 0.3287037037037037 },
+			{ 0.16666666666666666, 0.5, 0.2857142857142857, 0.2777777777777778 },
+			{ 1.0, 0.875, 0.14285714285714285, 0.6805555555555556 },
+			{ 0.16666666666666666, 1.0, 0.2857142857142857, 0.4444444444444444 },
+			{ 0.08333333333333333, 1.0, 0.0, 0.3194444444444444 },
+			{ 0.5, 0.625, 0.5714285714285714, 0.5416666666666666 },
+			{ 0.25, 0.375, 0.14285714285714285, 0.2222222222222222 },
+			{ 0.25, 0.25, 0.8571428571428571, 0.41203703703703703 },
+			{ 0.75, 0.125, 0.0, 0.28703703703703703 },
+			{ 0.25, 0.375, 0.42857142857142855, 0.3148148148148148 },
+			{ 0.25, 0.5, 0.2857142857142857, 0.3101851851851852 },
+			{ 0.4166666666666667, 0.875, 0.42857142857142855, 0.5462962962962963 },
+			{ 0.4166666666666667, 0.875, 0.8571428571428571, 0.6851851851851852 },
+			{ 0.9166666666666666, 0.0, 1.0, 0.6342592592592593 },
+			{ 0.9166666666666666, 1.0, 0.0, 0.6435185185185185 },
+			{ 0.16666666666666666, 0.0, 0.42857142857142855, 0.1574074074074074 },
+			{ 0.75, 0.375, 0.8571428571428571, 0.6481481481481481 },
+			{ 0.75, 0.375, 0.42857142857142855, 0.5092592592592593 },
+			{ 1.0, 0.5, 0.7142857142857143, 0.7407407407407407 },
+			{ 0.9166666666666666, 0.875, 0.2857142857142857, 0.6944444444444444 },
+			{ 0.16666666666666666, 0.75, 1.0, 0.5925925925925926 },
+			{ 0.25, 0.25, 0.0, 0.13425925925925927 },
+			{ 0.8333333333333334, 0.75, 0.5714285714285714, 0.7129629629629629 },
+			{ 0.5, 0.375, 0.5714285714285714, 0.4583333333333333 },
+			{ 0.75, 0.375, 0.8571428571428571, 0.6481481481481481 },
+			{ 0.3333333333333333, 0.875, 0.5714285714285714, 0.5601851851851852 },
+			{ 0.75, 0.375, 0.2857142857142857, 0.46296296296296297 },
+			{ 0.8333333333333334, 0.375, 0.2857142857142857, 0.49537037037037035 },
+			{ 0.0, 0.875, 0.42857142857142855, 0.38425925925925924 },
+			{ 0.5, 0.875, 0.8571428571428571, 0.7175925925925926 },
+			{ 0.3333333333333333, 1.0, 0.5714285714285714, 0.6018518518518519 },
+			{ 0.5, 0.375, 0.5714285714285714, 0.4583333333333333 },
+			{ 0.5833333333333334, 0.5, 0.0, 0.3472222222222222 },
+			{ 1.0, 0.125, 0.42857142857142855, 0.5231481481481481 },
+			{ 0.0, 0.875, 0.42857142857142855, 0.38425925925925924 },
+			{ 0.08333333333333333, 1.0, 1.0, 0.6435185185185185 },
+			{ 0.75, 0.625, 0.5714285714285714, 0.6388888888888888 },
+			{ 0.3333333333333333, 1.0, 0.8571428571428571, 0.6944444444444444 },
+		};*/
+
+		// prepare XOR traing data
+		double data[][4] = {
+			0,	0,	0,	0,
+			0,	0,	1,	1,
+			0,	1,	0,	1,
+			0,	1,	1,	0,
+			1,	0,	0,	1,
+			1,	0,	1,	0,
+			1,	1,	0,	0,
+			1,	1,	1,	1 };
+
+		// prepare test data	
+		double testData[][3] = {
+			0,      0,      0,
+			0,      0,      1,
+			0,      1,      0,
+			0,      1,      1,
+			1,      0,      0,
+			1,      0,      1,
+			1,      1,      0,
+			1,      1,      1 };
+
+		int patrones = 8;
+		int num_entrada = 3;
 
 		nc = 3;
 		nnc = new int[nc];
 		t = .1;
 
-		nnc[0] = 4;
-		nnc[1] = 4;
-		nnc[2] = 3;
+		nnc[0] = 3;
+		nnc[1] = 3;
+		nnc[2] = 2;
+		nnc[3] = 1;
 
 		EBP* ebp = new EBP(patrones, num_entrada, nc, nnc, t);
 		//ebp->setInicio(inicio(), NULL);
 
-		if (archv_entrenamiento.is_open())
+		cout << "Ingreso de datos\n";
+		for (int i = 0; i < patrones; i++)
 		{
-			while (std::getline(archv_entrenamiento, linea))
-			{
-				cout << "Lectura datos entrenamiento\n";
-
-				columna = 0;
-				std::stringstream ss(linea);
-
-				while (std::getline(ss, valor, ','))
-				{
-					//cout << columna << " " << valor << "\n";
-					if (columna == 4)
-					{
-						double* salidas = new double[3];
-						salidas[0] = 0;
-						salidas[1] = 0;
-						salidas[2] = 0;
-
-						if (valor == "Iris-setosa") salidas[0] = 1;
-						else if (valor == "Iris-versicolor") salidas[1] = 1;
-						else if (valor == "Iris-virginica") salidas[2] = 1;
-
-						ebp->setSalida(patron, 0, salidas[0]);
-						ebp->setSalida(patron, 1, salidas[1]);
-						ebp->setSalida(patron, 2, salidas[2]);
-					}
-					else 
-					{
-						ebp->setValor(patron, columna, stod(valor));
-					}
-
-					columna += 1;
-				}
-
-				patron += 1;
-			}
-			archv_entrenamiento.close();
-
-			cout << "Entrenamiento\n";
-			red = new BP(nc, nnc, ebp->online());
-
-			cout << "Ejecucion\n";
-			patron = 0;
-			while (std::getline(archv_validacion, linea))
-			{
-				//cout << "Lectura datos validacion\n";
-				double* entradas = new double[num_entrada];
-				columna = 0;
-				std::stringstream ss(linea);
-
-				while (std::getline(ss, valor, ','))
-				{
-					//cout << valor << " Lectura datos validacion\n";
-					if (columna == 4)
-					{
-						double* result = red->ejecutar(entradas);
-
-						if (result[0] == 1) cout << "Patron: " << patron << " Clase: " << valor << " Predicción: Iris-setosa\n";
-						else if (result[1] == 1) cout << "Patron: " << patron << " Clase: " << valor << " Predicción: Iris-versicolor\n";
-						else if (result[2] == 1) cout << "Patron: " << patron << " Clase: " << valor << " Predicción: Iris-virginica\n";
-						else cout << "Patron: " << patron << " Clase: " << valor << " Predicción: Sin clase Resultados: " << result[0] << " " << result[1] << " " << result[2]  << "\n";
-					}
-					else
-					{
-						entradas[columna] = stod(valor);
-					}
-
-					columna += 1;
-				}
-
-				patron += 1;
-			}
-			archv_validacion.close();
+			for (int j = 0; j < 4; j++)
+				ebp->setValor(i, j, data[i][j]);
+			
+			ebp->setSalida(i, 3, data[i][3]);
 		}
 
-		//cout << "No entro al for";
+		cout << "Entrenamiento\n";
+		red = new BP(nc, nnc, ebp->online());
+		cout << "Ejecucion\n";
+		double* entradas = new double[num_entrada];
+
+
+		for (int i = 0; i < patrones; i++)
+		{
+			for (int j = 0; j < num_entrada; j++)
+				entradas[j] = testData[i][j];
+	
+			double* result = red->ejecutar(entradas);
+			cout << "Patron " << i << "Resultado : " << result[0] << "\n";
+		}
 
 		//delete red;
 	}
