@@ -2,13 +2,18 @@
 //
 
 #include "stdafx.h"
-#include "PruebaBP.h"
+#include <iostream>
+#include "PruebasFAM.h"
 
 using namespace PruebasRed;
 
 int main()
 {
-	PruebaBP();
+	PruebasFAM();
+
+	int tecla;
+	
+	std::cin >> tecla;
 
     return 0;
 }
