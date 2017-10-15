@@ -82,4 +82,8 @@ namespace RedNeuronal
 	}
 
 	void FAM::getPesos(double**& p) const { p = pesos; }
+
+	int FAM::getNrnsA() const { return num_nrns_a; }
+
+	int FAM::getNrnsB() const { return num_nrns_b; }
 }

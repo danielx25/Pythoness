@@ -36,6 +36,10 @@ namespace RedNeuronal
 		void getSalidaA(double*& entrada_b, double*& s);
 		
 		void getPesos(double**& p) const;
+
+		int getNrnsA() const;
+
+		int getNrnsB() const;
 	protected:
 		double** pesos;
 		double* A; // asociado
