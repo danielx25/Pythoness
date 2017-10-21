@@ -28,7 +28,7 @@ namespace SFAM
 
 		void agregarRegla(string regla);
 
-		void fuzzificacion(string variable, double*& vals_var);
+		void fuzzificacion(ValorLinguistico*& valor, double*& vals_vars, int num_vals, double*& grados_vals_var);
 
 		void inferenciaDescomposicional(double**& salidas, int num_salidas, int num_vals, string operador, double*& salida);
 
@@ -41,6 +41,12 @@ namespace SFAM
 		void getElementosRegla(const string& regla, map<string, string>& vars, string& var_consc, string& val_consc, string& operador);
 
 		void getBitVector(string variable, double valor_entrada, double*& bit_vector);
+
+		void getValores(string variable, double*& valores);
+
+		void getGradosValores(string variable, string valor, double*& grados);
+
+		void getReglas(vector<string>& r);
 
 		// s = salida.
 		double getSalida(map<string, double>& entrada);
