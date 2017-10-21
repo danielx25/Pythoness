@@ -4,12 +4,14 @@
 #include "stdafx.h"
 #include <iostream>
 #include "PruebasFAM.h"
+#include "PruebasSFAM.h"
 
 using namespace PruebasRed;
 
 int main()
 {
-	PruebasFAM();
+	//PruebasFAM();
+	PruebasSFAM();
 
 	int tecla;
 	

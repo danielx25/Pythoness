@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\RNA;$(SolutionDir)\Entrenamiento;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\RNA;$(SolutionDir)\LogicaDifusa;$(SolutionDir)\SistemaFAM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,12 +149,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PruebasFAM.h" />
+    <ClInclude Include="PruebasSFAM.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pruebas.cpp" />
     <ClCompile Include="PruebasFAM.cpp" />
+    <ClCompile Include="PruebasSFAM.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -163,8 +165,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LogicaDifusa\LogicaDifusa.vcxproj">
+      <Project>{46fd5411-d779-4529-860c-0b9242120dd4}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\RNA\RNA.vcxproj">
       <Project>{1e08fba4-48f4-47d2-90b6-04ca22016a9d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\SistemaFAM\SistemaFAM.vcxproj">
+      <Project>{f89b3f17-3612-495b-86cc-3888b7b6dc06}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

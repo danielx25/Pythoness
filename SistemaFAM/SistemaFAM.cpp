@@ -16,7 +16,7 @@ namespace SFAM
 
 	void SistemaFAM::agregarVariable(VariableLinguistica*& variable)
 	{
-
+		variables[variable->getNombre()] = variable;
 	}
 
 	void SistemaFAM::agregarValoresVariable(string variable, double comienzo, double espacio, int num_vals)
@@ -38,13 +38,7 @@ namespace SFAM
 
 		for (map<string, ValorLinguistico*>::iterator valor = valores.begin(); valor != valores.end(); ++valor)
 		{
-			grados_vals_vars[variable][valor->second->getNombre()] = new double[num_vals];
-
-			for (int i = 0; i < num_vals; i++)
-			{
-				valor->second->CalcularGradoPertenencia(valores_variables[variable][i]);
-				grados_vals_vars[variable][valor->second->getNombre()][i] = valor->second->getGradoPertenencia();
-			}
+			fuzzificacion(valor->second, valores_variables[variable], num_vals, grados_vals_vars[variable][valor->second->getNombre()]);
 		}
 	}
 
@@ -53,6 +47,18 @@ namespace SFAM
 	{
 		reglas.push_back(regla);
 	}
+
+	void SistemaFAM::fuzzificacion(ValorLinguistico*& valor, double*& vals_vars, int num_vals, double*& grados)
+	{
+		grados = new double[num_vals];
+
+		for (int i = 0; i < num_vals; i++)
+		{
+			valor->CalcularGradoPertenencia(vals_vars[i]);
+			grados[i] = valor->getGradoPertenencia();
+		}
+	}
+
 
 	void SistemaFAM::inferenciaDescomposicional(double**& salidas, int num_salidas, int num_vals, string operador, double*& salida)
 	{
@@ -66,40 +72,17 @@ namespace SFAM
 			{
 				for (int i = 0; i < num_vals; i++)
 				{
-					if (salidas[s][i] < salidas[s - 1][i]) salida[i] = salidas[s][i];
-					else salida[i] = salidas[s - 1][i];
+					if (salidas[s][i] < salida[i]) salida[i] = salidas[s][i];
 				}
 			}
 			else if (operador == "o")
 			{
 				for (int i = 0; i < num_vals; i++)
 				{
-					if (salidas[s][i] > salidas[s - 1][i]) salida[i] = salidas[s][i];
-					else salida[i] = salidas[s - 1][i];
+					if (salidas[s][i] > salida[i]) salida[i] = salidas[s][i];
 				}
 			}
 		}
-	}
-
-	void SistemaFAM::getBitVector(string variable, double valor_entrada, double*& bit)
-	{
-		int num_vals = num_vals_vars[variable];
-		bit = new double[num_vals];
-		int valor = abs(valor_entrada - valores_variables[variable][0]);
-		int posicion = 0;
-
-		for (int i = 0; i < num_vals; i++)
-		{
-			bit[i] = 0;
-
-			if (valor > abs(valor_entrada - valores_variables[variable][i]))
-			{
-				valor = abs(valor_entrada - valores_variables[variable][i]);
-				posicion = i;
-			}
-		}
-
-		bit[posicion] = 1;
 	}
 
 	void SistemaFAM::evaluacionRegla(map<string, string>& vars, string& consecuente, string& val_consc, string& operador, map<string, double>& entrada, double*& salida)
@@ -124,8 +107,30 @@ namespace SFAM
 		inferenciaDescomposicional(salidas, vars.size(), num_vals_vars[consecuente], operador, salida);
 	}
 
+	void SistemaFAM::getBitVector(string variable, double valor_entrada, double*& bit)
+	{
+		int num_vals = num_vals_vars[variable];
+		bit = new double[num_vals];
+		int valor = abs(valor_entrada - valores_variables[variable][0]);
+		int posicion = 0;
+
+		for (int i = 0; i < num_vals; i++)
+		{
+			bit[i] = 0;
+
+			if (valor > abs(valor_entrada - valores_variables[variable][i]))
+			{
+				valor = abs(valor_entrada - valores_variables[variable][i]);
+				posicion = i;
+			}
+		}
+
+		bit[posicion] = 1;
+	}
+
 	void SistemaFAM::getElementosRegla(const string& regla, map<string, string>& vars, string& consecuente, string& val_consc, string& operador)
 	{
+		operador = "";
 		istringstream iss(regla);
 		bool es_consecuente = false;
 		string variable = "";
@@ -205,6 +210,21 @@ namespace SFAM
 		return centroide;
 	}
 
+	void SistemaFAM::getValores(string variable, double*& valores)
+	{
+		valores = valores_variables[variable];
+	}
+
+	void SistemaFAM::getGradosValores(string variable, string valor, double*& grados)
+	{
+		grados = grados_vals_vars[variable][valor];
+	}
+
+	void SistemaFAM::getReglas(vector<string>& r)
+	{
+		r = reglas;
+	}
+
 	double SistemaFAM::getSalida(map<string, double>& entrada)
 	{
 		double salida = 0;
@@ -221,9 +241,9 @@ namespace SFAM
 			string val_consc;
 			string operador;
 
-
 			getElementosRegla(*regla, vars, consecuente, val_consc, operador);
 			evaluacionRegla(vars, consecuente, val_consc, operador, entrada, salida_reglas[regla_actual]);
+			regla_actual += 1;
 		}
 
 		getCapaSuma(salida_reglas, reglas.size(), num_vals_vars[consecuente], suma);
