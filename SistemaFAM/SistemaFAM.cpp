@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <iostream>
 #include <sstream>
 #include "SistemaFAM.h"
 
@@ -85,7 +86,23 @@ namespace SFAM
 		}
 	}
 
-	void SistemaFAM::evaluacionRegla(map<string, string>& vars, string& consecuente, string& val_consc, string& operador, map<string, double>& entrada, double*& salida)
+	void SistemaFAM::evaluacionReglas(int comienzo, int fin)
+	{
+		string consecuente;
+
+		for (int r = comienzo; r < fin; r++)
+		{
+			map<string, string> vars;
+			string val_consc;
+			string operador;
+
+			getElementosRegla(reglas[r], vars, consecuente, val_consc, operador);
+			evaluacionRegla(vars, consecuente, val_consc, operador, salida_reglas[r]);
+		}
+	}
+
+
+	void SistemaFAM::evaluacionRegla(map<string, string>& vars, string& consecuente, string& val_consc, string& operador, double*& salida)
 	{
 		double** salidas;
 		int salida_actual = 0;
@@ -225,26 +242,63 @@ namespace SFAM
 		r = reglas;
 	}
 
-	double SistemaFAM::getSalida(map<string, double>& entrada)
+	double SistemaFAM::getSalida(map<string, double>& e)
 	{
 		double salida = 0;
 		int regla_actual = 0;
-		double** salida_reglas;
 		double* suma;
-		string consecuente;
+		string consecuente = "mp10";
+
+		entrada = e;
 
 		salida_reglas = new double*[reglas.size()];
 
-		for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
+		/*for (int i = 0; i < reglas.size(); i++)
+		{
+			salida_reglas[i] = new double[num_vals_vars["mp10"]];
+			
+			for (int j = 0; j < num_vals_vars["mp10"]; j++) salida_reglas[i][j] = 0;
+		}*/
+
+		const int num_hilos = 12;
+		int particion = reglas.size() / num_hilos;
+		thread hilos[num_hilos];
+
+		for (int i = 0; i < num_hilos; i++)
+		{
+			int comienzo = particion * i;
+			int fin = 0;
+			if (i + 1 == num_hilos) fin = reglas.size();
+			else fin = particion * (i + 1);
+
+			hilos[i] = thread(&SistemaFAM::evaluacionReglas, this, comienzo, fin);
+		}
+			
+
+		for (int i = 0; i < num_hilos; i++)
+			hilos[i].join();
+
+		//evaluacionReglas(0, reglas.size());
+
+		/*for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
 		{
 			map<string, string> vars;
 			string val_consc;
 			string operador;
 
 			getElementosRegla(*regla, vars, consecuente, val_consc, operador);
-			evaluacionRegla(vars, consecuente, val_consc, operador, entrada, salida_reglas[regla_actual]);
+			evaluacionRegla(vars, consecuente, val_consc, operador, salida_reglas[regla_actual]);
 			regla_actual += 1;
-		}
+		}*/
+
+		/*cout << "\nSalida Regla\n";
+
+		cout << salida_reglas[5][0] << " ";
+		cout << salida_reglas[5][1] << " ";
+		cout << salida_reglas[5][2] << " ";
+		cout << salida_reglas[5][3] << " ";
+		cout << salida_reglas[5][4] << " ";
+		cout << salida_reglas[5][5] << " \n";*/
 
 		getCapaSuma(salida_reglas, reglas.size(), num_vals_vars[consecuente], suma);
 		salida = getCentroide(suma, valores_variables[consecuente], num_vals_vars[consecuente]);

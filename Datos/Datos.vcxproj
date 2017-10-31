@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{46FD5411-D779-4529-860C-0B9242120DD4}</ProjectGuid>
+    <ProjectGuid>{AD006D6F-9919-4FA8-A93C-0F657407C759}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>LogicaDifusa</RootNamespace>
+    <RootNamespace>Datos</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -77,7 +77,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Integracion;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\LogicaDifusa;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -134,29 +134,27 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FuncionCampana.h" />
-    <ClInclude Include="FuncionGaussiana.h" />
-    <ClInclude Include="FuncionPertenencia.h" />
-    <ClInclude Include="FuncionTrapezoidal.h" />
-    <ClInclude Include="FuncionTriangular.h" />
+    <ClInclude Include="Normalizacion.h" />
+    <ClInclude Include="Reglas.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="ValorLinguistico.h" />
-    <ClInclude Include="VariableLinguistica.h" />
+    <ClInclude Include="VariablesLinguisticas.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FuncionCampana.cpp" />
-    <ClCompile Include="FuncionGaussiana.cpp" />
-    <ClCompile Include="FuncionTrapezoidal.cpp" />
-    <ClCompile Include="FuncionTriangular.cpp" />
+    <ClCompile Include="Normalizacion.cpp" />
+    <ClCompile Include="Reglas.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ValorLinguistico.cpp" />
-    <ClCompile Include="VariableLinguistica.cpp" />
+    <ClCompile Include="VariablesLinguisticas.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogicaDifusa\LogicaDifusa.vcxproj">
+      <Project>{46fd5411-d779-4529-860c-0b9242120dd4}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <utility>
+#include <thread>
 #include "FAM.h"
 #include "VariableLinguistica.h"
 
@@ -32,7 +34,10 @@ namespace SFAM
 
 		void inferenciaDescomposicional(double**& salidas, int num_salidas, int num_vals, string operador, double*& salida);
 
-		void evaluacionRegla(map<string, string>& vars, string& consecuente, string& val_consc, string& operador, map<string, double>& entrada, double*& salida);
+		// comienzo = indice primera regla, fin = indice ultima regla.
+		void evaluacionReglas(int comienzo, int fin);
+
+		void evaluacionRegla(map<string, string>& vars, string& consecuente, string& val_consc, string& operador, double*& salida);
 
 		void getCapaSuma(double**& salidas, int num_salidas, int num_vals, double*& suma);
 
@@ -57,6 +62,10 @@ namespace SFAM
 		map<string, map<string, double*>> grados_vals_vars;
 		map<string, int> num_vals_vars;
 		vector<string> reglas;
+		map<string, double> entrada;
+		double** salida_reglas;
+		pair<int, int> args_h1;
+		pair<int, int> args_h2;
 	};
 }
 
