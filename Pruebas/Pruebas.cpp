@@ -5,13 +5,22 @@
 #include <iostream>
 #include "PruebasFAM.h"
 #include "PruebasSFAM.h"
+#include "PruebasLD.h"
+#include "PruebasReglas.h"
+#include "PruebasMP10.h"
 
 using namespace PruebasRed;
+using namespace PruebasLogicaDifusa;
+using namespace PruebasReglasFAM;
+using namespace PruebasMP;
 
 int main()
 {
 	//PruebasFAM();
-	PruebasSFAM();
+	//PruebasSFAM();
+	//PruebasLD();
+	//PruebasReglas();
+	PruebasMP10();
 
 	int tecla;
 	

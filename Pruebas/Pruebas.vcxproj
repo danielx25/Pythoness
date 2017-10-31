@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\RNA;$(SolutionDir)\LogicaDifusa;$(SolutionDir)\SistemaFAM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\RNA;$(SolutionDir)\LogicaDifusa;$(SolutionDir)\Datos;$(SolutionDir)\SistemaFAM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PruebasFAM.h" />
+    <ClInclude Include="PruebasLD.h" />
+    <ClInclude Include="PruebasMP10.h" />
+    <ClInclude Include="PruebasReglas.h" />
     <ClInclude Include="PruebasSFAM.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -156,6 +159,9 @@
   <ItemGroup>
     <ClCompile Include="Pruebas.cpp" />
     <ClCompile Include="PruebasFAM.cpp" />
+    <ClCompile Include="PruebasLD.cpp" />
+    <ClCompile Include="PruebasMP10.cpp" />
+    <ClCompile Include="PruebasReglas.cpp" />
     <ClCompile Include="PruebasSFAM.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -165,6 +171,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Datos\Datos.vcxproj">
+      <Project>{ad006d6f-9919-4fa8-a93c-0f657407c759}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\LogicaDifusa\LogicaDifusa.vcxproj">
       <Project>{46fd5411-d779-4529-860c-0b9242120dd4}</Project>
     </ProjectReference>

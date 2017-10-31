@@ -71,4 +71,28 @@ namespace LogicaDifusa
 	double VariableLinguistica::getMinimo() const { return min; }
 
 	double VariableLinguistica::getMaximo() const { return max; }
+
+	string VariableLinguistica::getValor(double dato)
+	{
+		double max = 0;
+		string valorlinguistico = "";
+
+		//fuzzificar(dato);
+
+		for (map<string, ValorLinguistico*>::iterator valor = valores.begin(); valor != valores.end(); ++valor)
+		{
+			valor->second->CalcularGradoPertenencia(dato);
+			double grado = valor->second->getGradoPertenencia();
+
+			if (valorlinguistico == "") valorlinguistico = valor->second->getNombre();
+
+			if (grado > max)
+			{
+				max = grado;
+				valorlinguistico = valor->second->getNombre();
+			}
+		}
+
+		return valorlinguistico;
+	}
 }

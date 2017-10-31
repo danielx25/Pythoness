@@ -31,6 +31,8 @@ namespace LogicaDifusa
 
 		void getValor(string nombre, ValorLinguistico*& val);
 
+		string getValor(double valor);
+
 		string getNombre() const;
 
 		double getMinimo() const;
