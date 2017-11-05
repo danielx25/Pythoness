@@ -92,7 +92,6 @@ namespace PruebasMP
 			string field;
 			string regla;
 			int posicion = 0;
-			double grado_verano = 0;
 			vector<string> orden_vars;
 
 			Reglas::variables(orden_vars);
@@ -101,25 +100,17 @@ namespace PruebasMP
 				double valor_norm = atof(field.c_str());
 				double val_desnormalizado = 0;
 				string nom_var = orden_vars.at(posicion);
+				double var_max = vars[nom_var]->getMaximo();
+				double var_min = vars[nom_var]->getMinimo();
 
 				if (nom_var != "mp10")
 				{
-					if (posicion == 0)
-					{
-						grado_verano = valor_norm;
-					}
-					else
-					{
-						if (posicion == 1)
-						{
-							nom_var = "estacion";
+					val_desnormalizado = Normalizacion::desnormalizar(valor_norm, var_min, var_max);
 
-							if (valor_norm < grado_verano) valor_norm = grado_verano;
-						}
+					if (val_desnormalizado > var_max) val_desnormalizado = var_max;
+					else if (val_desnormalizado < var_min) val_desnormalizado = var_min;
 
-						entrada[nom_var] = Normalizacion::desnormalizar(valor_norm, vars[nom_var]->getMinimo(), vars[nom_var]->getMaximo());
-					}
-
+					entrada[nom_var] = val_desnormalizado;
 				}
 				else
 				{

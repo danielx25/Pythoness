@@ -41,46 +41,51 @@ namespace Datos
 		chaxa_camion();
 		movitec_camion();
 		das_camion();
-		cnorte_consumo_agua();
+		consumo_agua("cnorte_consumo_agua");
+		consumo_agua("cmovil_consumo_agua");
+		consumo_agua("cachimba1_consumo_agua");
+		consumo_agua("cachimba2_consumo_agua");
+		consumo_agua("gerencia_consumo_agua");
+		/*cnorte_consumo_agua();
 		cmovil_consumo_agua();
 		cachimba1_consumo_agua();
 		cachimba2_consumo_agua();
-		gerencia_consumo_agua();
+		gerencia_consumo_agua();*/
 		mp10();
 	}
 
 	void VariablesLinguisticas::estacion(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 1.0, 14.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("otono", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("invierno", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("primavera", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("verano", new FuncionGaussiana(50.96, 350.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 2.5, 14.5);
+		variable->agregarValorLinguistico(new ValorLinguistico("fria", new FuncionGaussiana(1.019, 4.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("helada", new FuncionGaussiana(1.019, 6.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_helada", new FuncionGaussiana(1.019, 8.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("calida", new FuncionGaussiana(1.019, 9.8)));
+		variable->agregarValorLinguistico(new ValorLinguistico("calurosa", new FuncionGaussiana(1.019, 11.5)));
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_calurosa", new FuncionGaussiana(1.019, 13.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::hora(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 12.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("amanecer", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("manana", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("mediodia", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("tarde", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("atardecer", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("anochecer", new FuncionGaussiana(50.96, 350.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("noche", new FuncionGaussiana(50.96, 350.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("transnoche", new FuncionGaussiana(50.96, 350.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 2.0, 26.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("madrugada", new FuncionGaussiana(2.038, 2.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("manana", new FuncionGaussiana(2.038, 7.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("mediodia", new FuncionGaussiana(2.038, 12.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("tarde", new FuncionGaussiana(2.038, 16.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("noche", new FuncionGaussiana(2.038, 20.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("medianoche", new FuncionGaussiana(2.038, 24.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::velocidad_viento(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 12.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionCampana(34.96, 5, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionCampana(34.96, 5, 250.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 30.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(0.6, 0.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(0.6, 2.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionCampana(20, 40, 22.89)));
 
 		variables[nombre] = variable;
 	}
@@ -88,70 +93,67 @@ namespace Datos
 	void VariablesLinguisticas::direccion_viento(string nombre)
 	{
 		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 360.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("norte", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("oeste", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("sur", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("este", new FuncionGaussiana(34.96, 250.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("este", new FuncionGaussiana(50.98, 90)));
+		variable->agregarValorLinguistico(new ValorLinguistico("norte", new FuncionGaussiana(50.98, 180)));
+		variable->agregarValorLinguistico(new ValorLinguistico("oeste", new FuncionGaussiana(50.98, 270.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("sur", new FuncionGaussiana(50.98, 360.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::temperatura(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 1.0, 24.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("fresca", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("calurosa", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_calurosa", new FuncionGaussiana(34.96, 250.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 24.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(1.038, 0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(1.038, 2.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("fresca", new FuncionGaussiana(2.038, 6.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("calida", new FuncionGaussiana(2.038, 12.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("calurosa", new FuncionGaussiana(2.038, 18.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_calurosa", new FuncionGaussiana(2.038, 24.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::humedad_relativa(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 1.0, 24.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 100.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(10.62, 0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(10.62, 25.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(10.62, 50.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(10.62, 75.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(10.62, 100.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::radiacion_solar(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 1700.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 1000.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(106.2, 0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(106.2, 250)));
+		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(106.2, 500.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(106.2, 750.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(106.2, 1000.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::presion_atmosferica(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 2860.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 570.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(121, 0.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(121, 285.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(121, 570.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::precipitacion(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 2860.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 45.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(9.554, 0.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(9.554, 22.5)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(9.554, 45.0)));
 
 		variables[nombre] = variable;
 	}
@@ -159,50 +161,58 @@ namespace Datos
 
 	void VariablesLinguisticas::evaporacion(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 36300000.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
-		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 150.0);
+		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(21.24, 0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(21.24, 50.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(21.24, 100.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(21.24, 150.0)));
 
 		variables[nombre] = variable;
 	}
 
 	void VariablesLinguisticas::chaxa_camion(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 7.0);
+		vector<string> valores = { "baja", "media", "alta" };
+		funcionGaussiana(nombre, valores, 0.0, 7.0);
+
+		/*VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 7.0);
 		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
 		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
 		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
 
-		variables[nombre] = variable;
+		variables[nombre] = variable;*/
 	}
 
 	void VariablesLinguisticas::movitec_camion(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 8.0);
+		vector<string> valores = { "baja", "media", "alta" };
+		funcionGaussiana(nombre, valores, 0.0, 8.0);
+
+		/*VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 8.0);
 		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
 		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
 		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
 
-		variables[nombre] = variable;
+		variables[nombre] = variable;*/
 	}
 
 	void VariablesLinguisticas::das_camion(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 4.0);
+		vector<string> valores = { "baja", "media", "alta" };
+		funcionGaussiana(nombre, valores, 0.0, 4.0);
+
+		/*VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 4.0);
 		variable->agregarValorLinguistico(new ValorLinguistico("muy_baja", new FuncionGaussiana(34.96, 3.75)));
 		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionGaussiana(34.96, 6.75)));
 		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionGaussiana(34.96, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionGaussiana(34.96, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionGaussiana(34.96, 250.0)));
 
-		variables[nombre] = variable;
+		variables[nombre] = variable;*/
 	}
 
 	void VariablesLinguisticas::cnorte_consumo_agua(string nombre)
@@ -290,6 +300,13 @@ namespace Datos
 		variables[nombre] = variable;
 	}
 
+	void VariablesLinguisticas::consumo_agua(string nombre)
+	{
+		vector<string> valores = { "bajo", "medio", "alto" };
+
+		funcionGaussiana(nombre, valores, 0.0, 1000.0);
+	}
+
 	void VariablesLinguisticas::funcionGaussiana(string nombre, vector<string> valores, double minimo, double maximo)
 	{
 		VariableLinguistica* variable = new VariableLinguistica(nombre, minimo, maximo);
@@ -299,8 +316,11 @@ namespace Datos
 		double ancho = 0;
 		double medio = rango / (num_valores - 1);
 
+		if (num_valores == 2) ancho = rango * .4247;
 		if (num_valores == 3) ancho = rango * .1699;
+		else if (num_valores == 4) ancho = rango * .1416;
 		else if (num_valores == 5) ancho = rango * .1062;
+		else if (num_valores == 6) ancho = rango * .08493;
 
 		for (vector<string>::iterator valor = valores.begin(); valor != valores.end(); ++valor)
 		{
