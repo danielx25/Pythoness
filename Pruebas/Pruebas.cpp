@@ -19,8 +19,8 @@ int main()
 	//PruebasFAM();
 	//PruebasSFAM();
 	//PruebasLD();
-	//PruebasReglas();
-	PruebasMP10();
+	PruebasReglas();
+	//PruebasMP10();
 
 	int tecla;
 	

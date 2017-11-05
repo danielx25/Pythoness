@@ -10,8 +10,7 @@ namespace Datos
 {
 	void Reglas::variables(vector<string>& variables)
 	{
-		variables.push_back("verano");
-		variables.push_back("invierno");
+		variables.push_back("estacion");
 		variables.push_back("hora");
 		variables.push_back("velocidad_viento");
 		variables.push_back("direccion_viento");
@@ -68,7 +67,6 @@ namespace Datos
 			string regla;
 			string antecedente;
 			int posicion = 0;
-			double grado_verano = 0;
 			
 			regla = "Si ";
 
@@ -77,38 +75,27 @@ namespace Datos
 				double val_desnormalizado = 0;
 				string nom_var = orden_vars.at(posicion);
 				string nom_val;
+				double var_max = vars[nom_var]->getMaximo();
+				double var_min = vars[nom_var]->getMinimo();
 
-				if (posicion == 0)
+				val_desnormalizado = Normalizacion::desnormalizar(valor, var_min, var_max);
+
+				if (val_desnormalizado > var_max) val_desnormalizado = var_max;
+				else if (val_desnormalizado < var_min) val_desnormalizado = var_min;
+
+				nom_val = vars[nom_var]->getValor(val_desnormalizado);
+
+				if (posicion == orden_vars.size() - 1)
 				{
-					grado_verano = valor;
+					antecedente = regla;
+					regla += " entonces ";
 				}
-				else
-				{
-					if (posicion == 1)
-					{
-						nom_var = "estacion";
+				else if (posicion > 0 ) 
+					regla += " y ";
 
-						if (valor > grado_verano) nom_val = "invierno";
-						else if (valor < grado_verano) nom_val = "verano";
-					}
-					else
-					{
-						val_desnormalizado = Normalizacion::desnormalizar(valor, vars[nom_var]->getMinimo(), vars[nom_var]->getMaximo());
+				regla += nom_var + " es " + nom_val;
 
-						nom_val = vars[nom_var]->getValor(val_desnormalizado);
-					}
-
-					if (posicion == orden_vars.size() - 1)
-					{
-						antecedente = regla;
-						regla += " entonces ";
-					}
-					else if (posicion > 0 && posicion != 1) regla += " y ";
-
-					regla += nom_var + " es " + nom_val;
-
-					//cout << "Variable: " << nom_var << " Valor linguistico: " << nom_val << " Valor: " << valor << " Valor Desnormalizado: " << val_desnormalizado << "\n";
-				}
+				//cout << "Variable: " << nom_var << " Valor linguistico: " << nom_val << " Valor: " << valor << " Valor Desnormalizado: " << val_desnormalizado << "\n";
 
 				posicion += 1;
 			}

@@ -10,13 +10,13 @@ namespace PruebasReglasFAM
 {
 	PruebasReglas::PruebasReglas()
 	{
-		string archivo = "C:\\Users\\Sefirot\\Documents\\Visual Studio 2015\\Projects\\Pythoness\\Debug\\pesosRNA.csv";
+		string archivo = "pesosRNA.csv";
 		vector<string> reglas;
 
 		Reglas::extraccionReglas(archivo, reglas);
 		Reglas::guardarReglas("reglas.txt", reglas);
 		//for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla) cout << *regla << "\n";
 
-		cout << "Something\n";
+		cout << "Extraccion finalizada.\n";
 	}
 }

@@ -50,6 +50,8 @@ namespace Datos
 
 		void das_camion(string nombre = "das_camion");
 		
+		void consumo_agua(string nombre = "cnorte_consumo_agua");
+
 		void cnorte_consumo_agua(string nombre = "cnorte_consumo_agua");
 		
 		void cmovil_consumo_agua(string nombre = "cmovil_consumo_agua");
