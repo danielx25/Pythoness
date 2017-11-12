@@ -9,10 +9,12 @@
 #include "VariablesLinguisticas.h"
 #include "Reglas.h"
 #include "Normalizacion.h"
+#include "Validacion.h"
 
 using namespace std;
 using namespace LogicaDifusa;
 using namespace Datos;
+using namespace ValidacionRNA;
 
 namespace PruebasMP
 {
@@ -127,6 +129,14 @@ namespace PruebasMP
 		}
 
 		in.close();
+	}
+
+	void PruebasMP10::validacion()
+	{
+		string archv_validacion = "C:\\Users\\Sefirot\\Documents\\Visual Studio 2017\\Projects\\Pythoness\\PruebasCS\\bin\\Debug\\validacion.csv";
+		string archv_reglas = "C:\\Users\\Sefirot\\Documents\\Visual Studio 2017\\Projects\\Pythoness\\Pruebas\\reglas.txt";
+
+		Validacion::validacionFAM(archv_validacion, archv_reglas);
 	}
 
 	void PruebasMP10::imprimirMatriz(double**& matriz, int filas, int cols)
