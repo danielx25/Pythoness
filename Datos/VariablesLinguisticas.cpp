@@ -29,13 +29,13 @@ namespace Datos
 		evaporacion("evaporacion_dia4");
 		evaporacion("evaporacion_dia5");
 		estado("pala1");
-		estado("pala2");
 		estado("pala3");
 		estado("pala4");
 		estado("pala5");
-		estado("pala6");
 		estado("pala7");
 		estado("pala8");
+		estado("pala10");
+		estado("pala11");
 		estado("chancador1");
 		estado("chancador2");
 		chaxa_camion();
@@ -92,7 +92,7 @@ namespace Datos
 
 	void VariablesLinguisticas::direccion_viento(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 360.0);
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 45.0, 405.0);
 		variable->agregarValorLinguistico(new ValorLinguistico("este", new FuncionGaussiana(50.98, 90)));
 		variable->agregarValorLinguistico(new ValorLinguistico("norte", new FuncionGaussiana(50.98, 180)));
 		variable->agregarValorLinguistico(new ValorLinguistico("oeste", new FuncionGaussiana(50.98, 270.0)));

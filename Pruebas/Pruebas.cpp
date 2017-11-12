@@ -19,9 +19,9 @@ int main()
 	//PruebasFAM();
 	//PruebasSFAM();
 	//PruebasLD();
-	PruebasReglas();
+	//PruebasReglas();
 	//PruebasMP10();
-
+	PruebasMP10::validacion();
 	int tecla;
 	
 	std::cin >> tecla;

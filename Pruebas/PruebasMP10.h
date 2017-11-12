@@ -13,6 +13,8 @@ namespace PruebasMP
 
 		//~PruebasLD();
 
+		static void validacion();
+
 		void imprimirMatriz(double**& matriz, int filas, int cols);
 
 		void imprimirArray(double*& arr, int cols);

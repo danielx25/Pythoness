@@ -29,13 +29,13 @@ namespace Datos
 		variables.push_back("evaporacion_dia4");
 		variables.push_back("evaporacion_dia5");
 		variables.push_back("pala1");
-		variables.push_back("pala2");
 		variables.push_back("pala3");
 		variables.push_back("pala4");
 		variables.push_back("pala5");
-		variables.push_back("pala6");
 		variables.push_back("pala7");
 		variables.push_back("pala8");
+		variables.push_back("pala10");
+		variables.push_back("pala11");
 		variables.push_back("chancador1");
 		variables.push_back("chancador2");
 		variables.push_back("chaxa_camion");
