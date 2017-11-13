@@ -12,6 +12,6 @@ namespace Controladores {
 	public ref class ControladorRNA
 	{
 	public:
-		static void validacion(/*String archv_validacion, String archv_reglas*/);
+		static void validacion();
 	};
 }

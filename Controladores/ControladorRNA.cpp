@@ -8,10 +8,10 @@ using namespace ValidacionRNA;
 
 namespace Controladores {
 
-	void ControladorRNA::validacion(/*String archv_validacion, String archv_reglas*/)
+	void ControladorRNA::validacion()
 	{
-		string archv_validacion = "C:\\Users\\Sefirot\\Documents\\Visual Studio 2017\\Projects\\Pythoness\\PruebasCS\\bin\\Debug\\validacion.csv";
-		string archv_reglas = "C:\\Users\\Sefirot\\Documents\\Visual Studio 2017\\Projects\\Pythoness\\Pruebas\\reglas.txt";
+		string archv_validacion = "validacion.csv";
+		string archv_reglas = "reglas.txt";
 
 		Validacion::validacionFAM(archv_validacion, archv_reglas);
 	}

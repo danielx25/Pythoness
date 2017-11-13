@@ -281,7 +281,7 @@ namespace Datos
 		funcionGaussiana("mp10", valores, 0.0, 800.0);*/
 
 		VariableLinguistica* variable = new VariableLinguistica("mp10", 0.0, 800.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("sin_alerta", new FuncionGaussiana(34.96, 0.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("sin_alerta", new FuncionGaussiana(46.96, 0.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_1", new FuncionGaussiana(34.96, 150.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_2", new FuncionGaussiana(34.96, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_3", new FuncionGaussiana(50.96, 350.0)));
