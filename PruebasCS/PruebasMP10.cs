@@ -13,26 +13,36 @@ namespace PruebasCS
     {
         public static void validacion()
         {
+            if (!File.Exists("validacion.csv"))
+            {
+                PruebasMP10.guardarDatos();
+                Console.WriteLine("Datos de validacion leidos y almacenados.");
+            }
+
+            Console.WriteLine("Validacion en proceso...");
             ControladorRNA.validacion();
+            Console.WriteLine("Validacion completa.");
         }
 
         public static void guardarDatos()
         {
-            DateTime inicio = new DateTime(2017, 1, 1, 0, 0, 0);
-            DateTime fin = new DateTime(2017, 1, 1, 5, 0, 0);
+            DateTime inicio = new DateTime(2016, 3, 1, 0, 0, 0);
+            DateTime fin = new DateTime(2016, 3, 1, 12, 0, 0);
 
             Dictionary<string, double[]> datos = Consultas.getDatosValidacion(inicio, fin);
 
-            StreamWriter file = new System.IO.StreamWriter("validacion.csv");
+            StreamWriter file = new StreamWriter("validacion.csv");
 
             foreach (KeyValuePair<string, double[]> dato in datos)
             {
                 String linea = String.Join(";", dato.Value);
 
-                Console.WriteLine(linea);
+                //Console.WriteLine(linea);
 
                 file.WriteLine(linea);
             }
+
+            file.Close();
         }
     }
 }

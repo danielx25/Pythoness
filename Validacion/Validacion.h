@@ -25,6 +25,8 @@ namespace ValidacionRNA
 
 		static bool getAcierto(double prediccion, double valor_real, VariableLinguistica*& mp10);
 
+		static void getProgreso(int& registro, int& aciertos);
+
 		static void guardarProgreso(double registro, double aciertos);
 
 		static void variables(vector<string>& variables);

@@ -22,71 +22,98 @@ namespace ValidacionRNA
 		variableslinguisticas->getVariables(vars);
 		vector<string> orden_vars;
 		Validacion::variables(orden_vars);
-		int registro = 1;
+		int progreso = 0;
+		int respaldo = 0;
+		int registro = 0;
 		int aciertos = 0;
+		int linea_actual = 0;
+
+		// cargamos el progreso previo si existiera alguno.
+		Validacion::getProgreso(respaldo, aciertos);
+
+		vector<string> reglas;
+		Reglas::leerReglas(archv_reglas, reglas);
 
 		while (getline(in, line)) {
-			SistemaFAM* sfam = new SistemaFAM();
-			map<string, double> entrada;
-			stringstream sep(line);
-			string field;
-			int posicion = 0;
-			int num_nrns = 6;
-			double valor_mp10 = 0;
-
-			for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
-			{
-				double espacio = (var->second->getMaximo() - var->second->getMinimo()) * .1;
-				double comienzo = var->second->getMinimo() + espacio;
-
-				sfam->agregarVariable(var->second);
-				sfam->agregarValoresVariable(var->second->getNombre(), comienzo, espacio, num_nrns);
-
-				/*if (var->second->getNombre() != "mp10")
-				entrada[var->second->getNombre()] = Normalizacion::desnormalizar(valor_norm[var->second->getNombre()], var->second->getMinimo(), var->second->getMaximo());*/
-			}
-
-			vector<string> reglas;
-			Reglas::leerReglas(archv_reglas, reglas);
-
-			for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
-				sfam->agregarRegla(*regla);
-
-			while (getline(sep, field, ';') && posicion < vars.size()) {
-				double valor = atof(field.c_str());
-				string nom_var = orden_vars.at(posicion);
-
-				if (nom_var != "mp10")
-				{
-					// realizamos ajustes a las variables "circulares".
-					if (nom_var == "estacion") valor = getEstacion(valor);
-					else if (nom_var == "hora") valor = getHora(valor);
-					else if (nom_var == "direccion_viento") valor = getDViento(valor);
-
-					// si el valor esta fuera de los limites, lo corregimos.
-					if (valor < vars[nom_var]->getMinimo()) valor = valor < vars[nom_var]->getMinimo();
-					else if (valor > vars[nom_var]->getMaximo()) valor = valor < vars[nom_var]->getMaximo();
-
-					entrada[nom_var] = valor;
-
-					posicion += 1;
-				}
-				else
-				{
-					valor_mp10 = valor;
-				}
-			}
-
-			double prediccion = sfam->getSalida(entrada);
-
-			if (Validacion::getAcierto(prediccion, valor_mp10, vars["mp10"]))
-				aciertos += 1;
-
-			Validacion::guardarProgreso(registro, aciertos);
-
 			registro += 1;
-			//cout << "Prediccion: " << prediccion << " Valor Real: " << valor_mp10 << "\n";
+
+			if (respaldo == 0 || registro > respaldo)
+			{
+				SistemaFAM* sfam = new SistemaFAM();
+				map<string, double> entrada;
+				stringstream sep(line);
+				string field;
+				int posicion = 0;
+				int num_nrns = 6;
+				double valor_mp10 = 0;
+
+				for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
+				{
+					double espacio = (var->second->getMaximo() - var->second->getMinimo()) * .1;
+					double comienzo = var->second->getMinimo() + espacio;
+
+					sfam->agregarVariable(var->second);
+					sfam->agregarValoresVariable(var->second->getNombre(), comienzo, espacio, num_nrns);
+
+					/*if (var->second->getNombre() != "mp10")
+					entrada[var->second->getNombre()] = Normalizacion::desnormalizar(valor_norm[var->second->getNombre()], var->second->getMinimo(), var->second->getMaximo());*/
+				}
+
+				for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
+					sfam->agregarRegla(*regla);
+
+				while (getline(sep, field, ';') && posicion < vars.size()) {
+					double valor = atof(field.c_str());
+					string nom_var = orden_vars.at(posicion);
+
+					if (nom_var != "mp10")
+					{
+						// realizamos ajustes a las variables "circulares".
+						if (nom_var == "estacion") valor = getEstacion(valor);
+						else if (nom_var == "hora") valor = getHora(valor);
+						else if (nom_var == "direccion_viento") valor = getDViento(valor);
+
+						// si el valor esta fuera de los limites, lo corregimos.
+						if (valor < vars[nom_var]->getMinimo()) valor = valor < vars[nom_var]->getMinimo();
+						else if (valor > vars[nom_var]->getMaximo()) valor = valor < vars[nom_var]->getMaximo();
+
+						entrada[nom_var] = valor;
+
+						posicion += 1;
+					}
+					else
+					{
+						valor_mp10 = valor;
+					}
+				}
+
+				double prediccion = sfam->getSalida(entrada);
+
+				if (Validacion::getAcierto(prediccion, valor_mp10, vars["mp10"]))
+				{
+					aciertos += 1;
+
+					ofstream archv_aciertos;
+					archv_aciertos.open("aciertos.txt", fstream::in | fstream::out | fstream::app);
+					archv_aciertos << prediccion << ";" << valor_mp10 << "\n";
+					archv_aciertos.close();
+				}
+
+				progreso += 1;
+
+				// se guarda el estado de la validacion.
+				if (progreso == 100)
+				{
+					Validacion::guardarProgreso(registro, aciertos);
+					progreso = 0;
+				}
+
+				//cout << "Prediccion: " << prediccion << " Valor Real: " << valor_mp10 << "\n";
+			}
 		}
+
+		// se guarda el progreso al finalizar la validacion.
+		if (registro > 0) Validacion::guardarProgreso(registro, aciertos);
 
 		in.close();
 	}
@@ -121,6 +148,33 @@ namespace ValidacionRNA
 			return true;
 
 		return false;
+	}
+
+	void Validacion::getProgreso(int& registro, int& aciertos)
+	{
+		ifstream archivo("progreso.txt");
+
+		if (archivo.good())
+		{
+			string linea;
+
+			while (getline(archivo, linea))
+			{
+				stringstream sep(linea);
+				string valor;
+				int posicion = 0;
+
+				while (getline(sep, valor, ';') && posicion < 2)
+				{
+					if (posicion == 0) registro = atof(valor.c_str());
+					if (posicion == 1) aciertos = atof(valor.c_str());
+
+					posicion += 1;
+				}
+			}
+
+			archivo.close();
+		}
 	}
 
 	void Validacion::guardarProgreso(double registro, double aciertos)
