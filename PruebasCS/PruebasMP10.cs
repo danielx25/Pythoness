@@ -20,14 +20,14 @@ namespace PruebasCS
             }
 
             Console.WriteLine("Validacion en proceso...");
-            ControladorRNA.validacion();
+            //ControladorRNA.validacion();
             Console.WriteLine("Validacion completa.");
         }
 
         public static void guardarDatos()
         {
-            DateTime inicio = new DateTime(2016, 3, 1, 0, 0, 0);
-            DateTime fin = new DateTime(2016, 3, 1, 12, 0, 0);
+            DateTime inicio = new DateTime(2016, 1, 1, 0, 0, 0);
+            DateTime fin = new DateTime(2016, 12, 31, 00, 0, 0);
 
             Dictionary<string, double[]> datos = Consultas.getDatosValidacion(inicio, fin);
 

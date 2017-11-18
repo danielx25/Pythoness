@@ -26,12 +26,16 @@ namespace SFAM
 		num_vals_vars[variable] = num_vals;
 		valores_variables[variable] = new double[num_vals];
 
+		//cout << "Valores Variables: " << variable << "\n";
 		// agregamos los valores no fuzzificados para la variable.
 		for (int i = 0; i < num_vals; i++)
 		{
+			//cout << valor_actual << " ";
+
 			valores_variables[variable][i] = valor_actual;
 			valor_actual += espacio;
 		}
+		//cout << "\n";
 
 		// fuzzificamos los valores agregados para todos los valores linguisticos.
 		map<string, ValorLinguistico*> valores;
@@ -53,11 +57,15 @@ namespace SFAM
 	{
 		grados = new double[num_vals];
 
+		//cout << "Grados Pertenencia Valor: " << valor->getNombre() << "\n";
 		for (int i = 0; i < num_vals; i++)
 		{
 			valor->CalcularGradoPertenencia(vals_vars[i]);
 			grados[i] = valor->getGradoPertenencia();
+			//cout << grados[i] << " ";
 		}
+		//cout << "\n";
+
 	}
 
 
@@ -118,6 +126,12 @@ namespace SFAM
 
 			getBitVector(var->first, entrada[var->first], bit);
 			fam->getSalidaB(bit, salidas[salida_actual]);
+			
+			/*cout << "Salida Antecedente: " << var->first << " es " << var->second << "\n";
+			for (int i = 0; i < num_vals_vars[consecuente]; i++)
+				cout << salidas[salida_actual][i] << " ";
+			cout << "\n";*/
+
 			salida_actual += 1;
 		}
 
@@ -216,12 +230,16 @@ namespace SFAM
 		double denominador = 0;
 		double centroide = 0;
 
+		//cout << "Centroide\n";
 		for (int i = 0; i < num_vals; i++)
 		{
+			//cout << "valor consc: " << vals_consc[i] << " suma: " << suma[i] << "\n";
+			//cout << "suma: " << suma[i] << "\n";
 			numerador += vals_consc[i] * suma[i];
 			denominador += suma[i];
 		}
 
+		//cout << "numerador: " << numerador << " denominador: " << denominador << "\n";
 		centroide = numerador / denominador;
 
 		return centroide;
@@ -288,6 +306,14 @@ namespace SFAM
 
 			getElementosRegla(*regla, vars, consecuente, val_consc, operador);
 			evaluacionRegla(vars, consecuente, val_consc, operador, salida_reglas[regla_actual]);
+
+			//cout << "\nRegla:" << regla_actual << "\n";
+			for (int j = 0; j < num_vals_vars[consecuente]; j++)
+			{
+				//cout << salida_reglas[regla_actual][j] << " ";
+			}
+			//cout << "\n";
+
 			regla_actual += 1;
 		}*/
 
@@ -299,6 +325,16 @@ namespace SFAM
 		cout << salida_reglas[5][3] << " ";
 		cout << salida_reglas[5][4] << " ";
 		cout << salida_reglas[5][5] << " \n";*/
+
+		/*for (int i = 0; i < reglas.size(); i++)
+		{
+			cout << "Regla:" << i << "\n";
+			for (int j = 0; j < num_vals_vars[consecuente]; j++)
+			{
+				cout << salida_reglas[i][j] << " ";
+			}
+			cout << "\n";
+		}*/
 
 		getCapaSuma(salida_reglas, reglas.size(), num_vals_vars[consecuente], suma);
 		salida = getCentroide(suma, valores_variables[consecuente], num_vals_vars[consecuente]);

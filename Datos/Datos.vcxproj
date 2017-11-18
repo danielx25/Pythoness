@@ -134,6 +134,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Discretizacion.h" />
     <ClInclude Include="Normalizacion.h" />
     <ClInclude Include="Reglas.h" />
     <ClInclude Include="stdafx.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="VariablesLinguisticas.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Discretizacion.cpp" />
     <ClCompile Include="Normalizacion.cpp" />
     <ClCompile Include="Reglas.cpp" />
     <ClCompile Include="stdafx.cpp">

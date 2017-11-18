@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5E292719-F4A2-434F-A1A9-C859E6D58BAC}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>PruebasCS</RootNamespace>
-    <AssemblyName>PruebasCS</AssemblyName>
+    <ProjectGuid>{C3B74BF6-E876-4E5B-8E70-5900F0CE3265}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ArbolDeDecision</RootNamespace>
+    <AssemblyName>ArbolDeDecision</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,32 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Arbol_.cs" />
+    <Compile Include="Archivo.cs" />
+    <Compile Include="C45.cs" />
+    <Compile Include="Columna.cs" />
+    <Compile Include="ID3.cs" />
+    <Compile Include="Nodo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PruebasBD.cs" />
-    <Compile Include="PruebasMP10.cs" />
-    <Compile Include="PruebasReglas.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ArbolDeDecision\ArbolDeDecision.csproj">
-      <Project>{c3b74bf6-e876-4e5b-8e70-5900f0ce3265}</Project>
-      <Name>ArbolDeDecision</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BaseDeDatos\BaseDeDatos.csproj">
-      <Project>{1c3394a1-9dd8-4373-960b-2aef24ec41e1}</Project>
-      <Name>BaseDeDatos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Controladores\Controladores.vcxproj">
-      <Project>{563d6ac6-eba0-4d62-83c8-89d9db3c59ad}</Project>
-      <Name>Controladores</Name>
-    </ProjectReference>
+    <Compile Include="Tabla.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>

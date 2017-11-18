@@ -27,7 +27,7 @@ namespace BaseDeDatos
                 double[] dato = new double[num_columnas];
 
                 // datos metereologicos.
-                dato[0] = fecha_actual.Year; // estacion.
+                dato[0] = fecha_actual.Month; // estacion.
                 dato[1] = fecha_actual.Hour; // hora.
                 columna_actual = 2;
 
