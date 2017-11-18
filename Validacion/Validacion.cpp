@@ -34,33 +34,43 @@ namespace ValidacionRNA
 		vector<string> reglas;
 		Reglas::leerReglas(archv_reglas, reglas);
 
+		SistemaFAM* sfam = new SistemaFAM();
+
+		for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
+		{
+			double porcentaje = .1;
+
+			/*if (var->first == "mp10")
+			{
+			cout << "message\n";
+			num_nrns = 20;
+			porcentaje = .05;
+			}*/
+
+			double espacio = (var->second->getMaximo() - var->second->getMinimo()) * porcentaje;
+			int num_nrns = ((var->second->getMaximo() - var->second->getMinimo()) / espacio) + 1;
+
+			double comienzo = var->second->getMinimo() /*+ espacio*/;
+			//double comienzo = 0;
+
+			sfam->agregarVariable(var->second);
+			sfam->agregarValoresVariable(var->second->getNombre(), comienzo, espacio, num_nrns);
+		}
+
+		for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
+			sfam->agregarRegla(*regla);
+
 		while (getline(in, line)) {
 			registro += 1;
 
 			if (respaldo == 0 || registro > respaldo)
 			{
-				SistemaFAM* sfam = new SistemaFAM();
 				map<string, double> entrada;
 				stringstream sep(line);
 				string field;
 				int posicion = 0;
-				int num_nrns = 6;
+				//int num_nrns = 6;
 				double valor_mp10 = 0;
-
-				for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
-				{
-					double espacio = (var->second->getMaximo() - var->second->getMinimo()) * .1;
-					double comienzo = var->second->getMinimo() + espacio;
-
-					sfam->agregarVariable(var->second);
-					sfam->agregarValoresVariable(var->second->getNombre(), comienzo, espacio, num_nrns);
-
-					/*if (var->second->getNombre() != "mp10")
-					entrada[var->second->getNombre()] = Normalizacion::desnormalizar(valor_norm[var->second->getNombre()], var->second->getMinimo(), var->second->getMaximo());*/
-				}
-
-				for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
-					sfam->agregarRegla(*regla);
 
 				while (getline(sep, field, ';') && posicion < vars.size()) {
 					double valor = atof(field.c_str());
@@ -104,16 +114,16 @@ namespace ValidacionRNA
 				// se guarda el estado de la validacion.
 				if (progreso == 100)
 				{
-					Validacion::guardarProgreso(registro, aciertos);
+					//Validacion::guardarProgreso(registro, aciertos);
 					progreso = 0;
 				}
 
-				//cout << "Prediccion: " << prediccion << " Valor Real: " << valor_mp10 << "\n";
+				cout << "Prediccion: " << prediccion << " Valor Real: " << valor_mp10 << "\n";
 			}
 		}
 
 		// se guarda el progreso al finalizar la validacion.
-		if (registro > 0) Validacion::guardarProgreso(registro, aciertos);
+		//if (registro > 0) Validacion::guardarProgreso(registro, aciertos);
 
 		in.close();
 	}
@@ -195,17 +205,18 @@ namespace ValidacionRNA
 		variables.push_back("temperatura");
 		variables.push_back("humedad_relativa");
 		variables.push_back("radiacion_solar");
-		variables.push_back("presion_atmosferica");
+		//variables.push_back("presion_atmosferica");
 		variables.push_back("precipitacion_dia1");
 		variables.push_back("precipitacion_dia2");
 		variables.push_back("precipitacion_dia3");
 		variables.push_back("precipitacion_dia4");
 		variables.push_back("precipitacion_dia5");
-		variables.push_back("evaporacion_dia1");
+		variables.push_back("evaporacion");
+		/*variables.push_back("evaporacion_dia1");
 		variables.push_back("evaporacion_dia2");
 		variables.push_back("evaporacion_dia3");
 		variables.push_back("evaporacion_dia4");
-		variables.push_back("evaporacion_dia5");
+		variables.push_back("evaporacion_dia5");*/
 		variables.push_back("pala1");
 		variables.push_back("pala3");
 		variables.push_back("pala4");

@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="UI.IngresoDatos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="790">
+    <Grid>
+        <Label Content="Predicción: " HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox x:Name="boxDias" Text="Seleccione un dia" HorizontalAlignment="Left" Margin="94,34,0,0" VerticalAlignment="Top" Width="177" SelectedIndex="0">
+            <ComboBoxItem Name="boxDia1">Dia 1</ComboBoxItem>
+            <ComboBoxItem Name="boxDia2">Dia 2</ComboBoxItem>
+            <ComboBoxItem Name="boxDia3">Dia 3</ComboBoxItem>
+            <ComboBoxItem Name="boxDia4">Dia 4</ComboBoxItem>
+            <ComboBoxItem Name="boxDia5">Dia 5</ComboBoxItem>
+        </ComboBox>
+        <TabControl HorizontalAlignment="Left" Height="362" Margin="10,118,0,0" VerticalAlignment="Top" Width="770">
+            <TabItem x:Name="tabMeteorologicos" Header="Meteorologicos" Controls:ControlsHelper.HeaderFontSize="16">
+                <Grid>
+                    <Label Content="Fecha:" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="116"/>
+                    <DatePicker x:Name="boxFecha" HorizontalAlignment="Left" Margin="126,29,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Velocidad viento:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxVelocidadV" HorizontalAlignment="Left" Height="23" Margin="126,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor"/>
+                    <Label Content="Dirección viento:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxDireccionV" HorizontalAlignment="Left" Height="23" Margin="126,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Temperatura:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxTemperatura" HorizontalAlignment="Left" Height="23" Margin="126,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Humedad relativa:" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxHumedad" HorizontalAlignment="Left" Height="23" Margin="126,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Radiacion solar:" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxRadiacion" HorizontalAlignment="Left" Height="23" Margin="126,243,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Evaporacion:" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxEvaporacion" HorizontalAlignment="Left" Height="23" Margin="126,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Precipitación ultimos 5 dias" HorizontalAlignment="Left" Margin="366,29,0,0" VerticalAlignment="Top" Width="301"/>
+                    <Label Content="Dia de mañana:" HorizontalAlignment="Left" Margin="372,70,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxPrecipitacionM" HorizontalAlignment="Left" Height="23" Margin="488,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Hoy:" HorizontalAlignment="Left" Margin="372,112,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxPrecipitacionH" HorizontalAlignment="Left" Height="23" Margin="488,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Un dia antes:" HorizontalAlignment="Left" Margin="372,155,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxPrecipitacion1" HorizontalAlignment="Left" Height="23" Margin="488,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Dos dia antes:" HorizontalAlignment="Left" Margin="372,197,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxPrecipitacion2" HorizontalAlignment="Left" Height="23" Margin="488,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Tres dia antes:" HorizontalAlignment="Left" Margin="372,243,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxPrecipitacion3" HorizontalAlignment="Left" Height="23" Margin="488,243,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabMitigación" Header="Mitigación" Controls:ControlsHelper.HeaderFontSize="16">
+                <Grid>
+                    <Label Content="Chancadores:" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxChancadores" HorizontalAlignment="Left" Height="23" Margin="126,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Movitec:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxMovitecdia" HorizontalAlignment="Left" Height="23" Margin="126,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Dasdia:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxDasdia" HorizontalAlignment="Left" Height="23" Margin="126,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Cnorte:" HorizontalAlignment="Left" Margin="372,29,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxCnorte" HorizontalAlignment="Left" Height="23" Margin="488,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Cmovil:" HorizontalAlignment="Left" Margin="372,71,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxCmovil" HorizontalAlignment="Left" Height="23" Margin="488,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Cachimba 1:" HorizontalAlignment="Left" Margin="372,114,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxCachimba1" HorizontalAlignment="Left" Height="23" Margin="488,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Cachimba 2:" HorizontalAlignment="Left" Margin="372,156,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxCachimba2" HorizontalAlignment="Left" Height="23" Margin="488,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                    <Label Content="Gerencia:" HorizontalAlignment="Left" Margin="372,202,0,0" VerticalAlignment="Top" Width="116"/>
+                    <TextBox x:Name="boxGerencia" HorizontalAlignment="Left" Height="23" Margin="488,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabChancadores" Header="Detención chacadores" Controls:ControlsHelper.HeaderFontSize="16">
+                <Grid>
+                    <CheckBox x:Name="boxCH1" Content="CH-1" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxCH2" Content="CH-2" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabPalas" Header="Detención palas" Controls:ControlsHelper.HeaderFontSize="16">
+                <Grid>
+                    <CheckBox x:Name="boxPA1" Content="PA-01" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxPA3" Content="PA-03" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxPA4" Content="PA-04" HorizontalAlignment="Left" Margin="124,29,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxPA5" Content="PA-05" HorizontalAlignment="Left" Margin="124,70,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxPA7" Content="PA-07" HorizontalAlignment="Left" Margin="226,29,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxPA8" Content="PA-08" HorizontalAlignment="Left" Margin="226,70,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxPA10" Content="PA-10" HorizontalAlignment="Left" Margin="333,29,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                    <CheckBox x:Name="boxPA11" Content="PA-11" HorizontalAlignment="Left" Margin="333,70,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="btnPrediccion" Content="Generar Predicción" HorizontalAlignment="Left" Margin="632,33,0,0" VerticalAlignment="Top" Width="148" />
+        <Separator HorizontalAlignment="Left" Height="34" Margin="10,84,0,0" VerticalAlignment="Top" Width="770"/>
+
+    </Grid>
+</UserControl>

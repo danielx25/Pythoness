@@ -66,6 +66,8 @@ namespace Datos
 
 		void funcionGaussiana(string nombre, vector<string> valores, double minimo, double maximo);
 
+		void funcionTriangular(string nombre, double minimo, double maximo);
+
 		void getVariable(string nombre, VariableLinguistica*& variable);
 
 		void getVariables(map<string, VariableLinguistica*>& vars) const;

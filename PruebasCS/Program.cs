@@ -10,7 +10,8 @@ namespace PruebasCS
     {
         static void Main(string[] args)
         {
-            PruebasMP10.validacion();
+            PruebasReglas pReglas = new PruebasReglas(); pReglas.extraccionReglas("dataset.csv", "reglasC45.txt");
+            //PruebasMP10.validacion();
             //PruebasBD.datosValidacion();
             //PruebasBD.meteorologicos();
             //PruebasBD.mitigacion();
