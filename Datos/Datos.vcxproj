@@ -22,7 +22,7 @@
     <ProjectGuid>{AD006D6F-9919-4FA8-A93C-0F657407C759}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Datos</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -134,6 +134,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Discretizacion.h" />
     <ClInclude Include="Normalizacion.h" />
     <ClInclude Include="Reglas.h" />
     <ClInclude Include="stdafx.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="VariablesLinguisticas.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Discretizacion.cpp" />
     <ClCompile Include="Normalizacion.cpp" />
     <ClCompile Include="Reglas.cpp" />
     <ClCompile Include="stdafx.cpp">

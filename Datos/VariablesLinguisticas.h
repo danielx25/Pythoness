@@ -21,64 +21,52 @@ namespace Datos
 		// Destructor virtual para una correcta limpieza.
 		//~VariablesLinguisticas() {}
 
-		void estacion();
+		void estacion(string nombre = "estacion");
 
-		void hora();
+		void hora(string nombre = "hora");
 
-		void velocidad_viento();
+		void velocidad_viento(string nombre = "velocidad_viento");
 		
-		void direccion_viento();
+		void direccion_viento(string nombre = "direccion_viento");
 		
-		void temperatura();
+		void temperatura(string nombre = "temperatura");
 		
-		void humedad_relativa();
+		void humedad_relativa(string nombre = "humedad_relativa");
 		
-		void radiacion_solar();
+		void radiacion_solar(string nombre = "radiacion_solar");
 		
-		void presion_atmosferica();
+		void presion_atmosferica(string nombre = "presion_atmosferica");
 		
-		void precipitacion_dia1();
-		
-		void precipitacion_dia2();
-		
-		void precipitacion_dia3();
-		
-		void precipitacion_dia4();
-		
-		void precipitacion_dia5();
-		
-		void evaporacion_dia1();
-		
-		void evaporacion_dia2();
-		
-		void evaporacion_dia3();
-		
-		void evaporacion_dia4();
-		
-		void evaporacion_dia5();
+		void precipitacion(string nombre);
+
+		void evaporacion(string nombre);
 		
 		// las palas y chancadores poseen la misma variable linguistica.
 		void estado(string nombre);
 
-		void chaxa_camion();
+		void chaxa_camion(string nombre = "chaxa_camion");
 
-		void movitec_camion();
+		void movitec_camion(string nombre = "movitec_camion");
 
-		void das_camion();
+		void das_camion(string nombre = "das_camion");
 		
-		void cnorte_consumo_agua();
+		void consumo_agua(string nombre = "cnorte_consumo_agua");
+
+		void cnorte_consumo_agua(string nombre = "cnorte_consumo_agua");
 		
-		void cmovil_consumo_agua();
+		void cmovil_consumo_agua(string nombre = "cmovil_consumo_agua");
 
-		void cachimba1_consumo_agua();
+		void cachimba1_consumo_agua(string nombre = "cachimba1_consumo_agua");
 
-		void cachimba2_consumo_agua();
+		void cachimba2_consumo_agua(string nombre = "cachimba2_consumo_agua");
 		
-		void gerencia_consumo_agua();
+		void gerencia_consumo_agua(string nombre = "gerencia_consumo_agua");
 
-		void mp10();
+		void mp10(string nombre = "mp10");
 
 		void funcionGaussiana(string nombre, vector<string> valores, double minimo, double maximo);
+
+		void funcionTriangular(string nombre, double minimo, double maximo);
 
 		void getVariable(string nombre, VariableLinguistica*& variable);
 

@@ -1,0 +1,7 @@
+Si estacion es fria y hora es madrugada y velocidad_viento es media y direccion_viento es norte y temperatura es baja y humedad_relativa es baja y radiacion_solar es muy_baja entonces mp10 es sin_alerta
+Si estacion es fria y hora es madrugada y velocidad_viento es media y direccion_viento es norte y temperatura es calida y humedad_relativa es baja y radiacion_solar es muy_baja entonces mp10 es sin_alerta
+Si estacion es muy_helada y hora es madrugada y velocidad_viento es media y direccion_viento es norte y temperatura es calida y humedad_relativa es muy_baja y radiacion_solar es muy_baja entonces mp10 es alerta_1
+Si estacion es muy_calurosa y hora es manana y velocidad_viento es media y direccion_viento es norte y temperatura es calurosa y humedad_relativa es muy_baja y radiacion_solar es baja entonces mp10 es alerta_2
+Si estacion es fria y hora es manana y velocidad_viento es media y direccion_viento es este y temperatura es calurosa y humedad_relativa es muy_baja y radiacion_solar es muy_baja entonces mp10 es alerta_3
+Si estacion es fria y hora es tarde y velocidad_viento es media y direccion_viento es sur y temperatura es calurosa y humedad_relativa es media y radiacion_solar es media entonces mp10 es alerta_4
+Si estacion es muy_helada y hora es mediodia y velocidad_viento es baja y direccion_viento es sur y temperatura es calurosa y humedad_relativa es muy_baja y radiacion_solar es alta entonces mp10 es alerta_4
