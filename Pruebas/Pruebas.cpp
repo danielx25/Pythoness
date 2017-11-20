@@ -22,7 +22,7 @@ int main()
 	//PruebasSFAM();
 	//PruebasLD();
 	//PruebasReglas();
-	//Discretizacion::pesos("pesosRNA.csv", "datosID3.csv");
+	//Discretizacion::datos("pesosRNA.csv", "dataset.csv", true);
 	//Discretizacion::valoresVariables("valores_variables.csv");
 	//PruebasMP10();
 	PruebasMP10::validacion();

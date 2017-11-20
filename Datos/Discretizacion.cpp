@@ -9,12 +9,12 @@
 
 namespace Datos
 {
-	void Discretizacion::pesos(string archv_pesos, string archv_salida)
+	void Discretizacion::datos(string archv_datos, string archv_salida, bool desnormalizar)
 	{
 		vector<string> filas;
 		VariablesLinguisticas* variableslinguisticas = new VariablesLinguisticas();
 		map<string, VariableLinguistica*> vars;
-		ifstream in(archv_pesos);
+		ifstream in(archv_datos);
 		string line;
 		vector<pair<string, pair<double, double>>> orden_vars;
 		vector<string> antecedentes;
@@ -36,7 +36,10 @@ namespace Datos
 				double var_max = orden_vars.at(posicion).second.second;
 				double var_min = orden_vars.at(posicion).second.first;
 
-				val_desnormalizado = Normalizacion::desnormalizar(valor, var_min, var_max);
+				if (desnormalizar)
+					val_desnormalizado = Normalizacion::desnormalizar(valor, var_min, var_max);
+				else
+					val_desnormalizado = valor;
 					
 				// realizamos ajustes a las variables "circulares".
 				if (nom_var == "estacion")
