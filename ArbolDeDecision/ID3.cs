@@ -162,7 +162,9 @@ namespace ArbolDeDecision
             //atributo = (String)columna[0];
 
 
+#pragma warning disable CS0219 // La variable 'frecuencia' está asignada pero su valor nunca se usa
             int frecuencia = 0;
+#pragma warning restore CS0219 // La variable 'frecuencia' está asignada pero su valor nunca se usa
             if (columna.IsContinuo)
             {
                 for (int i = 0; i < columna.getAtributosContinuos().Count + 1; i++)
