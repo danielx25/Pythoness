@@ -61,6 +61,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogo.cs" />
+    <Compile Include="GeneracionReglas.cs" />
+    <Compile Include="Progreso.xaml.cs">
+      <DependentUpon>Progreso.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RedNeuronal.xaml.cs">
+      <DependentUpon>RedNeuronal.xaml</DependentUpon>
+    </Compile>
+    <Page Include="FAM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="IngresoDatos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -73,6 +85,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FAM.xaml.cs">
+      <DependentUpon>FAM.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IngresoDatos.xaml.cs">
       <DependentUpon>IngresoDatos.xaml</DependentUpon>
     </Compile>
@@ -80,6 +95,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Progreso.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RedNeuronal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -108,6 +131,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArbolDeDecision\ArbolDeDecision.csproj">
+      <Project>{c3b74bf6-e876-4e5b-8e70-5900f0ce3265}</Project>
+      <Name>ArbolDeDecision</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controladores\Controladores.vcxproj">
+      <Project>{563d6ac6-eba0-4d62-83c8-89d9db3c59ad}</Project>
+      <Name>Controladores</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reglas\Reglas.csproj">
+      <Project>{a8df70b9-3b93-4ade-9cb1-970cc3133f24}</Project>
+      <Name>Reglas</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

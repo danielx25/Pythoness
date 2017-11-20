@@ -213,7 +213,7 @@ namespace ArbolDeDecision
         {
             TextWriter tw = new StreamWriter(archivo);
             List<string> lista = new List<string>();
-            produccionReglas(raiz, lista, "Si ");
+            produccionReglas(raiz, lista, "Si ", 1);
             foreach (string linea in lista)
             {
                 tw.WriteLine(linea);
@@ -222,7 +222,7 @@ namespace ArbolDeDecision
             tw.Close();
         }
 
-        public void produccionReglas(Nodo nodo, List<string> lista, string regla_actual)
+        public void produccionReglas(Nodo nodo, List<string> lista, string regla_actual, int profundidad)
         {
             if (nodo.getEsHoja() == false)
             {
@@ -255,7 +255,7 @@ namespace ArbolDeDecision
                     {
                         Nodo nuevoNodo = (Nodo)nodo[i];
                         //regla_actual += atributos[i] + " y ";
-                        produccionReglas(nuevoNodo, lista, regla_actual + atributos[i] + " y ");
+                        produccionReglas(nuevoNodo, lista, regla_actual + atributos[i] + " y ", profundidad + 1);
 
                     }
 
@@ -263,8 +263,11 @@ namespace ArbolDeDecision
             }
             else
             {
-                regla_actual += "entonces mp10 " + nodo.getNombreClase();
-                lista.Add(regla_actual);
+                if (profundidad < 6 || nodo.getNombreClase() == "alerta_4" || nodo.getNombreClase() == "alerta_3" || nodo.getNombreClase() == "alerta_2")
+                {
+                    regla_actual += "entonces mp10 " + nodo.getNombreClase();
+                    lista.Add(regla_actual);
+                }
             }
         }
     }

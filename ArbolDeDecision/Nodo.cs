@@ -14,12 +14,18 @@ namespace ArbolDeDecision
         private String clase;
         private List<String> atributosDiscretos;
         private List<double> atributosContinuos;
+#pragma warning disable CS0169 // El campo 'Nodo.division' nunca se usa
         private double division;
+#pragma warning restore CS0169 // El campo 'Nodo.division' nunca se usa
         private List<Nodo> punteros = new List<Nodo>();
 
+#pragma warning disable CS0414 // El campo 'Nodo.radioGanacia' está asignado pero su valor nunca se usa
         private double radioGanacia = 0.0; 
+#pragma warning restore CS0414 // El campo 'Nodo.radioGanacia' está asignado pero su valor nunca se usa
         private double ganancia = 0.0;
+#pragma warning disable CS0414 // El campo 'Nodo.distancia' está asignado pero su valor nunca se usa
         private double distancia = 0.0;
+#pragma warning restore CS0414 // El campo 'Nodo.distancia' está asignado pero su valor nunca se usa
 
         public Nodo(String clase, List<String> atributosDiscretos)
         {

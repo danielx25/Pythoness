@@ -14,8 +14,13 @@
                     <local:IngresoDatos x:Name="panelIngresoDatos" Grid.Row="1" />
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabPrediccion" Header="Predicción MP10" Margin="7,0,21,0" Controls:ControlsHelper.HeaderFontSize="20">
+            <TabItem x:Name="tabPrediccion" Header="Predicción MP10" Margin="0,0,-8,0" Controls:ControlsHelper.HeaderFontSize="20">
                 <Grid/>
+            </TabItem>
+            <TabItem x:Name="tabRNA" Header="Red Neuronal" Margin="7,0,-27,0" Controls:ControlsHelper.HeaderFontSize="20">
+                <Grid Margin="0,0,0,0">
+                    <local:RedNeuronal x:Name="panelRedNeuronal" Grid.Row="1" />
+                </Grid>
             </TabItem>
         </TabControl>
 

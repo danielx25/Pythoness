@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="UI.RedNeuronal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="790">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="448" Margin="10,32,0,0" VerticalAlignment="Top" Width="770">
+            <TabItem x:Name="tabSOM" Header="SOM" Controls:ControlsHelper.HeaderFontSize="16">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabLVQ" Header="LVQ" Controls:ControlsHelper.HeaderFontSize="16">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabFAM" Header="FAM" Controls:ControlsHelper.HeaderFontSize="16">
+                <Grid Margin="0,0,0,0">
+                    <local:FAM x:Name="panelFAM" Grid.Row="1" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
