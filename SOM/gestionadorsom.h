@@ -4,7 +4,7 @@
 #include "som.h"
 #include "ficherorna.h"
 #include "configuracion.h"
-
+#include <thread> 
 //#include <pthread.h>
 
 
@@ -49,7 +49,7 @@ class GestionadorSOM
         double **datosEntrenamiento;
         double progreso;//porcentaje
 
-        pthread_t hilo;//hilo del entrenamiento de la red
+        //pthread_t hilo;//hilo del entrenamiento de la red
         //milisegundo
         int tiempoGuardadoRed = 2000;
 

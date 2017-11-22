@@ -487,12 +487,12 @@ double *SOM::getBetas()
     return betas;
 }
 
-double SOM::setAlfas(double *alfa1)
+void SOM::setAlfas(double *alfa1)
 {
     alfas=alfa1;
 }
 
-double SOM::setBetas(double *beta1)
+void SOM::setBetas(double *beta1)
 {
     betas = beta1;
 }

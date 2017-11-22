@@ -61,8 +61,8 @@ class SOM
         double getAlfa();
         double getBeta();
 
-        double setAlfa(double alfa1);
-        double setBeta(double beta1);
+        void setAlfa(double alfa1);
+        void setBeta(double beta1);
 
         double *getAlfas();
         double *getBetas();

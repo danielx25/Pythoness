@@ -11,11 +11,9 @@ GestionadorSOM::~GestionadorSOM()
     //dtor
 }
 
-static void *proceso_hilos(void *funcion)
+static void proceso_hilos(SOM *som1)
 {
-    SOM *som1 = (SOM*)funcion;
-    som1->entrenamiento();
-    pthread_exit(NULL);
+	som1->entrenamiento();
 }
 
 static double ** createByteMatrix(unsigned int rows, unsigned int cols)
@@ -65,7 +63,7 @@ void GestionadorSOM::statusProgresoRNA()
 
 void GestionadorSOM::empezarEntrenamiento()
 {
-    pthread_create(&hilo, NULL, proceso_hilos, (void*)som1);
+	std::thread first(proceso_hilos, som1);
 
     while(som1->iteracion < som1->numeroIteraciones*Configuracion::NUMERO_DATOS)
     {
