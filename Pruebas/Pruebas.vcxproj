@@ -151,6 +151,7 @@
     <ClInclude Include="PruebasFAM.h" />
     <ClInclude Include="PruebasLD.h" />
     <ClInclude Include="PruebasMP10.h" />
+    <ClInclude Include="PruebaSOM.h" />
     <ClInclude Include="PruebasReglas.h" />
     <ClInclude Include="PruebasSFAM.h" />
     <ClInclude Include="stdafx.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="PruebasFAM.cpp" />
     <ClCompile Include="PruebasLD.cpp" />
     <ClCompile Include="PruebasMP10.cpp" />
+    <ClCompile Include="PruebaSOM.cpp" />
     <ClCompile Include="PruebasReglas.cpp" />
     <ClCompile Include="PruebasSFAM.cpp" />
     <ClCompile Include="stdafx.cpp">
