@@ -4,7 +4,7 @@
 #include "ControladorRNA.h"
 #include "Validacion.h"
 
-using namespace ValidacionRNA;
+//using namespace ValidacionRNA;
 
 namespace Controladores {
 
@@ -13,6 +13,6 @@ namespace Controladores {
 		string archv_validacion = "validacion.csv";
 		string archv_reglas = "reglas.txt";
 
-		Validacion::validacionFAM(archv_validacion, archv_reglas);
+		//Validacion::validacionFAM(archv_validacion, archv_reglas);
 	}
 }

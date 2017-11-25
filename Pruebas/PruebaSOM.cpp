@@ -13,7 +13,7 @@ PruebaSOM::~PruebaSOM()
 
 void PruebaSOM::llamarFuncionSOM()
 {
-	ControladorSOM::
+	//ControladorSOM::
 
 
 }

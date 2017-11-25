@@ -10,14 +10,14 @@ namespace PruebasCS
     {
         static void Main(string[] args)
         {
-            PruebasReglas pReglas = new PruebasReglas(); pReglas.extraccionReglas("dataset.csv", "reglasC45.txt");
+            //PruebasReglas pReglas = new PruebasReglas(); pReglas.extraccionReglas("dataset.csv", "reglasC45.txt");
             //PruebasMP10.validacion();
             //PruebasBD.datosValidacion();
             //PruebasBD.meteorologicos();
             //PruebasBD.mitigacion();
             //PruebasBD.palas();
             //PruebasBD.chancadores();
-
+            PruebaSOM_1.ejemploSom();
             Console.WriteLine("Prueba terminada, presione una tecla para continuar.");
             Console.ReadLine();
         }

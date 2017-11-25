@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PruebasBD.cs" />
     <Compile Include="PruebasMP10.cs" />
+    <Compile Include="PruebaSOM_1.cs" />
     <Compile Include="PruebasReglas.cs" />
   </ItemGroup>
   <ItemGroup>
