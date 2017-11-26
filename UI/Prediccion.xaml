@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:UI.graficos"
              mc:Ignorable="d" 
              d:DesignHeight="490" d:DesignWidth="790">
-    <Grid>
+    <Grid x:Name="gridPrediccion">
         <local:Linea x:Name="graficoPrediccion" Margin="0,10,254,91" />
         <Label Content="Nivel MP10" HorizontalAlignment="Left" Margin="597,37,0,0" VerticalAlignment="Top" Width="84"/>
         <Label Content="Nivel de alerta" HorizontalAlignment="Left" Margin="686,37,0,0" VerticalAlignment="Top" Width="94"/>
@@ -22,7 +22,9 @@
         <Label Content="Dia 4" HorizontalAlignment="Left" Margin="541,156,0,0" VerticalAlignment="Top" Width="51"/>
         <Label x:Name="mp10_dia4" Content="0" HorizontalAlignment="Left" Margin="597,156,0,0" VerticalAlignment="Top" Width="84"/>
         <Label x:Name="alerta_dia4" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,156,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Dia 5" HorizontalAlignment="Left" Margin="541,187,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="mp10_dia5" Content="0" HorizontalAlignment="Left" Margin="597,187,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label x:Name="alerta_dia5" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,187,0,0" VerticalAlignment="Top" Width="94"/>
         <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="569,279,0,0" VerticalAlignment="Top" Width="157"/>
-
     </Grid>
 </UserControl>

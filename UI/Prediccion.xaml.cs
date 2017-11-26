@@ -45,6 +45,10 @@ namespace UI
         {
             for (int i = 0; i < predicciones.Length; i++)
             {
+                string dia = "dia" + (i + 1);
+                Label nivel = (Label)gridPrediccion.FindName("mp10_" + dia);
+                Label alerta = (Label)gridPrediccion.FindName("alerta_" + dia);
+
                 if (predicciones[i] > -1)
                 {
                     graficoPrediccion.ChartValues.Add(new Coordenadas
@@ -52,8 +56,44 @@ namespace UI
                         X = i + 1,
                         Y = predicciones[i]
                     });
+
+                    nivel.Content = Math.Round(predicciones[i]) + "";
+                    alerta.Content = getAlerta(predicciones[i]);
+                }
+                else
+                {
+                    nivel.Content = "";
+                    alerta.Content = "";
                 }
             }
+        }
+
+        private string getAlerta(double mp10)
+        {
+            string alerta = "";
+
+            if(mp10 <= 150)
+            {
+                alerta = "Sin alerta";
+            }
+            else if (mp10 <= 250)
+            {
+                alerta = "Alerta 1";
+            }
+            else if(mp10 <= 350)
+            {
+                alerta = "Alerta 2";
+            }
+            else if (mp10 <= 500)
+            {
+                alerta = "Alerta 3";
+            }
+            else
+            {
+                alerta = "Alerta 4";
+            }
+
+            return alerta;
         }
     }
 }

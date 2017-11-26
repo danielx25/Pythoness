@@ -36,6 +36,13 @@ namespace BaseDeDatos
             return getDatos(metereologicos, inicio, fin, normalizar);
         }
 
+        public static Dictionary<string, double[]> getDatosFecha(DateTime fecha, bool normalizar)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicosFecha(fecha);
+
+            return getDatos(metereologicos, fecha, fecha, normalizar);
+        }
+
         public static Dictionary<string, double[]> getDatos(Dictionary<string, double[]> metereologicos, DateTime inicio, DateTime fin, bool normalizar)
         {
             Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
@@ -152,6 +159,31 @@ namespace BaseDeDatos
 
             return datos;
         }
+
+        public static Dictionary<string, double[]> getDatosMeteorologicosFecha(DateTime fecha)
+        {
+            Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
+
+            BD bd = new BD();
+
+            if (bd.conectar())
+            {
+                bd.consulta("SELECT * FROM meteorologicohora WHERE fecha = @fecha");
+
+                bd.setParamTimestamp("fecha");
+                bd.prepare();
+                bd.agregarParametro(0, fecha);
+
+                NpgsqlDataReader resultados = bd.executeReader();
+
+                datos = getDatosMeteorologicos(resultados);
+
+                bd.cerrar();
+            }
+
+            return datos;
+        }
+
         /// <summary>
         /// Obtiene los datos meteorologicos entre las fechas indicadas.
         /// </summary>
