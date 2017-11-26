@@ -21,7 +21,9 @@
             </TabItem>
             <TabItem x:Name="tabFAM" Header="FAM" Controls:ControlsHelper.HeaderFontSize="16">
                 <Grid Margin="0,0,0,0">
-                    <local:FAM x:Name="panelFAM" Grid.Row="1" />
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <local:FAM x:Name="panelFAM" Grid.Row="1" />
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
         </TabControl>

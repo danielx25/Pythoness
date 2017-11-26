@@ -50,7 +50,7 @@ namespace PruebasCS
 
             C45 c45 = new C45();
             c45.cargarTablaC45(dataset);
-            c45.iniciarC45();
+            c45.iniciarC45("reglasC45.txt");
         }
 
         public void setAtributo(int columna, String nombre)

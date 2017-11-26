@@ -50,7 +50,7 @@ namespace ReglasFAM
 
             C45 c45 = new C45();
             c45.cargarTablaC45(dataset);
-            c45.iniciarC45();
+            c45.iniciarC45(archv_reglas);
         }
 
         public void setAtributo(int columna, String nombre)

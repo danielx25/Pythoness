@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:UI"
-             mc:Ignorable="d" 
-             d:DesignHeight="448" d:DesignWidth="770">
+             mc:Ignorable="d" d:DesignWidth="770" Height="775">
     <Grid>
         <Label Content="Generacion Reglas:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="Seleccionar dataset:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="180"/>
@@ -14,21 +13,19 @@
         <CheckBox x:Name="boxDesnormalizar" Content="Desnormalizar datos" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="180" Checked="setDesnormalizacion" Unchecked="unSetDesnormalizacion"/>
         <Button x:Name="btnGenerarReglas" Content="Generar reglas" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Width="180" Click="generarReglas"/>
         <Label Content="Validación RNA (Base de datos):" HorizontalAlignment="Left" Margin="247,26,0,0" VerticalAlignment="Top" Width="180"/>
-        <Label Content="Fecha Inicial:" HorizontalAlignment="Left" Margin="247,57,0,0" VerticalAlignment="Top" Width="180"/>
-        <DatePicker x:Name="fechaInicial" HorizontalAlignment="Left" Margin="247,90,0,0" VerticalAlignment="Top" Width="180"/>
-        <Label Content="Fecha Final:" HorizontalAlignment="Left" Margin="247,130,0,0" VerticalAlignment="Top" Width="180"/>
-        <DatePicker x:Name="fechaFinal" HorizontalAlignment="Left" Margin="247,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.273,0.538" Width="180"/>
-        <Button x:Name="btnValBD" Content="Validación" HorizontalAlignment="Left" Margin="247,227,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label Content="Fecha Inicial:" HorizontalAlignment="Left" Margin="247,57,0,0" VerticalAlignment="Top" Width="109"/>
+        <DatePicker x:Name="fechaInicial" HorizontalAlignment="Left" Margin="247,90,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label Content="Hora:" HorizontalAlignment="Left" Margin="376,57,0,0" VerticalAlignment="Top" Width="51"/>
+        <ComboBox x:Name="horaInicial" HorizontalAlignment="Left" Margin="376,90,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label Content="Fecha Final:" HorizontalAlignment="Left" Margin="247,130,0,0" VerticalAlignment="Top" Width="109"/>
+        <DatePicker x:Name="fechaFinal" HorizontalAlignment="Left" Margin="247,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.273,0.538" Width="109"/>
+        <Label Content="Hora:" HorizontalAlignment="Left" Margin="376,130,0,0" VerticalAlignment="Top" Width="51"/>
+        <ComboBox x:Name="horaFinal" HorizontalAlignment="Left" Margin="376,170,0,0" VerticalAlignment="Top" Width="51"/>
+        <Button x:Name="btnValBD" Content="Validación" HorizontalAlignment="Left" Margin="247,227,0,0" VerticalAlignment="Top" Width="180" Click="validacionBD"/>
         <Label Content="Validación RNA (Archivo):" HorizontalAlignment="Left" Margin="484,26,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="Seleccionar archivo:" HorizontalAlignment="Left" Margin="484,57,0,0" VerticalAlignment="Top" Width="180"/>
         <TextBox x:Name="boxDatosVal" HorizontalAlignment="Left" Height="23" Margin="484,90,0,0" TextWrapping="Wrap" Text="validacion.csv" VerticalAlignment="Top" Width="180" GotFocus="seleccionarArchivo"/>
-        <Button x:Name="btnValArchivo" Content="validación" HorizontalAlignment="Left" Margin="484,227,0,0" VerticalAlignment="Top" Width="180"/>
-        <Label Content="Numero de Registros:" HorizontalAlignment="Left" Margin="247,317,0,0" VerticalAlignment="Top" Width="130"/>
-        <Label Content="Resultados Validación:" HorizontalAlignment="Left" Margin="247,286,0,0" VerticalAlignment="Top" Width="417"/>
-        <Label x:Name="lblNRegistros" Content="0" HorizontalAlignment="Left" Margin="247,350,0,0" VerticalAlignment="Top" Width="130" Height="38" FontSize="20"/>
-        <Label Content="Numero de Aciertos:" HorizontalAlignment="Left" Margin="388,317,0,0" VerticalAlignment="Top" Width="130"/>
-        <Label x:Name="lblNAciertos" Content="0" HorizontalAlignment="Left" Margin="388,350,0,0" VerticalAlignment="Top" Width="136" Height="38" FontSize="20"/>
-        <Label Content="% Acertividad:" HorizontalAlignment="Left" Margin="534,317,0,0" VerticalAlignment="Top" Width="130"/>
-        <Label x:Name="lblAcertividad" Content="0" HorizontalAlignment="Left" Margin="534,350,0,0" VerticalAlignment="Top" Width="130" Height="38" FontSize="20"/>
+        <Button x:Name="btnValArchivo" Content="validación" HorizontalAlignment="Left" Margin="484,227,0,0" VerticalAlignment="Top" Width="180" Click="validacionArchivo"/>
+        <!-- <local:ValidacionFAM x:Name="graficoValidacion" Height="450" Margin="10,274,10,51" /> -->
     </Grid>
 </UserControl>

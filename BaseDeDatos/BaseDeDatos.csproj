@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BD.cs" />
     <Compile Include="Consultas.cs" />
+    <Compile Include="Entrada.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

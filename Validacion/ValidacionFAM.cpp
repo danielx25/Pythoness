@@ -4,16 +4,14 @@
 #include <sstream>
 #include "VariablesLinguisticas.h"
 #include "Reglas.h"
-#include "SistemaFAM.h"
-#include "Validacion.h"
+#include "ValidacionFAM.h"
 
 using namespace std;
 using namespace Datos;
-using namespace SFAM;
 
 namespace ValidacionRNA
 {
-	void Validacion::validacionFAM(string archv_validacion, string archv_reglas)
+	void ValidacionFAM::validacionFAM(string archv_validacion, string archv_reglas)
 	{
 		ifstream in(archv_validacion);
 		string line;
@@ -21,7 +19,7 @@ namespace ValidacionRNA
 		map<string, VariableLinguistica*> vars;
 		variableslinguisticas->getVariables(vars);
 		vector<string> orden_vars;
-		Validacion::variables(orden_vars);
+		ValidacionFAM::variables(orden_vars);
 		int progreso = 0;
 		int respaldo = 0;
 		int registro = 0;
@@ -29,7 +27,7 @@ namespace ValidacionRNA
 		int linea_actual = 0;
 
 		// cargamos el progreso previo si existiera alguno.
-		Validacion::getProgreso(respaldo, aciertos);
+		ValidacionFAM::getProgreso(respaldo, aciertos);
 
 		vector<string> reglas;
 		Reglas::leerReglas(archv_reglas, reglas);
@@ -99,7 +97,7 @@ namespace ValidacionRNA
 
 				double prediccion = sfam->getSalida(entrada);
 
-				if (Validacion::getAcierto(prediccion, valor_mp10, vars["mp10"]))
+				if (ValidacionFAM::getAcierto(prediccion, valor_mp10, vars["mp10"]))
 				{
 					aciertos += 1;
 
@@ -114,7 +112,7 @@ namespace ValidacionRNA
 				// se guarda el estado de la validacion.
 				if (progreso == 100)
 				{
-					//Validacion::guardarProgreso(registro, aciertos);
+					//ValidacionFAM::guardarProgreso(registro, aciertos);
 					progreso = 0;
 				}
 
@@ -123,33 +121,33 @@ namespace ValidacionRNA
 		}
 
 		// se guarda el progreso al finalizar la validacion.
-		//if (registro > 0) Validacion::guardarProgreso(registro, aciertos);
+		//if (registro > 0) ValidacionFAM::guardarProgreso(registro, aciertos);
 
 		in.close();
 	}
 
-	double Validacion::getEstacion(double valor)
+	double ValidacionFAM::getEstacion(double valor)
 	{
 		if (valor < 2.5 && valor > 1) valor += 12;
 
 		return valor;
 	}
 
-	double Validacion::getHora(double valor)
+	double ValidacionFAM::getHora(double valor)
 	{
 		if (valor < 1 && valor > 0) valor += 24;
-		
+
 		return valor;
 	}
 
-	double Validacion::getDViento(double valor)
+	double ValidacionFAM::getDViento(double valor)
 	{
 		if (valor < 45 && valor > 0) valor += 360;
-		
+
 		return valor;
 	}
 
-	bool Validacion::getAcierto(double prediccion, double valor_real, VariableLinguistica*& mp10)
+	bool ValidacionFAM::getAcierto(double prediccion, double valor_real, VariableLinguistica*& mp10)
 	{
 		string predecido = mp10->getValor(prediccion);
 		string real = mp10->getValor(valor_real);
@@ -160,7 +158,7 @@ namespace ValidacionRNA
 		return false;
 	}
 
-	void Validacion::getProgreso(int& registro, int& aciertos)
+	void ValidacionFAM::getProgreso(int& registro, int& aciertos)
 	{
 		ifstream archivo("progreso.txt");
 
@@ -187,7 +185,7 @@ namespace ValidacionRNA
 		}
 	}
 
-	void Validacion::guardarProgreso(double registro, double aciertos)
+	void ValidacionFAM::guardarProgreso(double registro, double aciertos)
 	{
 		double acertividad = (aciertos / registro) * 100;
 		ofstream archivo;
@@ -196,7 +194,7 @@ namespace ValidacionRNA
 		archivo.close();
 	}
 
-	void Validacion::variables(vector<string>& variables)
+	void ValidacionFAM::variables(vector<string>& variables)
 	{
 		variables.push_back("estacion");
 		variables.push_back("hora");
@@ -205,18 +203,12 @@ namespace ValidacionRNA
 		variables.push_back("temperatura");
 		variables.push_back("humedad_relativa");
 		variables.push_back("radiacion_solar");
-		//variables.push_back("presion_atmosferica");
 		variables.push_back("precipitacion_dia1");
 		variables.push_back("precipitacion_dia2");
 		variables.push_back("precipitacion_dia3");
 		variables.push_back("precipitacion_dia4");
 		variables.push_back("precipitacion_dia5");
 		variables.push_back("evaporacion");
-		/*variables.push_back("evaporacion_dia1");
-		variables.push_back("evaporacion_dia2");
-		variables.push_back("evaporacion_dia3");
-		variables.push_back("evaporacion_dia4");
-		variables.push_back("evaporacion_dia5");*/
 		variables.push_back("pala1");
 		variables.push_back("pala3");
 		variables.push_back("pala4");

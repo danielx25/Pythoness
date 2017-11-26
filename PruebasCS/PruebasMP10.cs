@@ -19,17 +19,17 @@ namespace PruebasCS
                 Console.WriteLine("Datos de validacion leidos y almacenados.");
             }
 
-            Console.WriteLine("Validacion en proceso...");
-            //ControladorRNA.validacion();
-            Console.WriteLine("Validacion completa.");
+            /*Console.WriteLine("Validacion en proceso...");
+            ControladorRNA.validacion();
+            Console.WriteLine("Validacion completa.");*/
         }
 
         public static void guardarDatos()
         {
-            DateTime inicio = new DateTime(2016, 1, 1, 0, 0, 0);
-            DateTime fin = new DateTime(2016, 12, 31, 00, 0, 0);
+            DateTime inicio = new DateTime(2014, 1, 1, 0, 0, 0);
+            DateTime fin = new DateTime(2017, 12, 31, 0, 0, 0);
 
-            Dictionary<string, double[]> datos = Consultas.getDatosValidacion(inicio, fin);
+            Dictionary<string, double[]> datos = Consultas.getDatosAlerta4(inicio, fin, false);
 
             StreamWriter file = new StreamWriter("validacion.csv");
 

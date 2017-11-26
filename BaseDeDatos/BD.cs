@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BaseDeDatos
 {
-    class BD
+    public class BD
     {
         private string host;
         private string port;

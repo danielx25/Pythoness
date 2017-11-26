@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace UI
+namespace UI.eventos
 {
     public class Dialogo
     {

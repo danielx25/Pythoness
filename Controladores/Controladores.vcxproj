@@ -91,12 +91,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Datos;$(SolutionDir)\SOM;$(SolutionDir)\Datos;$(SolutionDir)\RNA;$(SolutionDir)\LogicaDifusa;$(SolutionDir)\SistemaFAM;$(SolutionDir)\Validacion;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SOM;$(SolutionDir)\Datos;$(SolutionDir)\FAM;$(SolutionDir)\LogicaDifusa;$(SolutionDir)\RNAs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsWinRT>false</CompileAsWinRT>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Datos.lib;SOM.lib;RNA.lib;LogicaDifusa.lib;SistemaFAM.lib;Validacion.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Datos.lib;SOM.lib;FAM.lib;LogicaDifusa.lib;RNAs.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -138,14 +138,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControladorFAM.h" />
-    <ClInclude Include="ControladorRNA.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="ControladorFAM.cpp" />
-    <ClCompile Include="ControladorRNA.cpp" />
+    <ClCompile Include="ControladorFAM.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

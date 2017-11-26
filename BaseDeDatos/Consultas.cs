@@ -10,9 +10,35 @@ namespace BaseDeDatos
     {
         public static Dictionary<string, double[]> getDatosValidacion(DateTime inicio, DateTime fin)
         {
-            Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
-
             Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin);
+
+            return getDatos(metereologicos, inicio, fin, false);
+        }
+
+        public static Dictionary<string, double[]> getDatosEntrenamiento(DateTime inicio, DateTime fin)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin);
+
+            return getDatos(metereologicos, inicio, fin, true);
+        }
+
+        public static Dictionary<string, double[]> getDatosAlerta4(DateTime inicio, DateTime fin, bool normalizar)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, 500);
+
+            return getDatos(metereologicos, inicio, fin, normalizar);
+        }
+
+        public static Dictionary<string, double[]> getDatosAlertas(DateTime inicio, DateTime fin, double limite_inferior, bool normalizar)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, limite_inferior);
+
+            return getDatos(metereologicos, inicio, fin, normalizar);
+        }
+
+        public static Dictionary<string, double[]> getDatos(Dictionary<string, double[]> metereologicos, DateTime inicio, DateTime fin, bool normalizar)
+        {
+            Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
             Dictionary<string, List<DateTime>> palas = Consultas.getDatosPalas();
             Dictionary < string, List<DateTime> > chancadores = Consultas.getDatosChancadores();
             Dictionary<string, double[]> mitigacion = Consultas.getDatosMitigacion(inicio, fin);
@@ -21,31 +47,49 @@ namespace BaseDeDatos
             {
                 DateTime fecha_actual = DateTime.ParseExact(fila.Key, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-                int num_columnas = 37;
+                int num_columnas = 32;
+                int indice = 0; // usado para los limites en la normalizacion.
                 int columna_actual = 0;
                 double valor_mp10 = 0;
                 double[] dato = new double[num_columnas];
+                double valor = 0;
+                Entrada entrada = new Entrada();
 
                 // datos metereologicos.
-                dato[0] = fecha_actual.Month; // estacion.
-                dato[1] = fecha_actual.Hour; // hora.
-                columna_actual = 2;
+                valor = fecha_actual.Month;
+                if (normalizar) valor = entrada.normalizar(valor, 0);
 
-                for (int i = 0; i < fila.Value.Length; i++)
+                dato[0] = valor; // estacion.
+
+                valor = fecha_actual.Hour;
+                if (normalizar) valor = entrada.normalizar(valor, 1);
+
+                dato[1] = valor; // hora.
+
+                columna_actual = 2;
+                indice = columna_actual;
+
+                for (int i = 0; i < 14; i++)
                 {
-                    if (i != 4 && i != 7 && i != 13)
+                    valor = fila.Value[i];
+
+                    if (normalizar) valor = entrada.normalizar(valor, indice);
+
+                    if (i != 4 && i != 6 && i != 7)
                     {
                         if (fila.Value[i] == -1)
                             dato[columna_actual] = 0;
                         else
-                            dato[columna_actual] = fila.Value[i];
+                            dato[columna_actual] = valor;
 
                         columna_actual += 1;
                     }
                     else if (i == 4)
                     {
-                        valor_mp10 = fila.Value[i];
+                        valor_mp10 = valor;
                     }
+
+                    indice += 1;
                 }
 
                 // palas.
@@ -54,6 +98,7 @@ namespace BaseDeDatos
                     if (pala.Value.Contains(fecha_actual)) dato[columna_actual] = 1;
                     else dato[columna_actual] = 0;
                     columna_actual += 1;
+                    indice += 1;
                 }
 
                 // chancadores.
@@ -62,6 +107,7 @@ namespace BaseDeDatos
                     if (chancador.Value.Contains(fecha_actual)) dato[columna_actual] = 1;
                     else dato[columna_actual] = 0;
                     columna_actual += 1;
+                    indice += 1;
                 }
 
                 // mitigacion.
@@ -76,17 +122,27 @@ namespace BaseDeDatos
                 for (int i = 0; i < 4; i += 2)
                 {
                     if (fecha_actual.Hour >= 8 && fecha_actual.Hour <= 18)
-                        dato[columna_actual] = fila_mitigacion[i];
+                        valor = fila_mitigacion[i];
                     else
-                        dato[columna_actual] = fila_mitigacion[i + 1];
+                        valor = fila_mitigacion[i + 1];
+
+                    if (normalizar) valor = entrada.normalizar(valor, indice);
+
+                    dato[columna_actual] = valor;
 
                     columna_actual += 1;
+                    indice += 1;
                 }
 
                 for (int i = 4; i < fila_mitigacion.Length; i++)
                 {
-                    dato[columna_actual] = fila_mitigacion[i];
+                    valor = fila_mitigacion[i];
+
+                    if (normalizar) valor = entrada.normalizar(valor, indice);
+
+                    dato[columna_actual] = valor;
                     columna_actual += 1;
+                    indice += 1;
                 }
 
                 dato[columna_actual] = valor_mp10;
@@ -96,7 +152,12 @@ namespace BaseDeDatos
 
             return datos;
         }
-
+        /// <summary>
+        /// Obtiene los datos meteorologicos entre las fechas indicadas.
+        /// </summary>
+        /// <param name="inicio"></param>
+        /// <param name="fin"></param>
+        /// <returns></returns>
         public static Dictionary<string, double[]> getDatosMeteorologicos(DateTime inicio, DateTime fin)
         {
             Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
@@ -115,18 +176,62 @@ namespace BaseDeDatos
 
                 NpgsqlDataReader resultados = bd.executeReader();
 
-                while (resultados.Read())
-                {
-                    int num_columnas = 19;
-                    double[] columnas = new double[num_columnas];
-
-                    for (int i = 0; i < num_columnas; i++)
-                        columnas[i] = resultados.GetDouble(i + 1);
-
-                    datos[resultados.GetTimeStamp(0).ToString()] = columnas;
-                }
+                datos = getDatosMeteorologicos(resultados);
 
                 bd.cerrar();
+            }
+
+            return datos;
+        }
+
+        /// <summary>
+        /// Obtiene los datos meteorologicos mayores a mp10 entre las fechas indicadas.
+        /// </summary>
+        /// <param name="inicio"></param>
+        /// <param name="fin"></param>
+        /// <param name="mp10"></param>
+        /// <returns></returns>
+        public static Dictionary<string, double[]> getDatosMeteorologicos(DateTime inicio, DateTime fin, double mp10)
+        {
+            Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
+
+            BD bd = new BD();
+
+            if (bd.conectar())
+            {
+                bd.consulta("SELECT * FROM meteorologicohora WHERE fecha BETWEEN @fecha_inicio AND @fecha_final AND mp10 > @mp10 ORDER BY fecha ");
+
+                bd.setParamTimestamp("fecha_inicio");
+                bd.setParamTimestamp("fecha_final");
+                bd.setParamDouble("mp10");
+                bd.prepare();
+                bd.agregarParametro(0, inicio);
+                bd.agregarParametro(1, fin);
+                bd.agregarParametro(2, mp10);
+
+                NpgsqlDataReader resultados = bd.executeReader();
+
+                datos = getDatosMeteorologicos(resultados);
+
+                bd.cerrar();
+            }
+
+            return datos;
+        }
+
+        public static Dictionary<string, double[]> getDatosMeteorologicos(NpgsqlDataReader resultados)
+        {
+            Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
+
+            while (resultados.Read())
+            {
+                int num_columnas = 19;
+                double[] columnas = new double[num_columnas];
+
+                for (int i = 0; i < num_columnas; i++)
+                    columnas[i] = resultados.GetDouble(i + 1);
+
+                datos[resultados.GetTimeStamp(0).ToString()] = columnas;
             }
 
             return datos;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Controladores;
 using ReglasFAM;
 
-namespace UI
+namespace UI.eventos
 {
     public class GeneracionReglas : Progreso
     {

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-
+using Controladores;
 
 namespace UI
 {
@@ -22,25 +22,44 @@ namespace UI
     /// </summary>
     public partial class MainWindow
     {
-        public IngresoDatos[] dias;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            dias = new IngresoDatos[5];
+            panelIngresoDatos.AddHandler(IngresoDatos.eventoGenerarPrediccion, new RoutedEventHandler(generarPrediccion));
         }
 
-        private void seleccionDia(object sender, SelectionChangedEventArgs e)
+        private void generarPrediccion(object sender, RoutedEventArgs e)
         {
-            ComboBox cmb = sender as ComboBox;
+            if (panelIngresoDatos.diasPrediccion.Count() > 0)
+            {
+                tabPrincipal.SelectedIndex = 1;
 
-            setDatosIngresos(cmb.SelectedIndex);
-        }
+                ControladorFAM cFAM = new ControladorFAM();
 
-        private void setDatosIngresos(int dia)
-        {
-            panelIngresoDatos.boxVelocidadV.Text = dias[dia].velocidadV + "";
+                foreach (KeyValuePair<string, Dictionary<string, double>> datos_dia in panelIngresoDatos.datos)
+                {
+                    if (panelIngresoDatos.diasPrediccion.Contains(datos_dia.Key))
+                    {
+                        string dia = datos_dia.Key;
+                        dia = dia.Replace("dia_", "");
+                        int indice_dia = Int32.Parse(dia) - 1;
+
+                        foreach (KeyValuePair<string, double> dato in datos_dia.Value)
+                        {
+                            string variable = dato.Key;
+
+                            cFAM.setValorVariable(ref variable, dato.Value);
+                        }
+
+                        panelPrediccion.predicciones[indice_dia] = cFAM.prediccion();
+                    }
+                }
+
+                panelPrediccion.graficarPredicciones();
+            }
+
+            e.Handled = true;
         }
     }
 }

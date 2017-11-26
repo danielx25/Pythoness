@@ -3,16 +3,18 @@
 #include <string>
 #include <vector>
 #include "VariableLinguistica.h"
+#include "SistemaFAM.h"
 
 using namespace std;
 using namespace LogicaDifusa;
+using namespace STMFAM;
 
 namespace ValidacionRNA
 {
-	class Validacion
+	class ValidacionFAM
 	{
 	public:
-		static void validacionFAM(string archv_validacion, string archv_reglas);
+		void static validacionFAM(string archv_validacion, string archv_reglas);
 
 		// obtiene la estación con un ajuste aplicado.
 		static double getEstacion(double valor);
@@ -30,5 +32,8 @@ namespace ValidacionRNA
 		static void guardarProgreso(double registro, double aciertos);
 
 		static void variables(vector<string>& variables);
+
+	private:
+		SistemaFAM* sfam;
 	};
 }

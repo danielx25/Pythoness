@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="UI.ValidacionFAM"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UI.graficos"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600">
+    <Grid>
+        <local:Linea x:Name="graficoValidacion" Margin="0,10,0,157" />
+        <Label Content="Resultados Validación" HorizontalAlignment="Left" Margin="173,318,0,0" VerticalAlignment="Top" Width="417"/>
+        <Label Content="Numero Registros" HorizontalAlignment="Left" Margin="173,349,0,0" VerticalAlignment="Top" Width="133"/>
+        <Label Content="Numero Aciertos" HorizontalAlignment="Left" Margin="311,349,0,0" VerticalAlignment="Top" Width="139"/>
+        <Label Content="% Acertividad" HorizontalAlignment="Left" Margin="451,349,0,0" VerticalAlignment="Top" Width="139"/>
+        <Label x:Name="lblRegistros" Content="0" HorizontalAlignment="Left" Margin="173,382,0,0" VerticalAlignment="Top" Width="133" Height="38" FontSize="20"/>
+        <Label x:Name="lblAciertos" Content="0" HorizontalAlignment="Left" Margin="311,382,0,0" VerticalAlignment="Top" Width="133" Height="38" FontSize="20"/>
+        <Label x:Name="lblAcertividad" Content="0" HorizontalAlignment="Left" Margin="451,382,0,0" VerticalAlignment="Top" Width="133" Height="38" FontSize="20"/>
+    </Grid>
+</UserControl>

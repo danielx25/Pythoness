@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -61,15 +67,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Dialogo.cs" />
-    <Compile Include="GeneracionReglas.cs" />
+    <Compile Include="eventos\Consulta.cs" />
+    <Compile Include="eventos\Dialogo.cs" />
+    <Compile Include="eventos\GeneracionReglas.cs" />
+    <Compile Include="graficos\Coordenadas.cs" />
+    <Compile Include="graficos\Linea.xaml.cs">
+      <DependentUpon>Linea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Prediccion.xaml.cs">
+      <DependentUpon>Prediccion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Progreso.xaml.cs">
       <DependentUpon>Progreso.xaml</DependentUpon>
     </Compile>
     <Compile Include="RedNeuronal.xaml.cs">
       <DependentUpon>RedNeuronal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidacionFAM.xaml.cs">
+      <DependentUpon>ValidacionFAM.xaml</DependentUpon>
+    </Compile>
     <Page Include="FAM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="graficos\Linea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,11 +116,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Prediccion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Progreso.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RedNeuronal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ValidacionFAM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +166,10 @@
       <Project>{c3b74bf6-e876-4e5b-8e70-5900f0ce3265}</Project>
       <Name>ArbolDeDecision</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BaseDeDatos\BaseDeDatos.csproj">
+      <Project>{1c3394a1-9dd8-4373-960b-2aef24ec41e1}</Project>
+      <Name>BaseDeDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Controladores\Controladores.vcxproj">
       <Project>{563d6ac6-eba0-4d62-83c8-89d9db3c59ad}</Project>
       <Name>Controladores</Name>
@@ -146,6 +179,7 @@
       <Name>Reglas</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
