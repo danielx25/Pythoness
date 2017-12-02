@@ -14,16 +14,9 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabLVQ" Header="LVQ" Controls:ControlsHelper.HeaderFontSize="16">
-                <Grid>
-
-                </Grid>
-            </TabItem>
             <TabItem x:Name="tabFAM" Header="FAM" Controls:ControlsHelper.HeaderFontSize="16">
                 <Grid Margin="0,0,0,0">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <local:FAM x:Name="panelFAM" Grid.Row="1" />
-                    </ScrollViewer>
+                    <local:FAM x:Name="panelFAM" Grid.Row="1" />
                 </Grid>
             </TabItem>
         </TabControl>

@@ -103,6 +103,11 @@ namespace RedNeuronal
 			getBitVector(var->first, entrada[var->first], bit);
 			fam->getSalidaB(bit, salidas[salida_actual]);
 
+			/*cout << "Salida Antecedente: " << var->first << " es " << var->second << "\n";
+			for (int i = 0; i < num_vals_vars[consecuente]; i++)
+			cout << salidas[salida_actual][i] << " ";
+			cout << "\n";*/
+
 			salida_actual += 1;
 		}
 

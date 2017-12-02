@@ -15,6 +15,12 @@ namespace BaseDeDatos
             setLimitesEntradas();
         }
 
+        /// <summary>
+        /// Normaliza el valor segun el indice de la variable de entrada
+        /// </summary>
+        /// <param name="valor">Valor a normalizar</param>
+        /// <param name="indice">Indice de la variable de entrada (velocidad viento, direccion viento, etc).</param>
+        /// <returns></returns>
         public double normalizar(double valor, int indice)
         {
             Tuple<double, double> limites = getLimiteEntrada(indice);
@@ -27,10 +33,30 @@ namespace BaseDeDatos
         {
             //(X_i - X.min) / (X.max - X.min)
             double valorNormalizado = (valor - minimo) / (maximo - minimo);
-            if (valorNormalizado < 0 && valor != -1)
-                Console.WriteLine("Valor fuera de rango en: " + valor + " minimo: " + minimo + " maximo: " + maximo);
+
             return valorNormalizado;
         }
+
+        /// <summary>
+        /// Normaliza el valor segun el indice de la variable de entrada
+        /// </summary>
+        /// <param name="valor">Valor a desnormalizar</param>
+        /// <param name="indice">Indice de la variable de entrada (velocidad viento, direccion viento, etc).</param>
+        /// <returns></returns>
+        public double desnormalizar(double valor, int indice)
+        {
+            Tuple<double, double> limites = getLimiteEntrada(indice);
+
+            return Entrada.desnormalizar(valor, limites.Item1, limites.Item2);
+        }
+
+        public static double desnormalizar(double normalizado, double minimo, double maximo)
+        {
+            double valor = (normalizado * (maximo - minimo)) + minimo;
+
+            return valor;
+        }
+
 
         public Tuple<double, double> getLimiteEntrada(int indice)
         {
@@ -48,7 +74,7 @@ namespace BaseDeDatos
             limites[3] = new Tuple<double, double>(0.0, 360.0);
             limites[4] = new Tuple<double, double>(-10.0, 55.0);
             limites[5] = new Tuple<double, double>(0.0, 100.0);
-            limites[6] = new Tuple<double, double>(0.0, 800.0);
+            limites[6] = new Tuple<double, double>(0.0, 1600.0);
             limites[7] = new Tuple<double, double>(0.0, 1700.0);
 
             limites[8] = new Tuple<double, double>(0.0, 0.0);

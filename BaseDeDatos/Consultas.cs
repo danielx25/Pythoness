@@ -29,6 +29,27 @@ namespace BaseDeDatos
             return getDatos(metereologicos, inicio, fin, normalizar);
         }
 
+        public static Dictionary<string, double[]> getDatosAlerta3(DateTime inicio, DateTime fin, bool normalizar)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, 350, 501);
+
+            return getDatos(metereologicos, inicio, fin, normalizar);
+        }
+
+        public static Dictionary<string, double[]> getDatosAlerta2(DateTime inicio, DateTime fin, bool normalizar)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, 250, 351);
+
+            return getDatos(metereologicos, inicio, fin, normalizar);
+        }
+
+        public static Dictionary<string, double[]> getDatosAlerta1(DateTime inicio, DateTime fin, bool normalizar)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, 150, 251);
+
+            return getDatos(metereologicos, inicio, fin, normalizar);
+        }
+
         public static Dictionary<string, double[]> getDatosAlertas(DateTime inicio, DateTime fin, double limite_inferior, bool normalizar)
         {
             Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, limite_inferior);
@@ -240,6 +261,44 @@ namespace BaseDeDatos
                 bd.agregarParametro(0, inicio);
                 bd.agregarParametro(1, fin);
                 bd.agregarParametro(2, mp10);
+
+                NpgsqlDataReader resultados = bd.executeReader();
+
+                datos = getDatosMeteorologicos(resultados);
+
+                bd.cerrar();
+            }
+
+            return datos;
+        }
+
+        /// <summary>
+        /// Obtiene los datos meteorologicos mayores a mp10 entre las fechas indicadas.
+        /// </summary>
+        /// <param name="inicio"></param>
+        /// <param name="fin"></param>
+        /// <param name="mp10_inferior"></param>
+        /// <param name="mp10_superior"></param>
+        /// <returns></returns>
+        public static Dictionary<string, double[]> getDatosMeteorologicos(DateTime inicio, DateTime fin, double mp10_inferior, double mp10_superior)
+        {
+            Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
+
+            BD bd = new BD();
+
+            if (bd.conectar())
+            {
+                bd.consulta("SELECT * FROM meteorologicohora WHERE fecha BETWEEN @fecha_inicio AND @fecha_final AND mp10 > @mp10_inferior AND mp10 < @mp10_superior ORDER BY fecha ");
+
+                bd.setParamTimestamp("fecha_inicio");
+                bd.setParamTimestamp("fecha_final");
+                bd.setParamDouble("mp10_inferior");
+                bd.setParamDouble("mp10_superior");
+                bd.prepare();
+                bd.agregarParametro(0, inicio);
+                bd.agregarParametro(1, fin);
+                bd.agregarParametro(2, mp10_inferior);
+                bd.agregarParametro(3, mp10_superior);
 
                 NpgsqlDataReader resultados = bd.executeReader();
 

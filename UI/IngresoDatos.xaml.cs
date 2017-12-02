@@ -27,7 +27,7 @@ namespace UI
         public Dictionary<string, Dictionary<string, double>> datos;
         public List<string> diasPrediccion;
         public static RoutedEvent eventoGenerarPrediccion;
-        private bool deshabilitarCheckbox = false;
+        private bool deshabilitarEventos = false;
 
         public IngresoDatos()
         {
@@ -75,11 +75,23 @@ namespace UI
             ComboBox box = ((ComboBox)sender);
             string dia = "dia_" + box.SelectedValue.ToString();
 
-            deshabilitarCheckbox = true;
+            deshabilitarEventos = true;
 
             setEntradas(dia);
 
-            deshabilitarCheckbox = false;
+            deshabilitarEventos = false;
+        }
+
+        private void setFecha(object sender, SelectionChangedEventArgs e)
+        {
+            if (boxDias.SelectedValue != null)
+            {
+                DatePicker box = (DatePicker)sender;
+                string dia_actual = "dia_" + boxDias.SelectedValue.ToString();
+            
+                DateTime fecha = (DateTime)box.SelectedDate;
+                datos[dia_actual]["estacion"] = fecha.Month;
+            }
         }
 
         private void setValor(object sender, RoutedEventArgs e)
@@ -93,7 +105,7 @@ namespace UI
 
         private void setCheck(object sender, RoutedEventArgs e)
         {
-            if (boxDias.SelectedValue != null && !deshabilitarCheckbox)
+            if (boxDias.SelectedValue != null && !deshabilitarEventos)
             {
                 string dia_actual = "dia_" + boxDias.SelectedValue.ToString();
                 CheckBox box = ((CheckBox)sender);
@@ -105,7 +117,7 @@ namespace UI
 
         private void setUncheck(object sender, RoutedEventArgs e)
         {
-            if (boxDias.SelectedValue != null && !deshabilitarCheckbox)
+            if (boxDias.SelectedValue != null && !deshabilitarEventos)
             {
                 string dia_actual = "dia_" + boxDias.SelectedValue.ToString();
                 CheckBox box = ((CheckBox)sender);

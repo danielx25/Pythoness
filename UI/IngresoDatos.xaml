@@ -27,14 +27,13 @@
         <Label Content="RNA: " HorizontalAlignment="Left" Margin="484,34,0,0" VerticalAlignment="Top" Width="42"/>
         <ComboBox x:Name="boxRNAs" Text="Seleccione un dia" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="531,33,0,0" VerticalAlignment="Top" Width="60" SelectedIndex="0">
             <ComboBoxItem Name="BoxSOM">SOM</ComboBoxItem>
-            <ComboBoxItem Name="BoxLVQ">LVQ</ComboBoxItem>
             <ComboBoxItem Name="boxFAM">FAM</ComboBoxItem>
         </ComboBox>
         <TabControl HorizontalAlignment="Left" Height="362" Margin="10,118,0,0" VerticalAlignment="Top" Width="770">
             <TabItem x:Name="tabMeteorologicos" Header="Meteorologicos" Controls:ControlsHelper.HeaderFontSize="16">
                 <Grid x:Name="gridMeteorologicos">
                     <Label Content="Fecha:" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="116"/>
-                    <DatePicker x:Name="boxFecha" HorizontalAlignment="Left" Margin="126,29,0,0" VerticalAlignment="Top"/>
+                    <DatePicker x:Name="boxFecha" HorizontalAlignment="Left" Margin="126,29,0,0" VerticalAlignment="Top" SelectedDateChanged="setFecha"/>
                     <Label Content="Velocidad viento:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="116"/>
                     <TextBox x:Name="boxVelocidadV" HorizontalAlignment="Left" Height="23" Margin="126,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="velocidad_viento"/>
                     <Label Content="Dirección viento:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="116"/>

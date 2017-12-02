@@ -70,6 +70,7 @@
     <Compile Include="eventos\Consulta.cs" />
     <Compile Include="eventos\Dialogo.cs" />
     <Compile Include="eventos\GeneracionReglas.cs" />
+    <Compile Include="eventos\GenerarPrediccion.cs" />
     <Compile Include="graficos\Coordenadas.cs" />
     <Compile Include="graficos\Linea.xaml.cs">
       <DependentUpon>Linea.xaml</DependentUpon>
@@ -82,6 +83,9 @@
     </Compile>
     <Compile Include="RedNeuronal.xaml.cs">
       <DependentUpon>RedNeuronal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SOM.xaml.cs">
+      <DependentUpon>SOM.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidacionFAM.xaml.cs">
       <DependentUpon>ValidacionFAM.xaml</DependentUpon>
@@ -125,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RedNeuronal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SOM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

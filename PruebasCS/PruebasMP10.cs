@@ -29,7 +29,7 @@ namespace PruebasCS
             DateTime inicio = new DateTime(2014, 1, 1, 0, 0, 0);
             DateTime fin = new DateTime(2017, 12, 31, 0, 0, 0);
 
-            Dictionary<string, double[]> datos = Consultas.getDatosAlerta4(inicio, fin, false);
+            Dictionary<string, double[]> datos = Consultas.getDatosAlerta4(inicio, fin, true);
 
             StreamWriter file = new StreamWriter("validacion.csv");
 

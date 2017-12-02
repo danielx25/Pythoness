@@ -14,7 +14,7 @@ namespace ValidacionRNA
 	class ValidacionFAM
 	{
 	public:
-		void static validacionFAM(string archv_validacion, string archv_reglas);
+		void static validacionFAM(string archv_validacion, string archv_reglas, int num_nrns);
 
 		// obtiene la estación con un ajuste aplicado.
 		static double getEstacion(double valor);
@@ -25,15 +25,25 @@ namespace ValidacionRNA
 		// obtiene la direccion del viento con un ajuste aplicado.
 		static double getDViento(double valor);
 
-		static bool getAcierto(double prediccion, double valor_real, VariableLinguistica*& mp10);
+		static void getRegistros(string archv_validacion, vector<string>& registros);
 
-		static void getProgreso(int& registro, int& aciertos);
+		static bool getAcierto(double prediccion, double valor_real);
 
-		static void guardarProgreso(double registro, double aciertos);
+		static string getArchvAciertos();
+
+		static string getArchvProgreso();
+
+		static string getArchvAcertividad();
+
+		static void getProgreso(int& registro, double& aciertos);
+
+		static void guardarAciertos(double prediccion, double valor_real);
+
+		static void guardarProgreso(double registro, double aciertos, double acertividad);
+
+		// guarda wl numero de registros, aciertos y la acertividad final.
+		static void guardarAcertividad(string archivo, double registro, double aciertos, double acertividad);
 
 		static void variables(vector<string>& variables);
-
-	private:
-		SistemaFAM* sfam;
 	};
 }

@@ -11,20 +11,26 @@ using namespace Datos;
 
 namespace ValidacionRNA
 {
-	void ValidacionFAM::validacionFAM(string archv_validacion, string archv_reglas)
+	void ValidacionFAM::validacionFAM(string archv_validacion, string archv_reglas, int neuronas)
 	{
-		ifstream in(archv_validacion);
-		string line;
+		vector<string> registros;
 		VariablesLinguisticas* variableslinguisticas = new VariablesLinguisticas();
 		map<string, VariableLinguistica*> vars;
 		variableslinguisticas->getVariables(vars);
 		vector<string> orden_vars;
 		ValidacionFAM::variables(orden_vars);
 		int progreso = 0;
-		int respaldo = 0;
-		int registro = 0;
-		int aciertos = 0;
+		int respaldo = 1;
+		double registro = 1;
+		double aciertos = 0;
+		double acertividad = 0;
 		int linea_actual = 0;
+		double porcentaje = (100.0 / neuronas) / 100.0;
+
+		// borramos los aciertos de ejecuciones anteriores.
+		remove(ValidacionFAM::getArchvAciertos().c_str());
+
+		getRegistros(archv_validacion, registros);
 
 		// cargamos el progreso previo si existiera alguno.
 		ValidacionFAM::getProgreso(respaldo, aciertos);
@@ -36,15 +42,6 @@ namespace ValidacionRNA
 
 		for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
 		{
-			double porcentaje = .1;
-
-			/*if (var->first == "mp10")
-			{
-			cout << "message\n";
-			num_nrns = 20;
-			porcentaje = .05;
-			}*/
-
 			double espacio = (var->second->getMaximo() - var->second->getMinimo()) * porcentaje;
 			int num_nrns = ((var->second->getMaximo() - var->second->getMinimo()) / espacio) + 1;
 
@@ -58,72 +55,70 @@ namespace ValidacionRNA
 		for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
 			sfam->agregarRegla(*regla);
 
-		while (getline(in, line)) {
-			registro += 1;
+		for (int i = respaldo; i <= registros.size(); i++) {
+			registro = i;
+			map<string, double> entrada;
+			stringstream sep(registros.at(registro - 1));
+			string field;
+			int posicion = 0;
+			double valor_mp10 = 0;
 
-			if (respaldo == 0 || registro > respaldo)
-			{
-				map<string, double> entrada;
-				stringstream sep(line);
-				string field;
-				int posicion = 0;
-				//int num_nrns = 6;
-				double valor_mp10 = 0;
+			while (getline(sep, field, ';') && posicion < vars.size()) {
+				double valor = atof(field.c_str());
+				string nom_var = orden_vars.at(posicion);
 
-				while (getline(sep, field, ';') && posicion < vars.size()) {
-					double valor = atof(field.c_str());
-					string nom_var = orden_vars.at(posicion);
-
-					if (nom_var != "mp10")
-					{
-						// realizamos ajustes a las variables "circulares".
-						if (nom_var == "estacion") valor = getEstacion(valor);
-						else if (nom_var == "hora") valor = getHora(valor);
-						else if (nom_var == "direccion_viento") valor = getDViento(valor);
-
-						// si el valor esta fuera de los limites, lo corregimos.
-						if (valor < vars[nom_var]->getMinimo()) valor = valor < vars[nom_var]->getMinimo();
-						else if (valor > vars[nom_var]->getMaximo()) valor = valor < vars[nom_var]->getMaximo();
-
-						entrada[nom_var] = valor;
-
-						posicion += 1;
-					}
-					else
-					{
-						valor_mp10 = valor;
-					}
-				}
-
-				double prediccion = sfam->getSalida(entrada);
-
-				if (ValidacionFAM::getAcierto(prediccion, valor_mp10, vars["mp10"]))
+				if (nom_var != "mp10")
 				{
-					aciertos += 1;
+					// realizamos ajustes a las variables "circulares".
+					if (nom_var == "estacion") valor = getEstacion(valor);
+					else if (nom_var == "hora") valor = getHora(valor);
+					else if (nom_var == "direccion_viento") valor = getDViento(valor);
 
-					ofstream archv_aciertos;
-					archv_aciertos.open("aciertos.txt", fstream::in | fstream::out | fstream::app);
-					archv_aciertos << prediccion << ";" << valor_mp10 << "\n";
-					archv_aciertos.close();
+					// si el valor esta fuera de los limites, lo corregimos.
+					if (valor < vars[nom_var]->getMinimo()) valor = vars[nom_var]->getMinimo();
+					else if (valor > vars[nom_var]->getMaximo()) valor = vars[nom_var]->getMaximo();
+
+					entrada[nom_var] = valor;
+
+					posicion += 1;
 				}
-
-				progreso += 1;
-
-				// se guarda el estado de la validacion.
-				if (progreso == 100)
+				else
 				{
-					//ValidacionFAM::guardarProgreso(registro, aciertos);
-					progreso = 0;
+					valor_mp10 = valor;
 				}
-
-				cout << "Prediccion: " << prediccion << " Valor Real: " << valor_mp10 << "\n";
 			}
+
+			double prediccion = sfam->getSalida(entrada);
+
+			if (ValidacionFAM::getAcierto(prediccion, valor_mp10))
+			{
+				aciertos += 1;
+
+				ValidacionFAM::guardarAciertos(prediccion, valor_mp10);
+			}
+
+			acertividad = (aciertos / registro) * 100;
+
+			progreso += 1;
+
+			// se guarda el estado de la validacion.
+			if (progreso == 100)
+			{
+				ValidacionFAM::guardarProgreso(registro, aciertos, acertividad);
+				progreso = 0;
+			}
+
+			system("cls");
+			cout << "Registro: " << registro << " Aciertos: " << aciertos << " Acertividad: " << acertividad << " Prediccion: " << prediccion << " Valor Real: " << valor_mp10  << "\n";
 		}
+
+		ValidacionFAM::guardarAcertividad(ValidacionFAM::getArchvAcertividad(), registro, aciertos, acertividad);
+
+		// removemos el archivo de progreso ya que la validacion fue completada.
+		remove(ValidacionFAM::getArchvProgreso().c_str());
 
 		// se guarda el progreso al finalizar la validacion.
 		//if (registro > 0) ValidacionFAM::guardarProgreso(registro, aciertos);
-
-		in.close();
 	}
 
 	double ValidacionFAM::getEstacion(double valor)
@@ -147,20 +142,63 @@ namespace ValidacionRNA
 		return valor;
 	}
 
-	bool ValidacionFAM::getAcierto(double prediccion, double valor_real, VariableLinguistica*& mp10)
+	void ValidacionFAM::getRegistros(string archv_validacion, vector<string>& registros)
 	{
-		string predecido = mp10->getValor(prediccion);
-		string real = mp10->getValor(valor_real);
+		ifstream in(archv_validacion);
+		string registro;
 
-		if (predecido == real)
-			return true;
+		while (getline(in, registro))
+		{
+			registros.push_back(registro);
+		}
+
+		in.close();
+	}
+
+	bool ValidacionFAM::getAcierto(double prediccion, double valor_real)
+	{
+		if (prediccion <= 150 && valor_real <= 150)
+		{
+			return true; // sin alerta.
+		}
+		else if (prediccion <= 250 && valor_real <= 250)
+		{
+			return true; // alerta 1.
+		}
+		else if (prediccion <= 350 && valor_real <= 350)
+		{
+			return true; // alerta 2.
+		}
+		else if (prediccion <= 500 && valor_real <= 500)
+		{
+			return true; // alerta 3.
+		}
+		else if (prediccion > 500 && valor_real > 500)
+		{
+			return true; // alerta 4.
+		}
 
 		return false;
 	}
 
-	void ValidacionFAM::getProgreso(int& registro, int& aciertos)
+	string ValidacionFAM::getArchvAciertos()
 	{
-		ifstream archivo("progreso.txt");
+		return "aciertos.txt";
+	}
+
+	string ValidacionFAM::getArchvProgreso()
+	{
+		return "registros.txt";
+	}
+
+	string ValidacionFAM::getArchvAcertividad()
+	{
+		return "acertividad.txt";
+	}
+
+	void ValidacionFAM::getProgreso(int& registro, double& aciertos)
+	{
+		ifstream archivo(ValidacionFAM::getArchvProgreso().c_str());
 
 		if (archivo.good())
 		{
@@ -185,14 +223,27 @@ namespace ValidacionRNA
 		}
 	}
 
-	void ValidacionFAM::guardarProgreso(double registro, double aciertos)
+	void ValidacionFAM::guardarAciertos(double prediccion, double valor_real)
 	{
-		double acertividad = (aciertos / registro) * 100;
-		ofstream archivo;
-		archivo.open("progreso.txt");
-		archivo << registro << ";" << aciertos << ";" << acertividad;
-		archivo.close();
+		ofstream archv_aciertos;
+		archv_aciertos.open(ValidacionFAM::getArchvAciertos().c_str(), fstream::in | fstream::out | fstream::app);
+		archv_aciertos << prediccion << ";" << valor_real << "\n";
+		archv_aciertos.close();
 	}
+
+	void ValidacionFAM::guardarProgreso(double registro, double aciertos, double acertividad)
+	{
+		guardarAcertividad("progreso.txt", registro, aciertos, acertividad);
+	}
+
+	void ValidacionFAM::guardarAcertividad(string archivo, double registro, double aciertos, double acertividad)
+	{
+		ofstream in;
+		in.open(archivo);
+		in << registro << ";" << aciertos << ";" << acertividad;
+		in.close();
+	}
+
 
 	void ValidacionFAM::variables(vector<string>& variables)
 	{

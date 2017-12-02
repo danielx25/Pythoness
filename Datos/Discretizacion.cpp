@@ -3,9 +3,9 @@
 #include <fstream>
 #include <sstream>
 #include "Normalizacion.h"
-#include "Discretizacion.h"
 #include "VariablesLinguisticas.h"
 #include "Reglas.h"
+#include "Discretizacion.h"
 
 namespace Datos
 {
@@ -20,6 +20,13 @@ namespace Datos
 		vector<string> antecedentes;
 		variableslinguisticas->getVariables(vars);
 		Reglas::variables(orden_vars);
+		int neuronas = 10;
+		int num_nrns = 0;
+		double porcentaje = (100.0 / neuronas) / 100.0;
+		map<string, double*> valores_variables;
+
+		// seteamos los valores de las neuronas para las variables liguisticas.
+		Reglas::setValoresVariables(vars, porcentaje, num_nrns, valores_variables);
 
 		while (getline(in, line)) {
 			stringstream sep(line);
@@ -40,7 +47,7 @@ namespace Datos
 					val_desnormalizado = Normalizacion::desnormalizar(valor, var_min, var_max);
 				else
 					val_desnormalizado = valor;
-					
+
 				// realizamos ajustes a las variables "circulares".
 				if (nom_var == "estacion")
 					val_desnormalizado = Reglas::getEstacion(val_desnormalizado);
@@ -51,6 +58,9 @@ namespace Datos
 
 				if (val_desnormalizado > var_max) val_desnormalizado = var_max;
 				else if (val_desnormalizado < var_min) val_desnormalizado = var_min;
+
+				// obtenemos el valor de la neurona que se activa con el valor.
+				val_desnormalizado = Reglas::getValorNeurona(valores_variables[nom_var], num_nrns, val_desnormalizado);
 
 				nom_val = vars[nom_var]->getValor(val_desnormalizado);
 

@@ -22,8 +22,9 @@ namespace PruebasMP
 	{
 		string archv_validacion = "validacion.csv";
 		string archv_reglas = "reglas.txt";
+		int num_nrns = 10;
 
-		ValidacionFAM::validacionFAM(archv_validacion, archv_reglas);
+		ValidacionFAM::validacionFAM(archv_validacion, archv_reglas, num_nrns);
 	}
 
 	void PruebasMP10::imprimirMatriz(double**& matriz, int filas, int cols)

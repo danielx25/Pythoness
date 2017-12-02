@@ -41,7 +41,7 @@ namespace UI
             lblProgreso.Content = (string)e.UserState;
         }
 
-        protected void completado(object sender, RunWorkerCompletedEventArgs e)
+        protected virtual void completado(object sender, RunWorkerCompletedEventArgs e)
         {
             this.Close();
         }

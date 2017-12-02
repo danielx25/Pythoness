@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using Controladores;
+using UI.eventos;
 
 namespace UI
 {
@@ -33,30 +34,11 @@ namespace UI
         {
             if (panelIngresoDatos.diasPrediccion.Count() > 0)
             {
+                string RNA = panelIngresoDatos.boxRNAs.SelectedValue.ToString();
+
                 tabPrincipal.SelectedIndex = 1;
 
-                ControladorFAM cFAM = new ControladorFAM();
-
-                foreach (KeyValuePair<string, Dictionary<string, double>> datos_dia in panelIngresoDatos.datos)
-                {
-                    if (panelIngresoDatos.diasPrediccion.Contains(datos_dia.Key))
-                    {
-                        string dia = datos_dia.Key;
-                        dia = dia.Replace("dia_", "");
-                        int indice_dia = Int32.Parse(dia) - 1;
-
-                        foreach (KeyValuePair<string, double> dato in datos_dia.Value)
-                        {
-                            string variable = dato.Key;
-
-                            cFAM.setValorVariable(ref variable, dato.Value);
-                        }
-
-                        panelPrediccion.predicciones[indice_dia] = cFAM.prediccion();
-                    }
-                }
-
-                panelPrediccion.graficarPredicciones();
+                GenerarPrediccion generarPrediccion = new GenerarPrediccion(RNA, panelIngresoDatos, panelPrediccion);
             }
 
             e.Handled = true;

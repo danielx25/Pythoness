@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:UI"
-             mc:Ignorable="d" d:DesignWidth="770" Height="775">
+             mc:Ignorable="d" 
+             d:DesignWidth="770" Height="490">
     <Grid>
         <Label Content="Generacion Reglas:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="Seleccionar dataset:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="180"/>
@@ -25,7 +26,8 @@
         <Label Content="Validación RNA (Archivo):" HorizontalAlignment="Left" Margin="484,26,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="Seleccionar archivo:" HorizontalAlignment="Left" Margin="484,57,0,0" VerticalAlignment="Top" Width="180"/>
         <TextBox x:Name="boxDatosVal" HorizontalAlignment="Left" Height="23" Margin="484,90,0,0" TextWrapping="Wrap" Text="validacion.csv" VerticalAlignment="Top" Width="180" GotFocus="seleccionarArchivo"/>
-        <Button x:Name="btnValArchivo" Content="validación" HorizontalAlignment="Left" Margin="484,227,0,0" VerticalAlignment="Top" Width="180" Click="validacionArchivo"/>
-        <!-- <local:ValidacionFAM x:Name="graficoValidacion" Height="450" Margin="10,274,10,51" /> -->
+        <Slider x:Name="slNumNrns" HorizontalAlignment="Left" Margin="484,151,0,0" VerticalAlignment="Top" Width="149" Minimum="3" Maximum="20" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Thumb.DragCompleted="setNumNeuronas"/>
+        <Label x:Name="lblNumNrns" Content="3" HorizontalAlignment="Left" Margin="638,144,0,0" VerticalAlignment="Top" Height="26" Width="26"/>
+        <Button x:Name="btnValidacion" Content="validación" HorizontalAlignment="Left" Margin="484,227,0,0" VerticalAlignment="Top" Width="180" Click="validacion"/>
     </Grid>
 </UserControl>

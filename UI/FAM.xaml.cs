@@ -20,6 +20,9 @@ using UI.graficos;
 using LiveCharts.Wpf;
 using LiveCharts;
 using System.Threading;
+using System.Diagnostics;
+using System.Windows.Controls.Primitives;
+using System.Reflection;
 
 namespace UI
 {
@@ -32,7 +35,7 @@ namespace UI
         public string archv_dataset;
         public string archv_validacion;
         public bool desnormalizar;
-
+        public int num_nrns;
         public FAM()
         {
             carpeta = "_FAM";
@@ -42,6 +45,7 @@ namespace UI
             archv_dataset = "";
             archv_validacion = "";
             desnormalizar = false;
+            num_nrns = 3;
             InitializeComponent();
 
             // agregamos la hora a los combobox.
@@ -101,14 +105,28 @@ namespace UI
             //graficoValidacion.validacion();
         }
 
-        public void validacionArchivo(object sender, RoutedEventArgs e)
+        public void setNumNeuronas(object sender, DragCompletedEventArgs e)
         {
-            //graficoValidacion.validacion();
+            lblNumNrns.Content = slNumNrns.Value.ToString();
+        }
+
+        public void validacion(object sender, RoutedEventArgs e)
+        {
+            string directorio = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            num_nrns = Int32.Parse(lblNumNrns.Content.ToString());
+            string archv_validacion = "\"" + directorio + "\\" + rutaArchivo("validacion.csv") + "\"";
+            string archv_reglas = "\"" + directorio + "\\" + rutaArchivo("reglas.txt") + "\"";
+
+            Process process = new Process();
+            process.StartInfo.FileName = directorio + "\\" + rutaArchivo("ConsolaFAM.exe");
+            process.StartInfo.Arguments = archv_validacion + " " + archv_reglas + " " + num_nrns;
+            //process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            process.Start();
         }
 
         private string rutaArchivo(string archivo)
         {
-            return carpeta + "/" + archivo;
+            return carpeta + "\\" + archivo;
         }
     }
 
