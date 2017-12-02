@@ -17,7 +17,7 @@ namespace PruebasCS
             //PruebasBD.mitigacion();
             //PruebasBD.palas();
             //PruebasBD.chancadores();
-
+            //PruebaSOM_1.ejemploSom();
             Console.WriteLine("Prueba terminada, presione una tecla para continuar.");
             Console.ReadLine();
         }
