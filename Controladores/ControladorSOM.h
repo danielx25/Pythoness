@@ -1,5 +1,5 @@
 #pragma once
-#include "gestionadorsom.h"
+//#include "gestionadorsom.h"
 ref class ControladorSOM
 {
 public:

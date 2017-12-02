@@ -11,7 +11,7 @@ namespace PruebasCS
     {
         public static void ejemploSom()
         {
-            Controlador.ControladorSOM.iniciarSOM();
+            //Controlador.ControladorSOM.iniciarSOM();
         }
     }
 }
