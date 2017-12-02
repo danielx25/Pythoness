@@ -23,7 +23,7 @@
     <ProjectGuid>{02287B9B-1A78-4D9B-93E1-0AD2F542CF29}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Validacion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,7 +77,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Datos;$(SolutionDir)\LogicaDifusa;$(SolutionDir)\RNA;$(SolutionDir)\SistemaFAM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Datos;$(SolutionDir)\LogicaDifusa;$(SolutionDir)\FAM;$(SolutionDir)\SistemaFAM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,7 +133,7 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Validacion.h" />
+    <ClInclude Include="ValidacionFAM.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -142,7 +142,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Validacion.cpp" />
+    <ClCompile Include="ValidacionFAM.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.vcxproj">

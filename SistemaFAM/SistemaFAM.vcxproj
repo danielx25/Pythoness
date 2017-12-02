@@ -22,7 +22,7 @@
     <ProjectGuid>{F89B3F17-3612-495B-86CC-3888B7B6DC06}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SistemaFAM</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,7 +77,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\RNA;$(SolutionDir)\LogicaDifusa;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\FAM;$(SolutionDir)\LogicaDifusa;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,9 +150,6 @@
   <ItemGroup>
     <ProjectReference Include="..\LogicaDifusa\LogicaDifusa.vcxproj">
       <Project>{46fd5411-d779-4529-860c-0b9242120dd4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\RNA\RNA.vcxproj">
-      <Project>{1e08fba4-48f4-47d2-90b6-04ca22016a9d}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

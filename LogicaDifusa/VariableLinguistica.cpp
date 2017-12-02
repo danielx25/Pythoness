@@ -79,10 +79,14 @@ namespace LogicaDifusa
 
 		//fuzzificar(dato);
 
+		//cout << "Variable linguistica: " << nombre << "\n";
+
 		for (map<string, ValorLinguistico*>::iterator valor = valores.begin(); valor != valores.end(); ++valor)
 		{
 			valor->second->CalcularGradoPertenencia(dato);
 			double grado = valor->second->getGradoPertenencia();
+
+			//cout << "Valor linguistico: " << valor->first << " Grado Pertenencia: " << grado << "\n";
 
 			if (valorlinguistico == "") valorlinguistico = valor->second->getNombre();
 

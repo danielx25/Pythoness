@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "Reglas.h"
 #include "VariablesLinguisticas.h"
+#include "Reglas.h"
 #include "Normalizacion.h"
 
 namespace Datos
@@ -47,7 +47,7 @@ namespace Datos
 		variables.push_back(make_pair("cachimba1_consumo_agua", make_pair(0.0, 1500.0)));
 		variables.push_back(make_pair("cachimba2_consumo_agua", make_pair(0.0, 2270.0)));
 		variables.push_back(make_pair("gerencia_consumo_agua", make_pair(0.0, 27000.0)));
-		variables.push_back(make_pair("mp10", make_pair(0.0, 800.0)));
+		variables.push_back(make_pair("mp10", make_pair(0.0, 1200.0)));
 	}
 
 
@@ -61,6 +61,13 @@ namespace Datos
 		vector<string> antecedentes;
 		variableslinguisticas->getVariables(vars);
 		Reglas::variables(orden_vars);
+		int neuronas = 10;
+		int num_nrns = 0;
+		double porcentaje = (100.0 / neuronas) / 100.0;
+		map<string, double*> valores_variables;
+
+		// seteamos los valores de las neuronas para las variables liguisticas.
+		Reglas::setValoresVariables(vars, porcentaje, num_nrns, valores_variables);
 
 		while (getline(in, line)) {
 			stringstream sep(line);
@@ -72,8 +79,8 @@ namespace Datos
 			regla = "Si ";
 
 			while (getline(sep, field, ';') && posicion < orden_vars.size()) {
-				if ((posicion > 3 && posicion < 6) || posicion > 30)
-				{
+				//if ((posicion > 3 && posicion < 6) || posicion > 30)
+				//{
 					double valor = atof(field.c_str());
 					double val_desnormalizado = 0;
 					string nom_var = orden_vars.at(posicion).first;
@@ -81,10 +88,14 @@ namespace Datos
 					double var_max = orden_vars.at(posicion).second.second;
 					double var_min = orden_vars.at(posicion).second.first;
 
+					// solo desnormalizamos si el valor esta normalizado.
 					if (desnormalizar)
 						val_desnormalizado = Normalizacion::desnormalizar(valor, var_min, var_max);
 					else
 						val_desnormalizado = valor;
+
+					//cout << "Valor desnormalizado: " << val_desnormalizado << "\n";
+
 
 					//cout << nom_var << ": " << val_desnormalizado << " ";
 
@@ -96,8 +107,19 @@ namespace Datos
 					else if (nom_var == "direccion_viento")
 						val_desnormalizado = getDViento(val_desnormalizado);
 
+					// para revisar si se exceden los limites, se concideran los limites de las variables linguisticas.
+					var_max = vars[nom_var]->getMaximo();
+					var_min = vars[nom_var]->getMinimo();
+
 					if (val_desnormalizado > var_max) val_desnormalizado = var_max;
 					else if (val_desnormalizado < var_min) val_desnormalizado = var_min;
+
+					//cout << "Valor: " << val_desnormalizado << "\n";
+
+					// obtenemos el valor de la neurona que se activa con el valor.
+					val_desnormalizado = Reglas::getValorNeurona(valores_variables[nom_var], num_nrns, val_desnormalizado);
+
+					//cout << "Valor neurona: " << val_desnormalizado << "\n";
 
 					nom_val = vars[nom_var]->getValor(val_desnormalizado);
 
@@ -112,11 +134,12 @@ namespace Datos
 					regla += nom_var + " es " + nom_val;
 
 					//cout << "Variable: " << nom_var << " Valor linguistico: " << nom_val << " Valor: " << valor << " Valor Desnormalizado: " << val_desnormalizado << "\n";
-				}
-				
+				//}
 
 				posicion += 1;
 			}
+
+			//reglas.push_back(regla);
 
 			//cout << "\n";
 
@@ -134,7 +157,7 @@ namespace Datos
 				reglas.push_back(regla);
 			}
 
-			double continuar = 0;
+			//double continuar = 0;
 
 			//cin >> continuar;
 
@@ -166,6 +189,52 @@ namespace Datos
 			archivo_reglas << *regla << "\n";
 		
 		archivo_reglas.close();
+	}
+
+	void Reglas::setValoresVariable(double comienzo, double espacio, int num_nrns, double*& valores_variable)
+	{
+		double valor_actual = comienzo;
+		valores_variable = new double[num_nrns];
+
+		// agregamos los valores no fuzzificados para la variable.
+		for (int i = 0; i < num_nrns; i++)
+		{
+			valores_variable[i] = valor_actual;
+			valor_actual += espacio;
+		}
+	}
+
+	void Reglas::setValoresVariables(map<string, VariableLinguistica*>& vars, double porcentaje, int& num_nrns, map<string, double*>& valores_variables)
+	{
+		for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
+		{
+			double* valores_variable;
+			double espacio = (var->second->getMaximo() - var->second->getMinimo()) * porcentaje;
+			num_nrns = ((var->second->getMaximo() - var->second->getMinimo()) / espacio) + 1;
+
+			double comienzo = var->second->getMinimo() /*+ espacio*/;
+			//double comienzo = 0;
+
+			Reglas::setValoresVariable(comienzo, espacio, num_nrns, valores_variable);
+			valores_variables[var->second->getNombre()] = valores_variable;
+		}
+	}
+
+	double Reglas::getValorNeurona(double*& valores_variable, int num_nrns, double valor_entrada)
+	{
+		int valor = abs(valor_entrada - valores_variable[0]);
+		int posicion = 0;
+
+		for (int i = 0; i < num_nrns; i++)
+		{
+			if (valor > abs(valor_entrada - valores_variable[i]))
+			{
+				valor = abs(valor_entrada - valores_variable[i]);
+				posicion = i;
+			}
+		}
+
+		return valores_variable[posicion];
 	}
 
 	double Reglas::getEstacion(double valor)

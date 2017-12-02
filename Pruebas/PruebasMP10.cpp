@@ -9,7 +9,7 @@
 #include "VariablesLinguisticas.h"
 #include "Reglas.h"
 #include "Normalizacion.h"
-#include "Validacion.h"
+#include "ValidacionFAM.h"
 
 using namespace std;
 using namespace LogicaDifusa;
@@ -22,8 +22,9 @@ namespace PruebasMP
 	{
 		string archv_validacion = "validacion.csv";
 		string archv_reglas = "reglas.txt";
+		int num_nrns = 10;
 
-		Validacion::validacionFAM(archv_validacion, archv_reglas);
+		ValidacionFAM::validacionFAM(archv_validacion, archv_reglas, num_nrns);
 	}
 
 	void PruebasMP10::imprimirMatriz(double**& matriz, int filas, int cols)

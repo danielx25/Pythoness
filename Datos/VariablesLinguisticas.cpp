@@ -162,11 +162,11 @@ namespace Datos
 
 	void VariablesLinguisticas::evaporacion(string nombre)
 	{
-		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 150.0);
+		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 255.0);
 		variable->agregarValorLinguistico(new ValorLinguistico("baja", new FuncionTriangular(0.0, 0.0, 50.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("media", new FuncionTriangular(0.0, 50.0, 100.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionTriangular(50.0, 100.0, 150.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionTriangular(100.0, 150.0, 150.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alta", new FuncionTriangular(50.0, 100.0, 255.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("muy_alta", new FuncionTriangular(100.0, 255.0, 255.0)));
 
 		variables[nombre] = variable;
 	}
@@ -275,12 +275,12 @@ namespace Datos
 		/*vector<string> valores = { "sin_alerta", "alerta_1", "alerta_2", "alerta_3", "alerta_4" };
 		funcionGaussiana("mp10", valores, 0.0, 800.0);*/
 
-		VariableLinguistica* variable = new VariableLinguistica("mp10", 0.0, 800.0);
+		VariableLinguistica* variable = new VariableLinguistica("mp10", 0.0, 1200.0);
 		variable->agregarValorLinguistico(new ValorLinguistico("sin_alerta", new FuncionTriangular(0.0, 0.0, 150.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_1", new FuncionTriangular(100.0, 150.0, 250.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_2", new FuncionTriangular(200.0, 250.0, 350.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_3", new FuncionTriangular(300.0, 350.0, 500.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alerta_4", new FuncionTrapezoidal(450.0, 500.0, 800.0, 800.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alerta_4", new FuncionTrapezoidal(450.0, 500.0, 1200.0, 1200.0)));
 
 		variables["mp10"] = variable;
 	}

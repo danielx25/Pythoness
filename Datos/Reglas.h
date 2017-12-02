@@ -5,9 +5,12 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <utility>
+#include "VariableLinguistica.h"
 
 using namespace std;
+using namespace LogicaDifusa;
 
 namespace Datos
 {
@@ -21,6 +24,12 @@ namespace Datos
 		static void leerReglas(string archivo, vector<string>& reglas);
 
 		static void guardarReglas(string archivo, vector<string>& reglas);
+
+		static void setValoresVariable(double comienzo, double espacio, int num_nrns, double*& valores_variable);
+
+		static void setValoresVariables(map<string, VariableLinguistica*>& vars, double porcentaje, int& num_nrns, map<string, double*>& valores_variables);
+
+		static double getValorNeurona(double*& valores_variable, int num_nrns, double valor_entrada);
 
 		// obtiene la estación con un ajuste aplicado.
 		static double getEstacion(double valor);

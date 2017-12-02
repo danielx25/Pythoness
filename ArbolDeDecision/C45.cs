@@ -23,7 +23,7 @@ namespace ArbolDeDecision
             promedioGanancia = promedioGanancias(this.tabla);
         }
 
-        public void iniciarC45()
+        public void iniciarC45(string archv_salida)
         {
             //inicio cronometro
             //Stopwatch stopwatch = new Stopwatch();
@@ -32,7 +32,7 @@ namespace ArbolDeDecision
             arbol.setRaiz(algoritmoC45(tabla, tabla.getClases()));
             //System.Console.WriteLine(arbol);
             //arbol.guardarArbol("arbolC45.txt");
-            arbol.guardarReglas("reglasC45.txt");
+            arbol.guardarReglas(archv_salida);
 
             // termino cronometro + resultados C4.5
             /*stopwatch.Stop();

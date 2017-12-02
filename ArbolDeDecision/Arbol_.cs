@@ -263,7 +263,7 @@ namespace ArbolDeDecision
             }
             else
             {
-                if (profundidad < 6 || nodo.getNombreClase() == "alerta_4" || nodo.getNombreClase() == "alerta_3" || nodo.getNombreClase() == "alerta_2")
+                if (profundidad < 6 || nodo.getNombreClase() == "alerta_4" /*|| nodo.getNombreClase() == "alerta_3" || nodo.getNombreClase() == "alerta_2"*/)
                 {
                     regla_actual += "entonces mp10 " + nodo.getNombreClase();
                     lista.Add(regla_actual);

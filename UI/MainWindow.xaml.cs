@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-
+using Controladores;
+using UI.eventos;
 
 namespace UI
 {
@@ -22,25 +23,25 @@ namespace UI
     /// </summary>
     public partial class MainWindow
     {
-        public IngresoDatos[] dias;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            dias = new IngresoDatos[5];
+            panelIngresoDatos.AddHandler(IngresoDatos.eventoGenerarPrediccion, new RoutedEventHandler(generarPrediccion));
         }
 
-        private void seleccionDia(object sender, SelectionChangedEventArgs e)
+        private void generarPrediccion(object sender, RoutedEventArgs e)
         {
-            ComboBox cmb = sender as ComboBox;
+            if (panelIngresoDatos.diasPrediccion.Count() > 0)
+            {
+                string RNA = panelIngresoDatos.boxRNAs.SelectedValue.ToString();
 
-            setDatosIngresos(cmb.SelectedIndex);
-        }
+                tabPrincipal.SelectedIndex = 1;
 
-        private void setDatosIngresos(int dia)
-        {
-            panelIngresoDatos.boxVelocidadV.Text = dias[dia].velocidadV + "";
+                GenerarPrediccion generarPrediccion = new GenerarPrediccion(RNA, panelIngresoDatos, panelPrediccion);
+            }
+
+            e.Handled = true;
         }
     }
 }

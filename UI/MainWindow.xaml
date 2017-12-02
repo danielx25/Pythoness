@@ -15,7 +15,9 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabPrediccion" Header="Predicción MP10" Margin="0,0,-8,0" Controls:ControlsHelper.HeaderFontSize="20">
-                <Grid/>
+                <Grid Margin="10,0,0,0">
+                    <local:Prediccion x:Name="panelPrediccion" Margin="0,23,0,0" />
+                </Grid>
             </TabItem>
             <TabItem x:Name="tabRNA" Header="Red Neuronal" Margin="7,0,-27,0" Controls:ControlsHelper.HeaderFontSize="20">
                 <Grid Margin="0,0,0,0">

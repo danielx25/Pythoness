@@ -2,7 +2,7 @@
 
 #include "SistemaFAM.h"
 
-using namespace SFAM;
+using namespace STMFAM;
 
 namespace PruebasRed
 {
