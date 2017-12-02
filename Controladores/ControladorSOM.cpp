@@ -8,7 +8,7 @@ ControladorSOM::ControladorSOM()
 
 void ControladorSOM::iniciarSOM()
 {
-	double ejemplo1[30][4] = {
+	/*double ejemplo1[30][4] = {
 		{ 0.25, 0.375, 0.428571428571, 0.25 },
 		{ 0.583333333333, 0.625, 0.428571428571, 0.598484848485 },
 		{ 0.333333333333, 1.0, 0.571428571429, 0.719696969697 },
@@ -51,5 +51,5 @@ void ControladorSOM::iniciarSOM()
 	GestionadorSOM* managerSom = new GestionadorSOM();
 	managerSom->inicializarSOM(matriz, 30, 4);
 	//managerSom->empezarEntrenamiento();
-	throw gcnew System::NotImplementedException();
+	throw gcnew System::NotImplementedException();*/
 }

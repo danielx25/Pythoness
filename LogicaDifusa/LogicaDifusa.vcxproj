@@ -22,7 +22,7 @@
     <ProjectGuid>{46FD5411-D779-4529-860C-0B9242120DD4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LogicaDifusa</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
