@@ -15,7 +15,7 @@ namespace Controladores {
 	public ref class ControladorFAM
 	{
 	public:
-		ControladorFAM();
+		ControladorFAM(int nrns);
 
 		static void discretizacion(String^% archivo_datos, String^% archivo_salida, bool desnormalizar);
 
@@ -27,5 +27,6 @@ namespace Controladores {
 
 	private:
 		SistemaFAM* sfam;
+		int neuronas;
 	};
 }

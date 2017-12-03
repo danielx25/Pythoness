@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using BaseDeDatos;
+using System.Globalization;
 
 namespace UI
 {
@@ -96,11 +97,18 @@ namespace UI
 
         private void setValor(object sender, RoutedEventArgs e)
         {
+            NumberStyles estilo = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("es-ES");
             string dia_actual = "dia_" + boxDias.SelectedValue.ToString();
             TextBox box = ((TextBox)sender);
+            double valor = 0;
 
-            datos[dia_actual][(string)box.Tag] = Convert.ToDouble(box.Text);
+            if (! Double.TryParse(box.Text, estilo, culture, out valor))
+                box.Text = valor + "";
 
+            //datos[dia_actual][(string)box.Tag] = Convert.ToDouble(box.Text);
+
+            datos[dia_actual][(string)box.Tag] = valor;
         }
 
         private void setCheck(object sender, RoutedEventArgs e)

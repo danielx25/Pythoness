@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Controladores;
+using System.Windows.Controls;
+using System.Diagnostics;
+using System.IO;
 
 namespace UI.eventos
 {
@@ -41,9 +44,56 @@ namespace UI.eventos
             this.Close();
         }
 
+        private double getMaximaPrediccion(ControladorFAM cFAM)
+        {
+            string variable = "hora";
+            double maximo = 0;
+
+            for (double hora = 0; hora < 24; hora++)
+            {
+                double prediccion = 0;
+                cFAM.setValorVariable(ref variable, hora);
+
+                prediccion = cFAM.prediccion();
+
+                if (prediccion > maximo)
+                {
+                    maximo = prediccion;
+                }
+            }
+
+            return maximo;
+        }
+
+        private string rutaArchivoFAM(string archivo)
+        {
+            return "_FAM" + "\\" + archivo;
+        }
+        private int getParametrosFAM()
+        {
+            IEnumerable<string> lineas = File.ReadLines(rutaArchivoFAM("configuracionRNA.conf"));
+            int num_nrns = 3;
+
+            foreach (string linea in lineas)
+            {
+                string[] parametros = linea.Split('=');
+
+                if (parametros.Length == 2)
+                {
+                    parametros[0] = parametros[0].Replace(" ", "");
+                    parametros[1] = parametros[1].Replace(" ", "");
+
+                    if (parametros[0] == "NUMERO_NEURONAS") num_nrns = Int32.Parse(parametros[1]);
+                }
+            }
+
+            return num_nrns;
+        }
+
         private void FAM(object sender, DoWorkEventArgs e)
         {
-            ControladorFAM cFAM = new ControladorFAM();
+            int num_nrns = getParametrosFAM();
+            ControladorFAM cFAM = new ControladorFAM(num_nrns);
 
             var w = sender as BackgroundWorker;
             w.ReportProgress(0, String.Format("Realizando prediccion..."));
@@ -63,7 +113,9 @@ namespace UI.eventos
                         cFAM.setValorVariable(ref variable, dato.Value);
                     }
 
-                    panelPrediccion.predicciones[indice_dia] = cFAM.prediccion();
+                    panelPrediccion.predicciones[indice_dia] = getMaximaPrediccion(cFAM);
+
+                    //panelPrediccion.predicciones[indice_dia] = cFAM.prediccion();
 
                     w.ReportProgress(25 * indice_dia, String.Format("Realizando prediccion..."));
                 }

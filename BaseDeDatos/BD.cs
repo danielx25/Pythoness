@@ -20,14 +20,25 @@ namespace BaseDeDatos
 
         public BD()
         {
-            IEnumerable<string> lineas = File.ReadLines("_conf");
+            IEnumerable<string> lineas = File.ReadLines("bd.conf");
             string[] datos = new string[6];
-            int contador = 0;
 
             foreach (string linea in lineas)
             {
-                datos[contador] = linea;
-                contador += 1;
+                string[] parametros = linea.Split('=');
+
+                if (parametros.Length == 2)
+                {
+                    parametros[0] = parametros[0].Replace(" ", "");
+                    parametros[1] = parametros[1].Replace(" ", "");
+
+                    if (parametros[0] == "HOST") datos[0] = parametros[1];
+                    else if (parametros[0] == "PUERTO") datos[1] = parametros[1];
+                    else if (parametros[0] == "USUARIO") datos[2] = parametros[1];
+                    else if (parametros[0] == "PASSWORD") datos[3] = parametros[1];
+                    else if (parametros[0] == "BD") datos[4] = parametros[1];
+                    else if (parametros[0] == "TIEMPO_ESPERA") datos[5] = parametros[1];
+                }
             }
 
             this.host = datos[0];

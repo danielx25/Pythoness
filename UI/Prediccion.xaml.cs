@@ -24,6 +24,8 @@ namespace UI
     {
         private int dias;
         public double[] predicciones;
+        public static RoutedEvent eventoGenerarReporte;
+        public string ruta_reporte;
 
         public Prediccion()
         {
@@ -39,6 +41,8 @@ namespace UI
             graficoPrediccion.SetAxisYLimits(0, 800);
             graficoPrediccion.LabelAxisX = "Dias";
             graficoPrediccion.LabelAxisY = "MP10";
+
+            eventoGenerarReporte = EventManager.RegisterRoutedEvent("generarReporte", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Prediccion));
         }
 
         public void graficarPredicciones()
@@ -94,6 +98,13 @@ namespace UI
             }
 
             return alerta;
+        }
+
+        private void clickGenerarReporte(object sender, RoutedEventArgs e)
+        {
+            RoutedEventArgs e1 = new RoutedEventArgs(eventoGenerarReporte);
+
+            RaiseEvent(e1);
         }
     }
 }

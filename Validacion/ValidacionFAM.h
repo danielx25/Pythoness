@@ -14,7 +14,7 @@ namespace ValidacionRNA
 	class ValidacionFAM
 	{
 	public:
-		void static validacionFAM(string archv_validacion, string archv_reglas, int num_nrns);
+		void static validacionFAM(string carpeta_archivos, int num_nrns);
 
 		// obtiene la estación con un ajuste aplicado.
 		static double getEstacion(double valor);
@@ -27,19 +27,25 @@ namespace ValidacionRNA
 
 		static void getRegistros(string archv_validacion, vector<string>& registros);
 
-		static bool getAcierto(double prediccion, double valor_real);
+		static string getAlerta(double nivel_mp10);
 
-		static string getArchvAciertos();
+		static bool getAciertoAlerta(double prediccion, double valor_real);
 
-		static string getArchvProgreso();
+		static string getArchvReglas(string carpeta_archivos);
+		
+		static string getArchvValidacion(string carpeta_archivos);
 
-		static string getArchvAcertividad();
+		static string getArchvAciertos(string carpeta_archivos);
 
-		static void getProgreso(int& registro, double& aciertos);
+		static string getArchvProgreso(string carpeta_archivos);
 
-		static void guardarAciertos(double prediccion, double valor_real);
+		static string getArchvAcertividad(string carpeta_archivos);
 
-		static void guardarProgreso(double registro, double aciertos, double acertividad);
+		static void getProgreso(string archivo, int& registro, double& aciertos);
+
+		static void guardarAciertos(string archivo, double prediccion, double valor_real);
+
+		static void guardarProgreso(string archivo, double registro, double aciertos, double acertividad);
 
 		// guarda wl numero de registros, aciertos y la acertividad final.
 		static void guardarAcertividad(string archivo, double registro, double aciertos, double acertividad);

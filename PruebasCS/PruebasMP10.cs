@@ -26,7 +26,7 @@ namespace PruebasCS
 
         public static void guardarDatos()
         {
-            DateTime inicio = new DateTime(2014, 1, 1, 0, 0, 0);
+            DateTime inicio = new DateTime(2010, 1, 1, 0, 0, 0);
             DateTime fin = new DateTime(2017, 12, 31, 0, 0, 0);
 
             Dictionary<string, double[]> datos = Consultas.getDatosAlerta4(inicio, fin, true);
