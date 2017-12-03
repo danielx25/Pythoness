@@ -288,7 +288,7 @@ namespace BaseDeDatos
 
             if (bd.conectar())
             {
-                bd.consulta("SELECT * FROM meteorologicohora WHERE fecha BETWEEN @fecha_inicio AND @fecha_final AND mp10 > @mp10_inferior AND mp10 < @mp10_superior ORDER BY fecha ");
+                bd.consulta("SELECT * FROM meteorologicohora WHERE fecha BETWEEN @fecha_inicio AND @fecha_final AND (mp10 > @mp10_inferior AND mp10 < @mp10_superior) ORDER BY fecha ");
 
                 bd.setParamTimestamp("fecha_inicio");
                 bd.setParamTimestamp("fecha_final");

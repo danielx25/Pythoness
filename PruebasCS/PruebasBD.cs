@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseDeDatos;
+using System.IO;
 
 namespace PruebasCS
 {
@@ -11,10 +12,20 @@ namespace PruebasCS
     {
         public static void datosValidacion()
         {
-            DateTime inicio = new DateTime(2017, 1, 1, 0, 0, 0);
+            /*DateTime inicio = new DateTime(2017, 1, 1, 0, 0, 0);
             DateTime fin = new DateTime(2017, 1, 1, 5, 0, 0);
 
-            PruebasBD.imprimir(Consultas.getDatosValidacion(inicio, fin), 37);
+            PruebasBD.imprimir(Consultas.getDatosValidacion(inicio, fin), 37);*/
+
+            Dictionary<string, double[]> alerta_4 = Consultas.getDatosAlerta4(new DateTime(2014, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0), false);
+            Dictionary<string, double[]> alerta_3 = Consultas.getDatosAlerta3(new DateTime(2014, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0), false);
+            Dictionary<string, double[]> alerta_2 = Consultas.getDatosAlerta2(new DateTime(2014, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0), false);
+            Dictionary<string, double[]> alerta_1 = Consultas.getDatosAlerta1(new DateTime(2014, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0), false);
+
+            guardarDatos(alerta_4, "alertas_4.csv");
+            guardarDatos(alerta_3, "alertas_3.csv");
+            guardarDatos(alerta_2, "alertas_2.csv");
+            guardarDatos(alerta_1, "alertas_1.csv");
         }
 
         public static void meteorologicos()
@@ -64,6 +75,25 @@ namespace PruebasCS
 
                 Console.Write("\n");
             }
+        }
+
+        public static void guardarDatos(Dictionary<string, double[]> datos, string archivo)
+        {
+            // = new DateTime(2010, 1, 1, 0, 0, 0);
+            // = new DateTime(2017, 12, 31, 0, 0, 0);
+
+            StreamWriter file = new StreamWriter(archivo);
+
+            foreach (KeyValuePair<string, double[]> dato in datos)
+            {
+                String linea = String.Join(";", dato.Value);
+
+                //Console.WriteLine(linea);
+
+                file.WriteLine(linea);
+            }
+
+            file.Close();
         }
     }
 }

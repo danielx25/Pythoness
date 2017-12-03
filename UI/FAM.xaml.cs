@@ -35,17 +35,16 @@ namespace UI
         public string archv_dataset;
         public string archv_validacion;
         public bool desnormalizar;
-        public int num_nrns;
         public FAM()
         {
             carpeta = "_FAM";
+            int num_nrns = getParametrosRNA();
 
             if (!Directory.Exists(carpeta)) Directory.CreateDirectory(carpeta);
 
             archv_dataset = "";
             archv_validacion = "";
             desnormalizar = false;
-            num_nrns = 3;
             InitializeComponent();
 
             // agregamos la hora a los combobox.
@@ -61,6 +60,9 @@ namespace UI
 
             horaInicial.ItemsSource = horas;
             horaFinal.ItemsSource = horas;
+
+            lblNumNrns.Content = num_nrns;
+            slNumNrns.Value = num_nrns;
         }
 
         public void seleccionarArchivo(object sender, RoutedEventArgs e)
@@ -108,18 +110,19 @@ namespace UI
         public void setNumNeuronas(object sender, DragCompletedEventArgs e)
         {
             lblNumNrns.Content = slNumNrns.Value.ToString();
+
+            guardarParametrosRNA(Int32.Parse(lblNumNrns.Content.ToString()));
         }
 
         public void validacion(object sender, RoutedEventArgs e)
         {
             string directorio = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            num_nrns = Int32.Parse(lblNumNrns.Content.ToString());
-            string archv_validacion = "\"" + directorio + "\\" + rutaArchivo("validacion.csv") + "\"";
-            string archv_reglas = "\"" + directorio + "\\" + rutaArchivo("reglas.txt") + "\"";
+            int num_nrns = Int32.Parse(lblNumNrns.Content.ToString());
+            string carpeta_archivos = "\"" + directorio + "\\_FAM" + "\"";
 
             Process process = new Process();
             process.StartInfo.FileName = directorio + "\\" + rutaArchivo("ConsolaFAM.exe");
-            process.StartInfo.Arguments = archv_validacion + " " + archv_reglas + " " + num_nrns;
+            process.StartInfo.Arguments = carpeta_archivos + " " + num_nrns;
             //process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
             process.Start();
         }
@@ -127,6 +130,36 @@ namespace UI
         private string rutaArchivo(string archivo)
         {
             return carpeta + "\\" + archivo;
+        }
+
+        private void guardarParametrosRNA(int num_nrns)
+        {
+            StreamWriter archivo = new StreamWriter(rutaArchivo("configuracionRNA.conf"));
+
+            archivo.WriteLine("NUMERO_NEURONAS = " + num_nrns);
+
+            archivo.Close();
+        }
+
+        private int getParametrosRNA()
+        {
+            IEnumerable<string> lineas = File.ReadLines(rutaArchivo("configuracionRNA.conf"));
+            int num_nrns = 3;
+
+            foreach (string linea in lineas)
+            {
+                string[] parametros = linea.Split('=');
+
+                if (parametros.Length == 2)
+                {
+                    parametros[0] = parametros[0].Replace(" ", "");
+                    parametros[1] = parametros[1].Replace(" ", "");
+
+                    if (parametros[0] == "NUMERO_NEURONAS") num_nrns = Int32.Parse(parametros[1]);
+                }
+            }
+
+            return num_nrns;
         }
     }
 

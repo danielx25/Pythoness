@@ -25,6 +25,6 @@
         <Label Content="Dia 5" HorizontalAlignment="Left" Margin="541,187,0,0" VerticalAlignment="Top" Width="51"/>
         <Label x:Name="mp10_dia5" Content="0" HorizontalAlignment="Left" Margin="597,187,0,0" VerticalAlignment="Top" Width="84"/>
         <Label x:Name="alerta_dia5" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,187,0,0" VerticalAlignment="Top" Width="94"/>
-        <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="569,279,0,0" VerticalAlignment="Top" Width="157"/>
+        <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="569,279,0,0" VerticalAlignment="Top" Width="157" Click="clickGenerarReporte"/>
     </Grid>
 </UserControl>

@@ -189,6 +189,10 @@
       <Project>{a8df70b9-3b93-4ade-9cb1-970cc3133f24}</Project>
       <Name>Reglas</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Reportes\Reportes.csproj">
+      <Project>{f2eb53f6-1b89-4681-bfab-2c60ae714aad}</Project>
+      <Name>Reportes</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

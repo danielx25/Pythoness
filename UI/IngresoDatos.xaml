@@ -25,7 +25,7 @@
         <CheckBox x:Name="chBoxDia4" Content="4" HorizontalAlignment="Left" Margin="390,34,0,0" VerticalAlignment="Top" Height="26" Checked="checkDiaSeleccion" Unchecked="unCheckDiaSeleccion" Tag="dia_4"/>
         <CheckBox x:Name="chBoxDia5" Content="5" HorizontalAlignment="Left" Margin="425,34,0,0" VerticalAlignment="Top" Height="26" Checked="checkDiaSeleccion" Unchecked="unCheckDiaSeleccion" Tag="dia_5"/>
         <Label Content="RNA: " HorizontalAlignment="Left" Margin="484,34,0,0" VerticalAlignment="Top" Width="42"/>
-        <ComboBox x:Name="boxRNAs" Text="Seleccione un dia" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="531,33,0,0" VerticalAlignment="Top" Width="60" SelectedIndex="0">
+        <ComboBox x:Name="boxRNAs" Text="Seleccione un dia" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="531,33,0,0" VerticalAlignment="Top" Width="76" SelectedIndex="0">
             <ComboBoxItem Name="BoxSOM">SOM</ComboBoxItem>
             <ComboBoxItem Name="boxFAM">FAM</ComboBoxItem>
         </ComboBox>

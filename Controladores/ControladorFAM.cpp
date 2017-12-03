@@ -11,19 +11,19 @@ using namespace Datos;
 
 namespace Controladores {
 
-	ControladorFAM::ControladorFAM()
+	ControladorFAM::ControladorFAM(int nrns)
 	{
-		string archv_reglas = "_FAM/reglas.txt";
-
+		string archv_reglas = "_FAM/reglas.pynoess";
+		neuronas = nrns;
 		sfam = new SistemaFAM();
 
 		VariablesLinguisticas* variableslinguisticas = new VariablesLinguisticas();
 		map<string, VariableLinguistica*> vars;
 		variableslinguisticas->getVariables(vars);
+		double porcentaje = (100.0 / neuronas) / 100.0;
 
 		for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
 		{
-			double porcentaje = .1;
 			double espacio = (var->second->getMaximo() - var->second->getMinimo()) * porcentaje;
 			int num_nrns = ((var->second->getMaximo() - var->second->getMinimo()) / espacio) + 1;
 
