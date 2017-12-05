@@ -99,5 +99,10 @@ namespace UI
                 }
             }
         }
+
+        private void panelRedNeuronal_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
