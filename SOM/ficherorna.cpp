@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "ficherorna.h"
 
 FicheroRNA::FicheroRNA()
