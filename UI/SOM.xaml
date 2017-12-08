@@ -27,7 +27,7 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="410,257,0,0" TextWrapping="Wrap" Text="0.005" VerticalAlignment="Top" Width="120"/>
         <Label Content="Rango de la vecindad" HorizontalAlignment="Left" Margin="188,281,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="410,283,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Guardar Configuracion RNA" HorizontalAlignment="Left" Margin="150,345,0,0" VerticalAlignment="Top" Width="192"/>
+        <Button Content="Guardar Configuracion RNA" HorizontalAlignment="Left" Margin="150,345,0,0" VerticalAlignment="Top" Width="192" Click="guardarEstado"/>
 
     </Grid>
 </UserControl>

@@ -142,7 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="configuracion.cpp" />
-    <ClCompile Include="ficherorna.cpp" />
     <ClCompile Include="gestionadorsom.cpp" />
     <ClCompile Include="neurona.cpp" />
     <ClCompile Include="som.cpp" />

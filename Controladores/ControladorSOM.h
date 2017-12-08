@@ -1,9 +1,16 @@
 #pragma once
 //#include "gestionadorsom.h"
-ref class ControladorSOM
-{
-public:
-	ControladorSOM();
-	void iniciarSOM();
-};
+#include "configuracion.h"
+#include "ficherorna.h"
+
+namespace Controladores {
+	public ref class ControladorSOM
+	{
+	public:
+		ControladorSOM();
+		static void iniciarSOM();
+	};
+
+}
+
 

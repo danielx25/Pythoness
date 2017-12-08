@@ -71,9 +71,6 @@
     <ClCompile Include="gestionadorsom.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="ficherorna.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="configuracion.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>

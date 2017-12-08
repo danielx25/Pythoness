@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controladores;
 
 namespace UI
 {
@@ -33,6 +34,13 @@ namespace UI
         {
             
         }
+
+        public void guardarEstado(object sender, RoutedEventArgs e)
+        {
+            ControladorSOM.iniciarSOM();
+            System.Console.WriteLine("funciona!!!");
+        }
+
 
         private string rutaArchivo(string archivo)
         {
