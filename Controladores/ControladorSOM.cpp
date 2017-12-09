@@ -1,10 +1,64 @@
 #include "stdafx.h"
 #include "ControladorSOM.h"
-
+#include <msclr\marshal_cppstd.h>
 namespace Controladores {
 
 	ControladorSOM::ControladorSOM()
 	{
+	}
+
+
+	void ControladorSOM::obtenerValoresConfiguracion()
+	{
+		FicheroRNA::leerConfiguracion();
+	}
+
+	String^ ControladorSOM::getDireccion()
+	{
+		return msclr::interop::marshal_as<String^>(Configuracion::RUTA_ARCHIVO);
+	}
+	int ControladorSOM::getNumeroEntradas()
+	{
+		return Configuracion::NUMERO_ENTRADAS;
+	}
+	int ControladorSOM::getNumetoNeuronas()
+	{
+		return Configuracion::NUMERO_NEURONAS;
+	}
+	int ControladorSOM::getLargo()
+	{
+		return Configuracion::LARGO;
+	}
+	int ControladorSOM::getAncho()
+	{
+		return Configuracion::ANCHO;
+	}
+	double ControladorSOM::getAlfa()
+	{
+		return Configuracion::ALFA;
+	}
+	double ControladorSOM::getBeta()
+	{
+		return Configuracion::BETA;
+	}
+	int ControladorSOM::getRangoVecindad()
+	{
+		return Configuracion::RANGO_VECINDAD;
+	}
+
+
+	void ControladorSOM::cambiarValoresConfiguracion(String^ direc, int n_entrada, int n_neurona, int largo, int ancho, double alfa, double beta, int rangoVecindad)
+	{
+		Configuracion::RUTA_ARCHIVO = msclr::interop::marshal_as<std::string>(direc);
+		Configuracion::NUMERO_ENTRADAS = n_entrada;
+		Configuracion::NUMERO_NEURONAS = n_neurona;
+		Configuracion::LARGO = largo;
+		Configuracion::ANCHO = ancho;
+		Configuracion::ALFA = alfa;
+		Configuracion::BETA = beta;
+		Configuracion::RANGO_VECINDAD = rangoVecindad;
+		FicheroRNA::crearConfiguracion();
+
 	}
 
 	void ControladorSOM::iniciarSOM()
