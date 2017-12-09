@@ -22,7 +22,7 @@ int main()
 	//PruebasSFAM();
 	//PruebasLD();
 	//PruebasReglas();
-	//Discretizacion::datos("validacion.csv", "dataset1.csv", true);
+	//Discretizacion::datos(10, "validacion.csv", "dataset1.csv", true);
 	//Discretizacion::valoresVariables("valores_variables.csv");
 	//PruebasMP10();
 	PruebasMP10::validacion();

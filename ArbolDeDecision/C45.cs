@@ -23,6 +23,13 @@ namespace ArbolDeDecision
             promedioGanancia = promedioGanancias(this.tabla);
         }
 
+        public void cargarTablaC45(Tabla tabla, int profundidad, string alerta)
+        {
+            this.tabla = tabla;
+            arbol = new Arbol_("C45", profundidad, alerta);
+            promedioGanancia = promedioGanancias(this.tabla);
+        }
+
         public void iniciarC45(string archv_salida)
         {
             //inicio cronometro

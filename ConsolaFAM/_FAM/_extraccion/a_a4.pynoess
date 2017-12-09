@@ -1,0 +1,7 @@
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es muy_alta entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es noche entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es muy_helada y evaporacion es muy_alta y precipitacion_dia1 es media entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es medianoche entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es mediodia entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es tarde entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es manana entonces mp10 alerta_4

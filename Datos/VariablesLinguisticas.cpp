@@ -277,8 +277,8 @@ namespace Datos
 
 		VariableLinguistica* variable = new VariableLinguistica("mp10", 0.0, 1200.0);
 		variable->agregarValorLinguistico(new ValorLinguistico("sin_alerta", new FuncionTriangular(0.0, 0.0, 150.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alerta_1", new FuncionTriangular(100.0, 150.0, 250.0)));
-		variable->agregarValorLinguistico(new ValorLinguistico("alerta_2", new FuncionTriangular(200.0, 250.0, 350.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alerta_1", new FuncionTriangular(100.0, 150.0, 300.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("alerta_2", new FuncionTriangular(200.0, 250.0, 400.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_3", new FuncionTriangular(300.0, 350.0, 500.0)));
 		variable->agregarValorLinguistico(new ValorLinguistico("alerta_4", new FuncionTrapezoidal(450.0, 500.0, 1200.0, 1200.0)));
 
@@ -289,8 +289,8 @@ namespace Datos
 	void VariablesLinguisticas::estado(string nombre)
 	{
 		VariableLinguistica* variable = new VariableLinguistica(nombre, 0.0, 1.0);
-		variable->agregarValorLinguistico(new ValorLinguistico("detenido", new FuncionTriangular(0.0, 00, 0.5)));
-		variable->agregarValorLinguistico(new ValorLinguistico("activo", new FuncionTriangular(0.0, 1.0, 1.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("activo", new FuncionTriangular(0.0, 0.0, 1.0)));
+		variable->agregarValorLinguistico(new ValorLinguistico("detenido", new FuncionTriangular(0.0, 1.0, 1.0)));
 
 		variables[nombre] = variable;
 	}

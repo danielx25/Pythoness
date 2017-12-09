@@ -209,6 +209,9 @@ namespace Datos
 		for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
 		{
 			double* valores_variable;
+
+			//if (var->first == "mp10") porcentaje = .01;
+
 			double espacio = (var->second->getMaximo() - var->second->getMinimo()) * porcentaje;
 			num_nrns = ((var->second->getMaximo() - var->second->getMinimo()) / espacio) + 1;
 

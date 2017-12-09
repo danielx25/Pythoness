@@ -20,11 +20,16 @@ namespace PruebasMP
 {
 	void PruebasMP10::validacion()
 	{
-		string archv_validacion = "validacion.csv";
-		string archv_reglas = "reglas.txt";
+		string carpeta_archivos = "_FAM";
 		int num_nrns = 10;
 
-		ValidacionFAM::validacionFAM(archv_validacion, archv_reglas, num_nrns);
+		//ValidacionFAM::validacionFAM(carpeta_archivos, num_nrns);
+
+		ValidacionFAM* validacion = new ValidacionFAM(carpeta_archivos, "validacion.csv", "reglas.pynoess");
+
+		validacion->ejecutar(num_nrns, true);
+
+		delete validacion;
 	}
 
 	void PruebasMP10::imprimirMatriz(double**& matriz, int filas, int cols)

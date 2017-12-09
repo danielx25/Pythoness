@@ -9,7 +9,7 @@
 
 namespace Datos
 {
-	void Discretizacion::datos(string archv_datos, string archv_salida, bool desnormalizar)
+	void Discretizacion::datos(int neuronas, string archv_datos, string archv_salida, bool desnormalizar)
 	{
 		vector<string> filas;
 		VariablesLinguisticas* variableslinguisticas = new VariablesLinguisticas();
@@ -20,7 +20,7 @@ namespace Datos
 		vector<string> antecedentes;
 		variableslinguisticas->getVariables(vars);
 		Reglas::variables(orden_vars);
-		int neuronas = 10;
+		//int neuronas = 10;
 		int num_nrns = 0;
 		double porcentaje = (100.0 / neuronas) / 100.0;
 		map<string, double*> valores_variables;
@@ -60,7 +60,10 @@ namespace Datos
 				else if (val_desnormalizado < var_min) val_desnormalizado = var_min;
 
 				// obtenemos el valor de la neurona que se activa con el valor.
-				val_desnormalizado = Reglas::getValorNeurona(valores_variables[nom_var], num_nrns, val_desnormalizado);
+				if (nom_var != "pala1" && nom_var != "pala3" && nom_var != "pala4" && nom_var != "pala5" && nom_var != "pala7" && nom_var != "pala8" && nom_var != "pala10" && nom_var != "pala11" && nom_var != "chancador1" && nom_var != "chancador2")
+				{
+					val_desnormalizado = Reglas::getValorNeurona(valores_variables[nom_var], num_nrns, val_desnormalizado);
+				}
 
 				nom_val = vars[nom_var]->getValor(val_desnormalizado);
 

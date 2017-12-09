@@ -17,7 +17,7 @@ namespace Controladores {
 	public:
 		ControladorFAM(int nrns);
 
-		static void discretizacion(String^% archivo_datos, String^% archivo_salida, bool desnormalizar);
+		static void discretizacion(int num_neuronas, String^% archivo_datos, String^% archivo_salida, bool desnormalizar);
 
 		void setValorVariable(String^% variable, double valor);
 

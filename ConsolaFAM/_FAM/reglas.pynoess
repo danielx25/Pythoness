@@ -1,0 +1,29 @@
+Si direccion_viento es norte y humedad_relativa es media y temperatura es calida y chancador2 es detenido y estacion es fria entonces mp10 sin_alerta
+Si direccion_viento es norte y humedad_relativa es media y temperatura es calida y chancador2 es detenido y estacion es helada y precipitacion_dia1 es baja entonces mp10 sin_alerta
+Si direccion_viento es norte y humedad_relativa es media y temperatura es fresca y hora es tarde entonces mp10 sin_alerta
+Si direccion_viento es norte y humedad_relativa es media y temperatura es calida y chancador2 es detenido y estacion es helada y precipitacion_dia1 es media y movitec_camion es bajo entonces mp10 sin_alerta
+Si direccion_viento es oeste y radiacion_solar es muy_baja y pala5 es activo y humedad_relativa es baja y chancador2 es activo y evaporacion es alta entonces mp10 sin_alerta
+Si direccion_viento es oeste y radiacion_solar es muy_baja y pala5 es activo y humedad_relativa es media y movitec_camion es bajo y hora es tarde y precipitacion_dia1 es baja entonces mp10 sin_alerta
+Si direccion_viento es oeste y radiacion_solar es muy_baja y pala5 es activo y humedad_relativa es media y movitec_camion es bajo y hora es tarde y precipitacion_dia1 es media entonces mp10 sin_alerta
+Si direccion_viento es sur y precipitacion_dia3 es baja y estacion es fria y humedad_relativa es baja entonces mp10 sin_alerta
+Si direccion_viento es sur y precipitacion_dia3 es baja y estacion es fria y humedad_relativa es media entonces mp10 sin_alerta
+Si direccion_viento es sur y precipitacion_dia3 es baja y estacion es helada y hora es noche entonces mp10 sin_alerta
+Si direccion_viento es sur y precipitacion_dia3 es baja y estacion es helada y hora es tarde entonces mp10 sin_alerta
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es media y temperatura es calida y radiacion_solar es baja entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calida y velocidad_viento es alta entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es media y temperatura es calurosa entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calurosa entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calida y velocidad_viento es media y radiacion_solar es baja entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es media y temperatura es calida y radiacion_solar es muy_baja y precipitacion_dia1 es baja y precipitacion_dia2 es alta entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calida entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calurosa entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calida y velocidad_viento es media y radiacion_solar es muy_baja y precipitacion_dia1 es baja y precipitacion_dia2 es alta entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es alta entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es muy_helada y evaporacion es alta entonces mp10 alerta_3
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es muy_alta entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es noche entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es muy_helada y evaporacion es muy_alta y precipitacion_dia1 es media entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es medianoche entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es mediodia entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es tarde entonces mp10 alerta_4
+Si direccion_viento es norte y humedad_relativa es muy_baja y estacion es helada y evaporacion es alta y hora es manana entonces mp10 alerta_4

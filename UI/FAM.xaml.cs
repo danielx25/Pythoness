@@ -33,78 +33,39 @@ namespace UI
     {
         public string carpeta;
         public string archv_dataset;
+        public string archv_discretizado;
+        public string archv_reglas;
         public string archv_validacion;
         public bool desnormalizar;
+        string directorio;
+
         public FAM()
         {
+            directorio = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             carpeta = "_FAM";
-            int num_nrns = getParametrosRNA();
 
             if (!Directory.Exists(carpeta)) Directory.CreateDirectory(carpeta);
 
-            archv_dataset = "";
+            archv_dataset = directorio + "\\pesosRNA.csv";
+            archv_reglas = directorio + "\\" + carpeta + "\\" + "reglas.pynoess";
             archv_validacion = "";
-            desnormalizar = false;
+            desnormalizar = true;
+
             InitializeComponent();
 
-            // agregamos la hora a los combobox.
-            List<string> horas = new List<string>();
-
-            for(int i = 0; i <= 24; i++)
-            {
-                string hora = "";
-
-                hora += i;
-                horas.Add(hora);
-            }
-
-            horaInicial.ItemsSource = horas;
-            horaFinal.ItemsSource = horas;
+            int num_nrns = getParametrosRNA();
 
             lblNumNrns.Content = num_nrns;
             slNumNrns.Value = num_nrns;
         }
 
-        public void seleccionarArchivo(object sender, RoutedEventArgs e)
-        {
-            TextBox box = (TextBox)sender;
-            string archivo = box.Text;
-
-            archivo = Dialogo.seleccionArchivo(archivo);
-
-            if (box.Name == boxDataset.Name) archv_dataset = archivo;
-            else if (box.Name == boxDatosVal.Name) archv_validacion = archivo;
-
-            box.Text = archivo;
-        }
-
-        public void setDesnormalizacion(object sender, RoutedEventArgs e)
-        {
-            desnormalizar = true;
-        }
-
-        public void unSetDesnormalizacion(object sender, RoutedEventArgs e)
-        {
-            desnormalizar = false;
-        }
-
         public void generarReglas(object sender, RoutedEventArgs e)
         {
-            GeneracionReglas genReglas = new GeneracionReglas(archv_dataset, rutaArchivo("dataset_dis.csv"), rutaArchivo("reglas.txt"), desnormalizar);
-        }
+            int num_nrns = Int32.Parse(lblNumNrns.Content.ToString());
+            string carpeta_archivos = directorio + "\\" + carpeta;
+            string consola = directorio + "\\" + rutaArchivo("ConsolaFAM.exe");
 
-        public void validacionBD(object sender, RoutedEventArgs e)
-        {
-            DateTime inicial = (DateTime)fechaInicial.SelectedDate;
-            DateTime final = (DateTime)fechaFinal.SelectedDate;
-            string hora_inicial = (string)horaInicial.SelectedValue;
-            string hora_final = (string)horaFinal.SelectedValue;
-            DateTime fecha_inicial = new DateTime(inicial.Year, inicial.Month, inicial.Day, Convert.ToInt32(hora_inicial), 0, 0);
-            DateTime fecha_final = new DateTime(final.Year, final.Month, final.Day, Convert.ToInt32(hora_final), 0, 0);
-
-            Consulta consulta = new Consulta(fecha_inicial, fecha_final, rutaArchivo("validacion.csv"));
-
-            //graficoValidacion.validacion();
+            GeneracionReglas genReglas = new GeneracionReglas(carpeta_archivos, archv_dataset, consola, num_nrns, true);
         }
 
         public void setNumNeuronas(object sender, DragCompletedEventArgs e)
@@ -116,13 +77,13 @@ namespace UI
 
         public void validacion(object sender, RoutedEventArgs e)
         {
-            string directorio = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            directorio = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             int num_nrns = Int32.Parse(lblNumNrns.Content.ToString());
-            string carpeta_archivos = "\"" + directorio + "\\_FAM" + "\"";
+            string carpeta_archivos = "\"" + directorio + "\\" + carpeta + "\"";
 
             Process process = new Process();
             process.StartInfo.FileName = directorio + "\\" + rutaArchivo("ConsolaFAM.exe");
-            process.StartInfo.Arguments = carpeta_archivos + " " + num_nrns;
+            process.StartInfo.Arguments = "-v " + carpeta_archivos + " " + num_nrns;
             //process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
             process.Start();
         }
@@ -143,7 +104,7 @@ namespace UI
 
         private int getParametrosRNA()
         {
-            IEnumerable<string> lineas = File.ReadLines(rutaArchivo("configuracionRNA.conf"));
+            IEnumerable<string> lineas = File.ReadLines(directorio + "\\" + rutaArchivo("configuracionRNA.conf"));
             int num_nrns = 3;
 
             foreach (string linea in lineas)

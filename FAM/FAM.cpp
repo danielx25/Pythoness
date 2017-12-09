@@ -26,10 +26,10 @@ namespace RedNeuronal
 
 	FAM::~FAM()
 	{
-		delete[] A;
-		delete[] B;
+		//delete[] A;
+		//delete[] B;
 		
-		for (int i = 0; i < num_nrns_b; i++)
+		for (int i = 0; i < num_nrns_a; i++)
 			delete[] pesos[i];
 
 		delete[] pesos;

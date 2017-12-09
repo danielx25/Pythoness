@@ -12,7 +12,7 @@ namespace Datos
 	class Discretizacion
 	{
 	public:
-		static void datos(string archv_datos, string archv_salida, bool desnormalizar = false);
+		static void datos(int neuronas, string archv_datos, string archv_salida, bool desnormalizar = false);
 
 		static void valoresVariables(string archv_salida);
 	};

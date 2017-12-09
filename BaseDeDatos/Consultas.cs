@@ -50,6 +50,13 @@ namespace BaseDeDatos
             return getDatos(metereologicos, inicio, fin, normalizar);
         }
 
+        public static Dictionary<string, double[]> getDatosSinAlerta(DateTime inicio, DateTime fin, bool normalizar)
+        {
+            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, -1, 151);
+
+            return getDatos(metereologicos, inicio, fin, normalizar);
+        }
+
         public static Dictionary<string, double[]> getDatosAlertas(DateTime inicio, DateTime fin, double limite_inferior, bool normalizar)
         {
             Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin, limite_inferior);

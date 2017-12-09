@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <sstream>
+#include <cstring>
 #include "SFAM.h"
 
 namespace RedNeuronal
@@ -12,7 +13,14 @@ namespace RedNeuronal
 
 	SFAM::~SFAM()
 	{
+		for (map<string, double*>::iterator valor = valores_variables.begin(); valor != valores_variables.end(); ++valor)
+			delete[] valor->second;
 
+		for (map<string, map<string, double*>>::iterator var = grados_vals_vars.begin(); var != grados_vals_vars.end(); ++var)
+		{
+			for (map<string, double*>::iterator valor = var->second.begin(); valor != var->second.end(); ++valor)
+				delete[] valor->second;
+		}
 	}
 
 	void SFAM::agregarVariable(VariableLinguistica*& variable)
@@ -65,7 +73,8 @@ namespace RedNeuronal
 	{
 		salida = new double[num_vals];
 
-		salida = salidas[0];
+		for (int i = 0; i < num_vals; i++)
+			salida[i] = salidas[0][i];
 
 		for (int s = 1; s < num_salidas; s++)
 		{
@@ -108,10 +117,18 @@ namespace RedNeuronal
 			cout << salidas[salida_actual][i] << " ";
 			cout << "\n";*/
 
+			delete[] bit;
+			delete fam;
+
 			salida_actual += 1;
 		}
 
 		inferenciaDescomposicional(salidas, vars.size(), num_vals_vars[consecuente], operador, salida);
+
+		for (int i = 0; i < vars.size(); i++)
+			delete[] salidas[i];
+
+		delete[] salidas;
 	}
 
 	void SFAM::getBitVector(string variable, double valor_entrada, double*& bit)

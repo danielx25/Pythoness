@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "VariablesLinguisticas.h"
 #include "Reglas.h"
 #include "ValidacionFAM.h"
@@ -11,58 +12,86 @@ using namespace Datos;
 
 namespace ValidacionRNA
 {
-	void ValidacionFAM::validacionFAM(string carpeta_archivos, int neuronas)
+	ValidacionFAM::ValidacionFAM(string carpeta_archivos, string archivo_validacion, string archivo_reglas, string archivo_activadas)
 	{
-		string archv_reglas = ValidacionFAM::getArchvReglas(carpeta_archivos);
-		string archv_validacion = ValidacionFAM::getArchvValidacion(carpeta_archivos);
-		string archv_progreso = ValidacionFAM::getArchvProgreso(carpeta_archivos);
-		string archv_aciertos = ValidacionFAM::getArchvAciertos(carpeta_archivos);
-		string archv_acertividad = ValidacionFAM::getArchvAcertividad(carpeta_archivos);
-		vector<string> registros;
+		carpeta = carpeta_archivos;
+		archv_reglas = carpeta + "\\" + archivo_reglas;
+		archv_validacion = carpeta + "\\" + archivo_validacion;
+		archv_progreso = carpeta + "\\progreso.pynoess";
+		archv_aciertos = carpeta + "\\aciertos.pynoess";
+		archv_acertividad = carpeta + "\\acertividad.pynoess";
+
+		if (archivo_activadas != "")
+		{
+			debug_sfam = true;
+			archv_reglas_activadas = carpeta + "\\" + archivo_activadas;
+			archv_progreso_activaciones = carpeta + "\\progreso_activadas.pynoess";
+		}
+		else
+		{
+			debug_sfam = false;
+			archv_reglas_activadas = "";
+			archv_progreso_activaciones = "";
+		}
+		
+		getRegistros(archv_validacion, registros);
+	}
+
+	ValidacionFAM::~ValidacionFAM()
+	{
+		delete sfam;
+		vector<string>().swap(registros);
+	}
+
+
+	void ValidacionFAM::ejecutar(int neuronas, bool mostrar_progreso)
+	{
 		VariablesLinguisticas* variableslinguisticas = new VariablesLinguisticas();
 		map<string, VariableLinguistica*> vars;
 		variableslinguisticas->getVariables(vars);
 		vector<string> orden_vars;
 		ValidacionFAM::variables(orden_vars);
+		vector<string> reglas;
+		Reglas::leerReglas(archv_reglas, reglas);
+		vector<pair<int, int>> activaciones_reglas;
 		int progreso = 0;
 		int respaldo = 1;
 		double registro = 1;
-		double aciertos = 0;
-		double acertividad = 0;
+		double aciertos_alerta = 0;
+		double aciertos_nivel = 0;
+		double acertividad_alerta = 0;
+		double acertividad_nivel = 0;
 		int linea_actual = 0;
-		double porcentaje = (100.0 / neuronas) / 100.0;
 
 		// borramos los aciertos de ejecuciones anteriores.
 		remove(archv_aciertos.c_str());
 
-		getRegistros(archv_validacion, registros);
-
 		// cargamos el progreso previo si existiera alguno.
-		ValidacionFAM::getProgreso(archv_progreso, respaldo, aciertos);
+		getProgreso(respaldo, aciertos_alerta, acertividad_alerta, aciertos_nivel, acertividad_nivel);
 
-		vector<string> reglas;
-		Reglas::leerReglas(archv_reglas, reglas);
+		sfam = new SistemaFAM(debug_sfam);
 
-		SistemaFAM* sfam = new SistemaFAM();
+		// agregamos las variables linguisticas al Sistema FAM.
+		setVariables(vars, neuronas);
 
-		for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
+		// agregamos las reglas al Sistema FAM.
+		setReglas(reglas);
+
+		// de ser necesario, cargamos las reglas activadas previamente.
+		if (debug_sfam)
 		{
-			double espacio = (var->second->getMaximo() - var->second->getMinimo()) * porcentaje;
-			int num_nrns = ((var->second->getMaximo() - var->second->getMinimo()) / espacio) + 1;
+			//sfam->getActivacionesReglas(activaciones_reglas);
+			getProgresoActivaciones(activaciones_reglas);
 
-			double comienzo = var->second->getMinimo() /*+ espacio*/;
-			//double comienzo = 0;
-
-			sfam->agregarVariable(var->second);
-			sfam->agregarValoresVariable(var->second->getNombre(), comienzo, espacio, num_nrns);
+			if (activaciones_reglas.size() > 0) sfam->setActivacionesReglas(activaciones_reglas);
+			else sfam->setActivacionesReglas();
 		}
 
-		for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
-			sfam->agregarRegla(*regla);
+		map<string, double> entrada;
 
+		// recorremos los registros.
 		for (int i = respaldo; i <= registros.size(); i++) {
 			registro = i;
-			map<string, double> entrada;
 			stringstream sep(registros.at(registro - 1));
 			string field;
 			int posicion = 0;
@@ -94,36 +123,79 @@ namespace ValidacionRNA
 			}
 
 			double prediccion = sfam->getSalida(entrada);
+			
+			actualizarAciertos(prediccion, valor_mp10, aciertos_alerta, aciertos_nivel);
 
-			if (ValidacionFAM::getAciertoAlerta(prediccion, valor_mp10))
-			{
-				aciertos += 1;
-
-				ValidacionFAM::guardarAciertos(archv_aciertos, prediccion, valor_mp10);
-			}
-
-			acertividad = (aciertos / registro) * 100;
+			acertividad_alerta = (aciertos_alerta / registro) * 100;
+			acertividad_nivel = (aciertos_nivel / registro) * 100;
 
 			progreso += 1;
 
 			// se guarda el estado de la validacion.
 			if (progreso == 100)
 			{
-				ValidacionFAM::guardarProgreso(archv_progreso, registro, aciertos, acertividad);
+				guardarProgreso(registro, aciertos_alerta, aciertos_nivel, acertividad_alerta, acertividad_nivel);
+				guardarProgresoActivaciones(activaciones_reglas);
 				progreso = 0;
 			}
 
-			system("cls");
-			cout << "Registro: " << registro << " Aciertos: " << aciertos << " Acertividad: " << acertividad << " Prediccion: " << prediccion << " Valor Real: " << valor_mp10  << "\n";
+			sfam->getActivacionesReglas(activaciones_reglas);
+
+			if (mostrar_progreso)
+			{
+				system("cls");
+				cout << "Registro: " << registro << " \nAciertos Alerta: " << aciertos_alerta << " \nAcertividad Alerta: " << acertividad_alerta << "% \nAciertos Nivel: " << aciertos_nivel << " \nAcertividad Nivel: " << acertividad_nivel << "% \nPrediccion: " << prediccion << " \nValor Real: " << valor_mp10 << "\n";
+			}
 		}
 
-		ValidacionFAM::guardarAcertividad(archv_acertividad, registro, aciertos, acertividad);
+		guardarAcertividad(archv_acertividad, registro, aciertos_alerta, acertividad_alerta, aciertos_nivel, acertividad_nivel);
 
 		// removemos el archivo de progreso ya que la validacion fue completada.
 		remove(archv_progreso.c_str());
+		remove(archv_progreso_activaciones.c_str());
+
+		if (debug_sfam)
+		{
+			guardarReglasActivadas(reglas, activaciones_reglas, 40);
+		}
+
+		//delete sfam;
 
 		// se guarda el progreso al finalizar la validacion.
 		//if (registro > 0) ValidacionFAM::guardarProgreso(registro, aciertos);
+	}
+
+	void ValidacionFAM::ordenarReglasActivacion(vector<pair<int, int>>& activaciones)
+	{
+		sort(activaciones.begin(), activaciones.end(), ValidacionFAM::compararActivacion);
+	}
+
+	bool ValidacionFAM::compararActivacion(pair<int, int>& primer_elemento, pair<int, int>& segundo_elemento)
+	{
+		return primer_elemento.second > segundo_elemento.second;
+	}
+
+	void ValidacionFAM::setVariables(map<string, VariableLinguistica*>& vars, int neuronas)
+	{
+		double porcentaje = (100.0 / neuronas) / 100.0;
+
+		for (map<string, VariableLinguistica*>::iterator var = vars.begin(); var != vars.end(); ++var)
+		{
+			double espacio = (var->second->getMaximo() - var->second->getMinimo()) * porcentaje;
+			int num_nrns = ((var->second->getMaximo() - var->second->getMinimo()) / espacio) + 1;
+
+			double comienzo = var->second->getMinimo() /*+ espacio*/;
+			//double comienzo = 0;
+
+			sfam->agregarVariable(var->second);
+			sfam->agregarValoresVariable(var->second->getNombre(), comienzo, espacio, num_nrns);
+		}
+	}
+
+	void ValidacionFAM::setReglas(vector<string>& reglas)
+	{
+		for (vector<string>::iterator regla = reglas.begin(); regla != reglas.end(); ++regla)
+			sfam->agregarRegla(*regla);
 	}
 
 	double ValidacionFAM::getEstacion(double valor)
@@ -191,42 +263,37 @@ namespace ValidacionRNA
 
 	bool ValidacionFAM::getAciertoAlerta(double prediccion, double valor_real)
 	{
-		string alerta_prediccion = ValidacionFAM::getAlerta(prediccion);
-		string alerta_real = ValidacionFAM::getAlerta(valor_real);
+		string alerta_prediccion = getAlerta(prediccion);
+		string alerta_real = getAlerta(valor_real);
 
 		if (alerta_prediccion == alerta_real) return true;
 
 		return false;
 	}
 
-	string ValidacionFAM::getArchvReglas(string carpeta_archivos)
+	bool ValidacionFAM::getAciertoNivel(double prediccion, double valor_real)
 	{
-		return carpeta_archivos + "\\reglas.pynoess";
+		double distancia = 50;
+		double acierto = false;
+		
+		if (prediccion == valor_real)
+		{
+			acierto = true;
+		}
+		else if (prediccion < valor_real)
+		{
+			if (prediccion >= (valor_real - 50)) acierto = true;
+		} else if (prediccion > valor_real)
+		{
+			if (prediccion <= (valor_real + 50)) acierto = true;
+		}
+
+		return acierto;
 	}
 
-	string ValidacionFAM::getArchvValidacion(string carpeta_archivos)
+	void ValidacionFAM::getProgreso(int& registro, double& aciertos_alerta, double& acertividad_alerta, double& aciertos_nivel, double& acertividad_nivel)
 	{
-		return carpeta_archivos + "\\validacion.csv";
-	}
-
-	string ValidacionFAM::getArchvAciertos(string carpeta_archivos)
-	{
-		return carpeta_archivos + "\\aciertos.pynoess";
-	}
-
-	string ValidacionFAM::getArchvProgreso(string carpeta_archivos)
-	{
-		return carpeta_archivos + "\\progreso.pynoess";
-	}
-
-	string ValidacionFAM::getArchvAcertividad(string carpeta_archivos)
-	{
-		return carpeta_archivos + "\\acertividad.pynoess";
-	}
-
-	void ValidacionFAM::getProgreso(string archivo, int& registro, double& aciertos)
-	{
-		ifstream in(archivo.c_str());
+		ifstream in(archv_progreso.c_str());
 
 		if (in.good())
 		{
@@ -238,10 +305,13 @@ namespace ValidacionRNA
 				string valor;
 				int posicion = 0;
 
-				while (getline(sep, valor, ';') && posicion < 2)
+				while (getline(sep, valor, ';') && posicion < 5)
 				{
 					if (posicion == 0) registro = atof(valor.c_str());
-					if (posicion == 1) aciertos = atof(valor.c_str());
+					if (posicion == 1) aciertos_alerta = atof(valor.c_str());
+					if (posicion == 3) acertividad_alerta = atof(valor.c_str());
+					if (posicion == 4) aciertos_nivel = atof(valor.c_str());
+					if (posicion == 5) acertividad_nivel = atof(valor.c_str());
 
 					posicion += 1;
 				}
@@ -251,27 +321,115 @@ namespace ValidacionRNA
 		}
 	}
 
-	void ValidacionFAM::guardarAciertos(string archivo, double prediccion, double valor_real)
+	void ValidacionFAM::getProgresoActivaciones(vector<pair<int, int>>& activaciones)
 	{
-		ofstream archv_aciertos;
-		archv_aciertos.open(archivo.c_str(), fstream::in | fstream::out | fstream::app);
-		archv_aciertos << prediccion << ";" << valor_real << "\n";
-		archv_aciertos.close();
+		ifstream in(archv_progreso_activaciones.c_str());
+
+		if (in.good())
+		{
+			string linea;
+
+			while (getline(in, linea))
+			{
+				stringstream sep(linea);
+				string valor;
+				int posicion = 0;
+				int id_regla = 0;
+				int activaciones_regla = 0;
+
+				while (getline(sep, valor, ';') && posicion < 2)
+				{
+					if (posicion == 0) id_regla = atoi(valor.c_str());
+					if (posicion == 1) activaciones_regla = atoi(valor.c_str());
+
+					posicion += 1;
+				}
+
+				activaciones.push_back(make_pair(id_regla, activaciones_regla));
+			}
+
+			in.close();
+		}
 	}
 
-	void ValidacionFAM::guardarProgreso(string archivo, double registro, double aciertos, double acertividad)
+	void ValidacionFAM::actualizarAciertos(double prediccion, double valor_real, double& aciertos_alerta, double& aciertos_nivel)
 	{
-		guardarAcertividad(archivo, registro, aciertos, acertividad);
+		bool acierto_alerta = getAciertoAlerta(prediccion, valor_real);
+		bool acierto_nivel = getAciertoNivel(prediccion, valor_real);
+		string tipo = "";
+
+		if (acierto_alerta || acierto_nivel)
+		{
+			if (acierto_alerta)
+			{
+				aciertos_alerta += 1;
+				tipo += "Alerta";
+			}
+
+			if (acierto_nivel)
+			{
+				aciertos_nivel += 1;
+				tipo += "-Nivel";
+			}
+
+			ofstream archivo;
+			archivo.open(archv_aciertos.c_str(), fstream::in | fstream::out | fstream::app);
+			archivo << prediccion << ";" << valor_real << ";" << tipo << "\n";
+			archivo.close();
+		}
 	}
 
-	void ValidacionFAM::guardarAcertividad(string archivo, double registro, double aciertos, double acertividad)
+	void ValidacionFAM::guardarProgreso(double registro, double aciertos_alerta, double acertividad_alerta, double aciertos_nivel, double acertividad_nivel)
+	{
+		guardarAcertividad(archv_progreso, registro, aciertos_alerta, acertividad_alerta, aciertos_nivel, acertividad_nivel);
+	}
+
+	void ValidacionFAM::guardarAcertividad(string archivo, double registro, double aciertos_alerta, double acertividad_alerta, double aciertos_nivel, double acertividad_nivel)
 	{
 		ofstream in;
 		in.open(archivo);
-		in << registro << ";" << aciertos << ";" << acertividad;
+		in << registro << ";" << aciertos_alerta << ";" << acertividad_alerta << ";" << aciertos_nivel << ";" << acertividad_nivel;
 		in.close();
 	}
 
+	void ValidacionFAM::guardarProgresoActivaciones(vector<pair<int, int>>& activaciones)
+	{
+		ofstream in;
+		in.open(archv_progreso_activaciones);
+
+		for (vector<pair<int, int>>::iterator activacion = activaciones.begin(); activacion != activaciones.end(); ++activacion)
+		{
+			in << activacion->first << ";" << activacion->second << "\n";
+		}
+
+		in.close();
+	}
+
+	void ValidacionFAM::guardarReglasActivadas(vector<string>& reglas, vector<pair<int, int>>& activaciones, int limite_reglas)
+	{
+		int regla_actual = 0;
+		ofstream in;
+		in.open(archv_reglas_activadas);
+
+		ValidacionFAM::ordenarReglasActivacion(activaciones);
+
+		if (limite_reglas == 0) limite_reglas = activaciones.size();
+
+		//cout << "Tamaño activaciones: " << activaciones.size() << "\n";
+
+		for (vector<pair<int, int>>::iterator activacion = activaciones.begin(); activacion != activaciones.end() && regla_actual < limite_reglas; ++activacion)
+		{
+			if (activacion->second > 0)
+			{
+				//cout << "Regla " << activacion->first << " Activaciones: " << activacion->second << "\n";
+
+				in << reglas.at(activacion->first) << "\n";
+				regla_actual += 1;
+			}
+		}
+		
+		in.close();
+	}
 
 	void ValidacionFAM::variables(vector<string>& variables)
 	{

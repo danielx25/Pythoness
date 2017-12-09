@@ -18,6 +18,12 @@ namespace ArbolDeDecision
             arbol = new Arbol_("ID3");
         }
 
+        public void cargarTabla(Tabla tabla, int profundidad, string alerta)
+        {
+            this.tabla = tabla;
+            arbol = new Arbol_("ID3", profundidad, alerta);
+        }
+
         public Arbol_ Arbol
         {
             get
@@ -27,21 +33,22 @@ namespace ArbolDeDecision
         }
         
 
-        public void iniciarID3()
+        public void iniciarID3(string archv_salida)
         {
-            tabla.ToString();
+            //tabla.ToString();
             //inicio cronometro
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Restart();
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Restart();
 
             arbol.setRaiz(algoritmoID3(tabla, tabla.getClases()));
-            System.Console.WriteLine(arbol);
-            arbol.guardarArbol("arbolID3.txt");
+            //System.Console.WriteLine(arbol);
+            //arbol.guardarArbol(archv_salida);
+            arbol.guardarReglas(archv_salida);
             //Nodo s=algoritmoID3(this.tabla, tabla.getClases());
             //System.Console.WriteLine(s.getNombreClase());
 
             // termino cronometro + resultados ID3
-            stopwatch.Stop();
+            /*stopwatch.Stop();
             TimeSpan tiempoID3 = stopwatch.Elapsed;
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
             tiempoID3.Hours, tiempoID3.Minutes, tiempoID3.Seconds,
@@ -49,14 +56,14 @@ namespace ArbolDeDecision
             string elapsedMilisecons = String.Format(" {0} ",tiempoID3.Milliseconds);
             Console.WriteLine("RunTime: " + elapsedTime);
             Console.WriteLine("Runtime: " + elapsedMilisecons + " miliseconds");
-            arbol.Tiempo = tiempoID3.Milliseconds;
+            arbol.Tiempo = tiempoID3.Milliseconds;*/
         }
-        
+
         public Nodo algoritmoID3(Tabla tabla, List<String> atributos)
         {
-            System.Console.WriteLine();
-            tabla.ToString();
-            System.Console.WriteLine();
+            //System.Console.WriteLine();
+            //tabla.ToString();
+            //System.Console.WriteLine();
             Nodo raiz = null;
 
             int indice = siTodosEjemplosSonLosMismos(tabla);
@@ -76,7 +83,7 @@ namespace ArbolDeDecision
             }
             int indiceClase = seleccionarAtributoConMayorGanancia(tabla, atributos, raiz);
             Columna clase = tabla.getColumna(indiceClase);
-            System.Console.WriteLine("Clase: " +clase.getClase());
+            //System.Console.WriteLine("Clase: " +clase.getClase());
             int countAtributos = 0;
             
             if (clase.IsContinuo)
@@ -107,7 +114,7 @@ namespace ArbolDeDecision
                 }
                 else
                     particionarTabla(nuevaTabla, indiceClase, clase.getAtributosDiscretos()[i]);
-                nuevaTabla.ToString();
+                //nuevaTabla.ToString();
                 if (nuevaTabla.getCountfilas() ==0)//ejemplos estan vacios
                 {
                     raiz.agregarNodo(new Nodo(elAtributoSAlidoMayorNumero(tabla)));

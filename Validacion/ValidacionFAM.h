@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 #include "VariableLinguistica.h"
 #include "SistemaFAM.h"
 
@@ -14,42 +15,68 @@ namespace ValidacionRNA
 	class ValidacionFAM
 	{
 	public:
-		void static validacionFAM(string carpeta_archivos, int num_nrns);
+		ValidacionFAM(string carpeta_archivos, string archivo_validacion, string archivo_reglas, string archivo_activadas = "");
+
+		~ValidacionFAM();
+
+		void ejecutar(int neuronas, bool mostrar_progreso = false);
+
+		// ordena las reglas de mayor a menor activacion.
+		static void ordenarReglasActivacion(vector<pair<int, int>>& activaciones);
+
+		static bool compararActivacion(pair<int, int>& primer_elemento, pair<int, int>& segundo_elemento);
+
+		// agrega las variables linguisticas al Sistema FAM.
+		void setVariables(map<string, VariableLinguistica*>& vars, int neuronas);
+		
+		// agrega las reglas al Sistema FAM.
+		void setReglas(vector<string>& reglas);
 
 		// obtiene la estación con un ajuste aplicado.
-		static double getEstacion(double valor);
+		double getEstacion(double valor);
 
 		// obtiene la hora con un ajuste aplicado.
-		static double getHora(double valor);
+		double getHora(double valor);
 
 		// obtiene la direccion del viento con un ajuste aplicado.
-		static double getDViento(double valor);
+		double getDViento(double valor);
 
-		static void getRegistros(string archv_validacion, vector<string>& registros);
+		void getRegistros(string archv_validacion, vector<string>& registros);
 
-		static string getAlerta(double nivel_mp10);
+		string getAlerta(double nivel_mp10);
 
-		static bool getAciertoAlerta(double prediccion, double valor_real);
+		bool getAciertoAlerta(double prediccion, double valor_real);
 
-		static string getArchvReglas(string carpeta_archivos);
-		
-		static string getArchvValidacion(string carpeta_archivos);
+		bool getAciertoNivel(double prediccion, double valor_real);
 
-		static string getArchvAciertos(string carpeta_archivos);
+		void getProgreso(int& registro, double& aciertos_alerta, double& acertividad_alerta, double& aciertos_nivel, double& acertividad_nivel);
 
-		static string getArchvProgreso(string carpeta_archivos);
+		void getProgresoActivaciones(vector<pair<int, int>>& activaciones);
 
-		static string getArchvAcertividad(string carpeta_archivos);
+		void actualizarAciertos(double prediccion, double valor_real, double& aciertos_alerta, double& aciertos_nivel);
 
-		static void getProgreso(string archivo, int& registro, double& aciertos);
-
-		static void guardarAciertos(string archivo, double prediccion, double valor_real);
-
-		static void guardarProgreso(string archivo, double registro, double aciertos, double acertividad);
+		void guardarProgreso(double registro, double aciertos_alerta, double acertividad_alerta, double aciertos_nivel, double acertividad_nivel);
 
 		// guarda wl numero de registros, aciertos y la acertividad final.
-		static void guardarAcertividad(string archivo, double registro, double aciertos, double acertividad);
+		void guardarAcertividad(string archivo, double registro, double aciertos_alerta, double acertividad_alerta, double aciertos_nivel, double acertividad_nivel);
 
-		static void variables(vector<string>& variables);
+		void guardarProgresoActivaciones(vector<pair<int, int>>& activaciones);
+
+		void guardarReglasActivadas(vector<string>& reglas, vector<pair<int, int>>& activaciones, int limite_reglas = 0);
+
+		void variables(vector<string>& variables);
+
+	private:
+		string carpeta;
+		string archv_reglas;
+		string archv_validacion;
+		string archv_progreso;
+		string archv_aciertos;
+		string archv_acertividad;
+		string archv_reglas_activadas;
+		string archv_progreso_activaciones;
+		vector<string> registros;
+		SistemaFAM* sfam;
+		bool debug_sfam;
 	};
 }

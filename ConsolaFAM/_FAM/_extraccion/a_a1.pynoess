@@ -1,0 +1,10 @@
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es media y temperatura es calida y radiacion_solar es baja entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calida y velocidad_viento es alta entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es media y temperatura es calurosa entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calurosa entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calida y velocidad_viento es media y radiacion_solar es baja entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es media y temperatura es calida y radiacion_solar es muy_baja y precipitacion_dia1 es baja y precipitacion_dia2 es alta entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calida entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calurosa entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es madrugada y temperatura es calida y estacion es calida y velocidad_viento es media y radiacion_solar es muy_baja y precipitacion_dia1 es baja y precipitacion_dia2 es alta entonces mp10 alerta_1
+Si direccion_viento es norte y humedad_relativa es baja y pala5 es activo y hora es manana y estacion es calurosa y velocidad_viento es alta entonces mp10 alerta_1

@@ -1,0 +1,9 @@
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es alta y estacion es fria entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es alta y estacion es helada y precipitacion_dia4 es alta entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es alta y estacion es helada y precipitacion_dia4 es baja y precipitacion_dia1 es media entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es muy_alta y precipitacion_dia1 es media entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es muy_alta y precipitacion_dia1 es alta entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es alta y estacion es helada y precipitacion_dia4 es baja y precipitacion_dia1 es alta entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es alta y estacion es calida entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es alta y estacion es calurosa entonces mp10 alerta_4
+Si humedad_relativa es muy_baja y direccion_viento es norte y evaporacion es alta y estacion es muy_calurosa entonces mp10 alerta_4

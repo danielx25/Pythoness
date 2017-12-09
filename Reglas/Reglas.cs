@@ -17,13 +17,17 @@ namespace ReglasFAM
         String[] datos;
         Dictionary<String, List<String>> valores_variables;
         Tabla dataset;
+        int profundidad = 0;
+        string alerta = "";
 
-        public Reglas()
+        public Reglas(string archv_val_vars, int profundidad, string alerta)
         {
             dataset = new Tabla();
             valores_variables = new Dictionary<string, List<string>>();
-            setValoresVariables("valores_variables.csv");
+            setValoresVariables(archv_val_vars);
             setVariables();
+            this.profundidad = profundidad;
+            this.alerta = alerta;
         }
 
         public void extraccionReglas(String archv_datos, String archv_reglas)
@@ -49,8 +53,12 @@ namespace ReglasFAM
                 dataset.agregarColumna(columnas[i]);
 
             C45 c45 = new C45();
-            c45.cargarTablaC45(dataset);
+            c45.cargarTablaC45(dataset, profundidad, alerta);
             c45.iniciarC45(archv_reglas);
+
+            /*ID3_ id3 = new ID3_();
+            id3.cargarTabla(dataset, profundidad, alerta);
+            id3.iniciarID3(archv_reglas);*/
         }
 
         public void setAtributo(int columna, String nombre)

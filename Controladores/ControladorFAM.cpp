@@ -50,13 +50,13 @@ namespace Controladores {
 		return sfam->getSalida();
 	}
 
-	void ControladorFAM::discretizacion(String^% archivo_datos, String^% archivo_salida, bool desnormalizar)
+	void ControladorFAM::discretizacion(int num_neuronas, String^% archivo_datos, String^% archivo_salida, bool desnormalizar)
 	{
 		msclr::interop::marshal_context context;
 		std::string archv_datos = ControladorFAM::getString(archivo_datos);
 		std::string archv_salida = ControladorFAM::getString(archivo_salida);
 
-		Discretizacion::datos(archv_datos, archv_salida, desnormalizar);
+		Discretizacion::datos(num_neuronas, archv_datos, archv_salida, desnormalizar);
 	}
 
 	string ControladorFAM::getString(String^% string_net)

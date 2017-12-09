@@ -16,10 +16,19 @@ namespace ArbolDeDecision
         private int profundidadArbol = 0;
         private int numeroHojas = 0;
         private int numeroNodos = 0;
+        private int profundidad = 0;
+        private string alerta = "";
 
         public Arbol_(string nombreAlgoritmo1)
         {
             this.nombreAlgortimo = nombreAlgoritmo1;
+        }
+
+        public Arbol_(string nombreAlgoritmo1, int profundidad, string alerta)
+        {
+            this.nombreAlgortimo = nombreAlgoritmo1;
+            this.profundidad = profundidad;
+            this.alerta = alerta;
         }
 
         public void setRaiz(Nodo nodo)
@@ -263,10 +272,14 @@ namespace ArbolDeDecision
             }
             else
             {
-                if (profundidad < 6 || nodo.getNombreClase() == "alerta_4" /*|| nodo.getNombreClase() == "alerta_3" || nodo.getNombreClase() == "alerta_2"*/)
+                if (profundidad > 0 && nodo.getNombreClase() != "")
                 {
-                    regla_actual += "entonces mp10 " + nodo.getNombreClase();
-                    lista.Add(regla_actual);
+                    if (profundidad < this.profundidad && nodo.getNombreClase() == this.alerta)
+                    {
+                        regla_actual += "entonces mp10 " + nodo.getNombreClase();
+                        regla_actual = regla_actual.Replace("y entonces", "entonces");
+                        lista.Add(regla_actual);
+                    }
                 }
             }
         }
