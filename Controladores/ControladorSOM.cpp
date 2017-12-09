@@ -1,14 +1,70 @@
 #include "stdafx.h"
 #include "ControladorSOM.h"
+#include <msclr\marshal_cppstd.h>
+namespace Controladores {
+
+	ControladorSOM::ControladorSOM()
+	{
+	}
 
 
-ControladorSOM::ControladorSOM()
-{
-}
+	void ControladorSOM::obtenerValoresConfiguracion()
+	{
+		FicheroRNA::leerConfiguracion();
+	}
 
-void ControladorSOM::iniciarSOM()
-{
-	/*double ejemplo1[30][4] = {
+	String^ ControladorSOM::getDireccion()
+	{
+		return msclr::interop::marshal_as<String^>(Configuracion::RUTA_ARCHIVO);
+	}
+	int ControladorSOM::getNumeroEntradas()
+	{
+		return Configuracion::NUMERO_ENTRADAS;
+	}
+	int ControladorSOM::getNumetoNeuronas()
+	{
+		return Configuracion::NUMERO_NEURONAS;
+	}
+	int ControladorSOM::getLargo()
+	{
+		return Configuracion::LARGO;
+	}
+	int ControladorSOM::getAncho()
+	{
+		return Configuracion::ANCHO;
+	}
+	double ControladorSOM::getAlfa()
+	{
+		return Configuracion::ALFA;
+	}
+	double ControladorSOM::getBeta()
+	{
+		return Configuracion::BETA;
+	}
+	int ControladorSOM::getRangoVecindad()
+	{
+		return Configuracion::RANGO_VECINDAD;
+	}
+
+
+	void ControladorSOM::cambiarValoresConfiguracion(String^ direc, int n_entrada, int n_neurona, int largo, int ancho, double alfa, double beta, int rangoVecindad)
+	{
+		Configuracion::RUTA_ARCHIVO = msclr::interop::marshal_as<std::string>(direc);
+		Configuracion::NUMERO_ENTRADAS = n_entrada;
+		Configuracion::NUMERO_NEURONAS = n_neurona;
+		Configuracion::LARGO = largo;
+		Configuracion::ANCHO = ancho;
+		Configuracion::ALFA = alfa;
+		Configuracion::BETA = beta;
+		Configuracion::RANGO_VECINDAD = rangoVecindad;
+		FicheroRNA::crearConfiguracion();
+
+	}
+
+	void ControladorSOM::iniciarSOM()
+	{
+		FicheroRNA::crearConfiguracion();
+		/*double ejemplo1[30][4] = {
 		{ 0.25, 0.375, 0.428571428571, 0.25 },
 		{ 0.583333333333, 0.625, 0.428571428571, 0.598484848485 },
 		{ 0.333333333333, 1.0, 0.571428571429, 0.719696969697 },
@@ -39,17 +95,21 @@ void ControladorSOM::iniciarSOM()
 		{ 0.5, 0.5, 0.142857142857, 0.325757575758 },
 		{ 1.0, 0.375, 0.714285714286, 0.878787878788 },
 		{ 0.0833333333333, 0.375, 1.0, 0.44696969697 }
-	};
+		};
 
-	double **matriz = new double*[30];
+		double **matriz = new double*[30];
 
-	for (int i = 0; i < 30; i++)
-	{
+		for (int i = 0; i < 30; i++)
+		{
 		matriz[i] = new double[4];
+		}
+
+		GestionadorSOM* managerSom = new GestionadorSOM();
+		managerSom->inicializarSOM(matriz, 30, 4);
+		//managerSom->empezarEntrenamiento();
+		throw gcnew System::NotImplementedException();*/
 	}
 
-	GestionadorSOM* managerSom = new GestionadorSOM();
-	managerSom->inicializarSOM(matriz, 30, 4);
-	//managerSom->empezarEntrenamiento();
-	throw gcnew System::NotImplementedException();*/
+
+
 }
