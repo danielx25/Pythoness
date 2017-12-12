@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controladores;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -25,6 +26,8 @@ namespace UI
         public string carpeta;
         public static RoutedEvent eventoCambiarTab;
 
+        private int valorAncho, valorLargo;
+
         public SOM()
         {
             carpeta = "_SOM";
@@ -33,6 +36,72 @@ namespace UI
             cargarValoresConfig();
 
             eventoCambiarTab = EventManager.RegisterRoutedEvent("cambiarTab", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SOM));
+        }
+
+        public void cambioNumeroCiclos(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                double alfa = Convert.ToDouble(t_alfa.Text);
+                double beta = Convert.ToDouble(t_beta.Text);
+
+                double numeroCiclos = alfa/beta;
+                t_numeroCiclos.Text = Convert.ToString(numeroCiclos);
+                System.Console.WriteLine("numero de ciclos");
+            }
+            catch (OverflowException)
+            {
+                //Console.WriteLine("{0} is outside the range of the Int32 type.", value);
+            }
+            catch (FormatException)
+            {
+                //Console.WriteLine("The {0} value '{1}' is not in a recognizable format.",
+                //                  value.GetType().Name, value);
+            }
+            catch(NullReferenceException)
+            {
+
+            }
+        }
+
+        public void cambioValorAncho(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                valorAncho = Convert.ToInt16(t_ancho.Text);
+                t_numeroNeuronas.Text = Convert.ToString(valorAncho * valorLargo);
+                System.Console.WriteLine("cambio de valor1");
+            }
+            catch (OverflowException)
+            {
+                //Console.WriteLine("{0} is outside the range of the Int32 type.", value);
+            }
+            catch (FormatException)
+            {
+                //Console.WriteLine("The {0} value '{1}' is not in a recognizable format.",
+                //                  value.GetType().Name, value);
+            }
+            
+        }
+
+        public void cambioValorLargo(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                valorLargo = Convert.ToInt16(t_largo.Text);
+                t_numeroNeuronas.Text = Convert.ToString(valorAncho * valorLargo);
+                System.Console.WriteLine("cambio de valor1");
+            }
+            catch (OverflowException)
+            {
+                //Console.WriteLine("{0} is outside the range of the Int32 type.", value);
+            }
+            catch (FormatException)
+            {
+                //Console.WriteLine("The {0} value '{1}' is not in a recognizable format.",
+                //                  value.GetType().Name, value);
+
+            }
         }
 
         public void validacion(object sender, RoutedEventArgs e)
@@ -77,6 +146,8 @@ namespace UI
             t_alfa.Text = Convert.ToString(ControladorSOM.getAlfa());
             t_beta.Text = Convert.ToString(ControladorSOM.getBeta());
             t_randoVecindad.Text = Convert.ToString(ControladorSOM.getRangoVecindad());
+            valorAncho = ControladorSOM.getAncho();
+            valorLargo = ControladorSOM.getLargo();
         }
 
         public event RoutedEventHandler cambiarTab
@@ -88,6 +159,12 @@ namespace UI
         private string rutaArchivo(string archivo)
         {
             return carpeta + "/" + archivo;
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
