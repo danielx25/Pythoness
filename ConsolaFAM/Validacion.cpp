@@ -7,8 +7,8 @@ namespace ConsolaFAM
 {
 	void Validacion::ejecutar(string carpeta_archivos, int num_nrns)
 	{
-		string archv_datos[] = { "validacion_1.csv", "validacion_2.csv", "validacion_3.csv" };
-		string archv_reglas = carpeta_archivos + "\\reglas.pynoess";
+		string archv_datos[] = { "validacion_3.csv"/*, "validacion_2.csv", "validacion_3.csv"*/ };
+		string archv_reglas = "reglas.pynoess";
 		string archv_progreso = carpeta_archivos + "\\progreso_validacion.pynoess";
 		int size = (sizeof(archv_datos) / sizeof(*archv_datos));
 		int progreso = 0;

@@ -83,8 +83,16 @@ namespace ValidacionRNA
 			//sfam->getActivacionesReglas(activaciones_reglas);
 			getProgresoActivaciones(activaciones_reglas);
 
-			if (activaciones_reglas.size() > 0) sfam->setActivacionesReglas(activaciones_reglas);
-			else sfam->setActivacionesReglas();
+			if (activaciones_reglas.size() > 0)
+			{
+				//cout << "Progreso\n";
+				sfam->setActivacionesReglas(activaciones_reglas);
+			}
+			else
+			{
+				//cout << "Sin Progreso\n";
+				sfam->setActivacionesReglas();
+			}
 		}
 
 		map<string, double> entrada;
@@ -134,12 +142,14 @@ namespace ValidacionRNA
 			// se guarda el estado de la validacion.
 			if (progreso == 100)
 			{
-				guardarProgreso(registro, aciertos_alerta, aciertos_nivel, acertividad_alerta, acertividad_nivel);
-				guardarProgresoActivaciones(activaciones_reglas);
+				guardarProgreso(registro, aciertos_alerta, acertividad_alerta, aciertos_nivel, acertividad_nivel);
+
+				if (debug_sfam) guardarProgresoActivaciones(activaciones_reglas);
+				
 				progreso = 0;
 			}
 
-			sfam->getActivacionesReglas(activaciones_reglas);
+			if (debug_sfam) sfam->getActivacionesReglas(activaciones_reglas);
 
 			if (mostrar_progreso)
 			{
@@ -156,7 +166,7 @@ namespace ValidacionRNA
 
 		if (debug_sfam)
 		{
-			guardarReglasActivadas(reglas, activaciones_reglas, 40);
+			guardarReglasActivadas(reglas, activaciones_reglas);
 		}
 
 		//delete sfam;

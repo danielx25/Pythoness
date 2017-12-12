@@ -37,7 +37,8 @@ namespace UI
         {
             if (panelIngresoDatos.diasPrediccion.Count() > 0)
             {
-                string RNA = panelIngresoDatos.boxRNAs.SelectedValue.ToString();
+                //string RNA = panelIngresoDatos.boxRNAs.SelectedValue.ToString();
+                string RNA = "FAM";
 
                 limpiarGrafico();
 
@@ -92,10 +93,13 @@ namespace UI
                     string dia = "dia" + (i + 1);
                     Label nivel = (Label)panelPrediccion.gridPrediccion.FindName("mp10_" + dia);
                     Label alerta = (Label)panelPrediccion.gridPrediccion.FindName("alerta_" + dia);
+                    Label hora = (Label)panelPrediccion.gridPrediccion.FindName("hora_" + dia);
 
                     nivel.Content = "";
                     alerta.Content = "";
+                    hora.Content = "";
                     panelPrediccion.predicciones[i] = -1;
+                    panelPrediccion.horas[i] = 0;
                 }
             }
         }

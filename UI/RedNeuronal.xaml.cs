@@ -23,6 +23,13 @@ namespace UI
         public RedNeuronal()
         {
             InitializeComponent();
+
+            panelSOM.AddHandler(SOM.eventoCambiarTab, new RoutedEventHandler(mostrarTabFAM));
+        }
+
+        private void mostrarTabFAM(object sender, RoutedEventArgs e)
+        {
+            tabPrincipal.SelectedIndex = 1;
         }
     }
 }

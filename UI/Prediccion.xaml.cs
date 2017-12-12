@@ -24,6 +24,7 @@ namespace UI
     {
         private int dias;
         public double[] predicciones;
+        public double[] horas;
         public static RoutedEvent eventoGenerarReporte;
         public string ruta_reporte;
 
@@ -33,9 +34,13 @@ namespace UI
 
             dias = 5;
             predicciones = new double[dias];
+            horas = new double[dias];
 
             for (int i = 0; i < dias; i++)
+            {
                 predicciones[i] = -1;
+                horas[i] = 0;
+            }
 
             graficoPrediccion.SetAxisXLimits(1, predicciones.Length);
             graficoPrediccion.SetAxisYLimits(0, 800);
@@ -52,6 +57,7 @@ namespace UI
                 string dia = "dia" + (i + 1);
                 Label nivel = (Label)gridPrediccion.FindName("mp10_" + dia);
                 Label alerta = (Label)gridPrediccion.FindName("alerta_" + dia);
+                Label hora = (Label)gridPrediccion.FindName("hora_" + dia);
 
                 if (predicciones[i] > -1)
                 {
@@ -63,11 +69,13 @@ namespace UI
 
                     nivel.Content = Math.Round(predicciones[i]) + "";
                     alerta.Content = getAlerta(predicciones[i]);
+                    hora.Content = horas[i] + "";
                 }
                 else
                 {
                     nivel.Content = "";
                     alerta.Content = "";
+                    hora.Content = "";
                 }
             }
         }

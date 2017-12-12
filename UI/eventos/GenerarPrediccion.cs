@@ -44,10 +44,11 @@ namespace UI.eventos
             this.Close();
         }
 
-        private double getMaximaPrediccion(ControladorFAM cFAM)
+        private Tuple<double, double> getMaximaPrediccion(ControladorFAM cFAM)
         {
             string variable = "hora";
             double maximo = 0;
+            double hora_maxima = 0;
 
             for (double hora = 0; hora < 24; hora++)
             {
@@ -59,10 +60,13 @@ namespace UI.eventos
                 if (prediccion > maximo)
                 {
                     maximo = prediccion;
+                    hora_maxima = hora;
                 }
             }
 
-            return maximo;
+            Tuple<double, double> prediccion_hora = Tuple.Create(maximo, hora_maxima);
+
+            return prediccion_hora;
         }
 
         private string rutaArchivoFAM(string archivo)
@@ -113,7 +117,10 @@ namespace UI.eventos
                         cFAM.setValorVariable(ref variable, dato.Value);
                     }
 
-                    panelPrediccion.predicciones[indice_dia] = getMaximaPrediccion(cFAM);
+                    Tuple<double, double> prediccion_hora = getMaximaPrediccion(cFAM);
+
+                    panelPrediccion.predicciones[indice_dia] = prediccion_hora.Item1;
+                    panelPrediccion.horas[indice_dia] = prediccion_hora.Item2;
 
                     //panelPrediccion.predicciones[indice_dia] = cFAM.prediccion();
 

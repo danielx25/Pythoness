@@ -7,9 +7,9 @@ namespace ConsolaFAM
 {
 	void ExtraccionReglas::ejecutar(string carpeta_archivos, int num_nrns)
 	{
-		string archv_reglas[] = { "sa.pynoess", "a1.pynoess", "a2.pynoess", "a3.pynoess", "a4.pynoess" };
-		string archv_reglas_activadas[] = { "a_sa.pynoess", "a_a1.pynoess", "a_a2.pynoess", "a_a3.pynoess", "a_a4.pynoess" };
-		string archv_datos[] = { "sa.csv", "a1.csv", "a2.csv", "a3.csv", "a4.csv" };
+		string archv_reglas[] = { /*"sa.pynoess", "a1.pynoess", "a2.pynoess", "a3.pynoess",*/ "a4.pynoess" };
+		string archv_reglas_activadas[] = { /*"a_sa.pynoess", "a_a1.pynoess", "a_a2.pynoess", "a_a3.pynoess",*/ "a_a4.pynoess" };
+		string archv_datos[] = { /*"sa.csv", "a1.csv", "a2.csv", "a3.csv",*/ "a4.csv" };
 		string carpeta_extraccion = carpeta_archivos + "\\_extraccion";
 		string archv_progreso = carpeta_extraccion + "\\progreso_extraccion.pynoess";
 		int size = (sizeof(archv_reglas) / sizeof(*archv_reglas));

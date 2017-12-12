@@ -22,7 +22,9 @@ namespace PruebasCS
             Dictionary<string, double[]> alerta_2 = Consultas.getDatosAlerta2(new DateTime(2014, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0), false);
             Dictionary<string, double[]> alerta_1 = Consultas.getDatosAlerta1(new DateTime(2014, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0), false);
             Dictionary<string, double[]> sin_alerta = Consultas.getDatosSinAlerta(new DateTime(2010, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0), false);*/
-            Dictionary<string, double[]> datos_3_3 = Consultas.getDatosValidacion(new DateTime(2014, 1, 1, 0, 0, 0), new DateTime(2017, 12, 1, 0, 0, 0));
+            Dictionary<string, double[]> datos_3 = Consultas.getDatosValidacion(new DateTime(2010, 1, 1, 0, 0, 0), new DateTime(2012, 5, 31, 23, 0, 0));
+            Dictionary<string, double[]> datos_2 = Consultas.getDatosValidacion(new DateTime(2012, 1, 6, 0, 0, 0), new DateTime(2014, 10, 31, 23, 0, 0));
+            Dictionary<string, double[]> datos_1 = Consultas.getDatosValidacion(new DateTime(2014, 11, 1, 0, 0, 0), new DateTime(2017, 2, 28, 23, 0, 0));
 
 
             /*guardarDatos(alerta_4, "alertas_4.csv");
@@ -30,7 +32,9 @@ namespace PruebasCS
             guardarDatos(alerta_2, "alertas_2.csv");
             guardarDatos(alerta_1, "alertas_1.csv");
             guardarDatos(sin_alerta, "sin_alerta_.csv");*/
-            guardarDatos(datos_3_3, "validacion_3_3.csv");
+            guardarDatos(datos_1, "validacion_1.csv");
+            guardarDatos(datos_2, "validacion_2.csv");
+            guardarDatos(datos_3, "validacion_3.csv");
         }
 
         public static void meteorologicos()

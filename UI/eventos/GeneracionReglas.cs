@@ -50,7 +50,7 @@ namespace UI.eventos
 
             w.ReportProgress(40, String.Format("Discretizando dataset..."));
 
-            reglas = new Reglas(archv_val_vars, 12, "alerta_1");
+            reglas = new Reglas(archv_val_vars, 10, "alerta_1");
             reglas.extraccionReglas(salida_dataset, carpeta_extraccion + "\\a1.pynoess");
 
             w.ReportProgress(60, String.Format("Discretizando dataset..."));

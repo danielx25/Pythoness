@@ -45,7 +45,7 @@ namespace STMFAM
 			// revisamos, de ser necesario, si la regla se ha activado.
 			if (debug && esVerdad(salida_reglas[r], num_vals_vars[consecuente]))
 			{
-				//cout << r << "\n";
+				//cout << "Regla " << r << "\n";
 				activaciones_reglas.at(r).second += 1;
 			}
 

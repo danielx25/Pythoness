@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="490" d:DesignWidth="790">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="448" Margin="10,32,0,0" VerticalAlignment="Top" Width="770">
+        <TabControl x:Name="tabPrincipal" HorizontalAlignment="Left" Height="448" Margin="10,32,0,0" VerticalAlignment="Top" Width="770">
             <TabItem x:Name="tabSOM" Header="SOM" Controls:ControlsHelper.HeaderFontSize="16">
                 <Grid Margin="0,0,0,0">
                     <local:SOM x:Name="panelSOM" Grid.Row="1" />

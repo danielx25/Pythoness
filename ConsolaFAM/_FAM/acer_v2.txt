@@ -1,0 +1,8 @@
+Registro: 24702
+Aciertos Alerta: 16171
+Acertividad Alerta: 65.4643%
+Aciertos Nivel: 10093
+Acertividad Nivel: 40.859%
+Prediccion: 28.2353
+Valor Real: 46
+Presione una tecla para continuar . . .

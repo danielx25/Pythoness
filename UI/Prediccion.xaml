@@ -7,24 +7,30 @@
              mc:Ignorable="d" 
              d:DesignHeight="490" d:DesignWidth="790">
     <Grid x:Name="gridPrediccion">
-        <local:Linea x:Name="graficoPrediccion" Margin="0,10,254,91" />
-        <Label Content="Nivel MP10" HorizontalAlignment="Left" Margin="597,37,0,0" VerticalAlignment="Top" Width="84"/>
-        <Label Content="Nivel de alerta" HorizontalAlignment="Left" Margin="686,37,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label Content="Dia 1" HorizontalAlignment="Left" Margin="541,63,0,0" VerticalAlignment="Top" Width="51"/>
-        <Label x:Name="mp10_dia1" Content="0" HorizontalAlignment="Left" Margin="597,63,0,0" VerticalAlignment="Top" Width="84"/>
-        <Label x:Name="alerta_dia1" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,63,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label Content="Dia 2" HorizontalAlignment="Left" Margin="541,94,0,0" VerticalAlignment="Top" Width="51"/>
-        <Label x:Name="mp10_dia2" Content="0" HorizontalAlignment="Left" Margin="597,94,0,0" VerticalAlignment="Top" Width="84"/>
-        <Label x:Name="alerta_dia2" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,94,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label Content="Dia 3" HorizontalAlignment="Left" Margin="541,125,0,0" VerticalAlignment="Top" Width="51"/>
-        <Label x:Name="mp10_dia3" Content="0" HorizontalAlignment="Left" Margin="597,125,0,0" VerticalAlignment="Top" Width="84"/>
-        <Label x:Name="alerta_dia3" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,125,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label Content="Dia 4" HorizontalAlignment="Left" Margin="541,156,0,0" VerticalAlignment="Top" Width="51"/>
-        <Label x:Name="mp10_dia4" Content="0" HorizontalAlignment="Left" Margin="597,156,0,0" VerticalAlignment="Top" Width="84"/>
-        <Label x:Name="alerta_dia4" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,156,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label Content="Dia 5" HorizontalAlignment="Left" Margin="541,187,0,0" VerticalAlignment="Top" Width="51"/>
-        <Label x:Name="mp10_dia5" Content="0" HorizontalAlignment="Left" Margin="597,187,0,0" VerticalAlignment="Top" Width="84"/>
-        <Label x:Name="alerta_dia5" Content="Sin alerta" HorizontalAlignment="Left" Margin="686,187,0,0" VerticalAlignment="Top" Width="94"/>
+        <local:Linea x:Name="graficoPrediccion" Margin="0,10,360,50" />
+        <Label Content="Nivel MP10" HorizontalAlignment="Left" Margin="504,37,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label Content="Nivel de alerta" HorizontalAlignment="Left" Margin="593,37,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Hora" HorizontalAlignment="Left" Margin="689,37,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Dia 1" HorizontalAlignment="Left" Margin="448,63,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="mp10_dia1" Content="0" HorizontalAlignment="Left" Margin="504,63,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label x:Name="alerta_dia1" Content="Sin alerta" HorizontalAlignment="Left" Margin="593,63,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="hora_dia1" Content="0" HorizontalAlignment="Left" Margin="689,63,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Dia 2" HorizontalAlignment="Left" Margin="448,94,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="mp10_dia2" Content="0" HorizontalAlignment="Left" Margin="504,94,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label x:Name="alerta_dia2" Content="Sin alerta" HorizontalAlignment="Left" Margin="593,94,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="hora_dia2" Content="0" HorizontalAlignment="Left" Margin="689,94,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Dia 3" HorizontalAlignment="Left" Margin="448,125,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="mp10_dia3" Content="0" HorizontalAlignment="Left" Margin="504,125,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label x:Name="alerta_dia3" Content="Sin alerta" HorizontalAlignment="Left" Margin="593,125,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="hora_dia3" Content="0" HorizontalAlignment="Left" Margin="689,125,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Dia 4" HorizontalAlignment="Left" Margin="448,156,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="mp10_dia4" Content="0" HorizontalAlignment="Left" Margin="504,156,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label x:Name="alerta_dia4" Content="Sin alerta" HorizontalAlignment="Left" Margin="593,156,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="hora_dia4" Content="0" HorizontalAlignment="Left" Margin="689,156,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Dia 5" HorizontalAlignment="Left" Margin="448,187,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="mp10_dia5" Content="0" HorizontalAlignment="Left" Margin="504,187,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label x:Name="alerta_dia5" Content="Sin alerta" HorizontalAlignment="Left" Margin="593,187,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="hora_dia5" Content="0" HorizontalAlignment="Left" Margin="689,187,0,0" VerticalAlignment="Top" Width="94"/>
         <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="569,279,0,0" VerticalAlignment="Top" Width="157" Click="clickGenerarReporte"/>
     </Grid>
 </UserControl>

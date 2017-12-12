@@ -12,7 +12,7 @@ namespace PruebasCS
         {
             //PruebasReglas pReglas = new PruebasReglas(); pReglas.extraccionReglas("pesosRNA.csv", "reglasC45.txt");
             //PruebasMP10.validacion();
-            //PruebasBD.datosValidacion();
+            PruebasBD.datosValidacion();
             //PruebasBD.meteorologicos();
             //PruebasBD.mitigacion();
             //PruebasBD.palas();

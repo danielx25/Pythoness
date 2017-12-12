@@ -16,13 +16,13 @@ using namespace ConsolaFAM;
 
 int main(int argc, char* argv[])
 {
-	string modo(argv[1]);
+	/*string modo(argv[1]);
 	string carpeta_archivos(argv[2]);
-	int num_nrns = atoi(argv[3]);
+	int num_nrns = atoi(argv[3]);*/
 
-	/*string modo = "-v";
+	string modo = "-v";
 	string carpeta_archivos = "_FAM";
-	int num_nrns = 10;*/
+	int num_nrns = 10;
 
 	/*string archv_validacion("validacion.csv");
 	string archv_reglas("reglas.txt");

@@ -60,7 +60,7 @@ namespace UI
             }
 
             boxDias.SelectedIndex = 4;
-            boxRNAs.SelectedIndex = 2;
+            //boxRNAs.SelectedIndex = 2;
 
             chBoxDia1.IsChecked = true;
             chBoxDia2.IsChecked = true;

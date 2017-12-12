@@ -23,6 +23,7 @@ namespace UI
     public partial class SOM : UserControl
     {
         public string carpeta;
+        public static RoutedEvent eventoCambiarTab;
 
         public SOM()
         {
@@ -30,6 +31,8 @@ namespace UI
 
             InitializeComponent();
             cargarValoresConfig();
+
+            eventoCambiarTab = EventManager.RegisterRoutedEvent("cambiarTab", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SOM));
         }
 
         public void validacion(object sender, RoutedEventArgs e)
@@ -40,6 +43,10 @@ namespace UI
             this.btnValidacion.IsEnabled = false;
             tempProc.WaitForExit();
             this.btnValidacion.IsEnabled = true;
+
+            RoutedEventArgs e1 = new RoutedEventArgs(eventoCambiarTab);
+
+            RaiseEvent(e1);
         }
 
         public void guardarEstado(object sender, RoutedEventArgs e)
@@ -72,6 +79,11 @@ namespace UI
             t_randoVecindad.Text = Convert.ToString(ControladorSOM.getRangoVecindad());
         }
 
+        public event RoutedEventHandler cambiarTab
+        {
+            add { base.AddHandler(eventoCambiarTab, value); }
+            remove { base.RemoveHandler(eventoCambiarTab, value); }
+        }
 
         private string rutaArchivo(string archivo)
         {
