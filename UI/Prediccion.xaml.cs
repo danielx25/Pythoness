@@ -43,7 +43,7 @@ namespace UI
             }
 
             graficoPrediccion.SetAxisXLimits(1, predicciones.Length);
-            graficoPrediccion.SetAxisYLimits(0, 800);
+            graficoPrediccion.SetAxisYLimits(0, 1200);
             graficoPrediccion.LabelAxisX = "Dias";
             graficoPrediccion.LabelAxisY = "MP10";
 

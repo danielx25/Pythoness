@@ -154,7 +154,7 @@ namespace ValidacionRNA
 			if (mostrar_progreso)
 			{
 				system("cls");
-				cout << "Registro: " << registro << " \nAciertos Alerta: " << aciertos_alerta << " \nAcertividad Alerta: " << acertividad_alerta << "% \nAciertos Nivel: " << aciertos_nivel << " \nAcertividad Nivel: " << acertividad_nivel << "% \nPrediccion: " << prediccion << " \nValor Real: " << valor_mp10 << "\n";
+				cout << "Registro: " << registro << " \nAciertos Alerta: " << aciertos_alerta << " \nAsertividad Alerta: " << acertividad_alerta << "% \nAciertos Nivel: " << aciertos_nivel << " \nAsertividad Nivel: " << acertividad_nivel << "% \nPrediccion: " << prediccion << " \nValor Real: " << valor_mp10 << "\n";
 			}
 		}
 
@@ -168,6 +168,9 @@ namespace ValidacionRNA
 		{
 			guardarReglasActivadas(reglas, activaciones_reglas);
 		}
+
+		aser_alerta = acertividad_alerta;
+		aser_nivel = acertividad_nivel;
 
 		//delete sfam;
 
@@ -360,6 +363,16 @@ namespace ValidacionRNA
 
 			in.close();
 		}
+	}
+
+	double ValidacionFAM::getAsertividadAlerta()
+	{
+		return aser_alerta;
+	}
+
+	double ValidacionFAM::getAsertividadNivel()
+	{
+		return aser_nivel;
 	}
 
 	void ValidacionFAM::actualizarAciertos(double prediccion, double valor_real, double& aciertos_alerta, double& aciertos_nivel)

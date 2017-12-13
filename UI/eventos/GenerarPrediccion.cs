@@ -119,6 +119,7 @@ namespace UI.eventos
 
                     Tuple<double, double> prediccion_hora = getMaximaPrediccion(cFAM);
 
+                    panelIngresoDatos.datos[datos_dia.Key]["hora"] = prediccion_hora.Item2;
                     panelPrediccion.predicciones[indice_dia] = prediccion_hora.Item1;
                     panelPrediccion.horas[indice_dia] = prediccion_hora.Item2;
 

@@ -20,7 +20,24 @@ namespace BaseDeDatos
 
         public BD()
         {
-            IEnumerable<string> lineas = File.ReadLines("bd.conf");
+            string archivo = "bd.conf";
+
+            // si el archivo no existe, creamos un por defecto.
+            if (!File.Exists(archivo))
+            {
+                using (TextWriter tw = new StreamWriter(archivo, true))
+                {
+                    tw.WriteLine("HOST = localhost");
+                    tw.WriteLine("PUERTO = 5432");
+                    tw.WriteLine("USUARIO = postgres");
+                    tw.WriteLine("PASSWORD = 1234");
+                    tw.WriteLine("BD = MP10");
+                    tw.WriteLine("TIEMPO_ESPERA = 0");
+                    tw.Close();
+                }
+            }
+
+            IEnumerable<string> lineas = File.ReadLines(archivo);
             string[] datos = new string[6];
 
             foreach (string linea in lineas)
@@ -63,11 +80,18 @@ namespace BaseDeDatos
         {
             string datos_conexion = "Host=" + host + ";Username=" + usuario + ";Password=" + password + ";Database=" + base_de_datos + ";CommandTimeout=" + tiempo_espera;
 
-            conexion = new NpgsqlConnection(datos_conexion);
-            conexion.Open();
+            try
+            {
+                conexion = new NpgsqlConnection(datos_conexion);
+                conexion.Open();
 
-            if (conexion.State == System.Data.ConnectionState.Open)
-                return true;
+                if (conexion.State == System.Data.ConnectionState.Open)
+                    return true;
+            }
+            catch (Exception e)
+            {
+
+            }
 
             return false;
         }

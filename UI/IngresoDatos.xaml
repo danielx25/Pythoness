@@ -33,49 +33,49 @@
             <TabItem x:Name="tabMeteorologicos" Header="Meteorologicos" Controls:ControlsHelper.HeaderFontSize="16">
                 <Grid x:Name="gridMeteorologicos">
                     <Label Content="Fecha:" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="116"/>
-                    <DatePicker x:Name="boxFecha" HorizontalAlignment="Left" Margin="126,29,0,0" VerticalAlignment="Top" SelectedDateChanged="setFecha"/>
-                    <Label Content="Velocidad viento:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxVelocidadV" HorizontalAlignment="Left" Height="23" Margin="126,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="velocidad_viento"/>
-                    <Label Content="Dirección viento:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxDireccionV" HorizontalAlignment="Left" Height="23" Margin="126,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="direccion_viento"/>
-                    <Label Content="Temperatura:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxTemperatura" HorizontalAlignment="Left" Height="23" Margin="126,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="temperatura"/>
-                    <Label Content="Humedad relativa:" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxHumedad" HorizontalAlignment="Left" Height="23" Margin="126,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="humedad_relativa"/>
-                    <Label Content="Radiacion solar:" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxRadiacion" HorizontalAlignment="Left" Height="23" Margin="126,243,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="radiacion_solar"/>
-                    <Label Content="Evaporacion:" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxEvaporacion" HorizontalAlignment="Left" Height="23" Margin="126,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="evaporacion"/>
-                    <Label Content="Precipitación ultimos 5 dias" HorizontalAlignment="Left" Margin="366,29,0,0" VerticalAlignment="Top" Width="301"/>
-                    <Label Content="Dia de mañana:" HorizontalAlignment="Left" Margin="372,70,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxPrecipitacionM" HorizontalAlignment="Left" Height="23" Margin="488,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia1"/>
-                    <Label Content="Hoy:" HorizontalAlignment="Left" Margin="372,112,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxPrecipitacionH" HorizontalAlignment="Left" Height="23" Margin="488,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia2"/>
-                    <Label Content="Un dia antes:" HorizontalAlignment="Left" Margin="372,155,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxPrecipitacion1" HorizontalAlignment="Left" Height="23" Margin="488,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia3"/>
-                    <Label Content="Dos dia antes:" HorizontalAlignment="Left" Margin="372,197,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxPrecipitacion2" HorizontalAlignment="Left" Height="23" Margin="488,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia4"/>
-                    <Label Content="Tres dia antes:" HorizontalAlignment="Left" Margin="372,243,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxPrecipitacion3" HorizontalAlignment="Left" Height="23" Margin="488,243,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia5"/>
+                    <DatePicker x:Name="boxFecha" HorizontalAlignment="Left" Margin="162,29,0,0" VerticalAlignment="Top" SelectedDateChanged="setFecha"/>
+                    <Label Content="Velocidad viento (m/s):" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxVelocidadV" HorizontalAlignment="Left" Height="23" Margin="162,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="velocidad_viento"/>
+                    <Label Content="Dirección viento (grados):" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxDireccionV" HorizontalAlignment="Left" Height="23" Margin="162,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="direccion_viento"/>
+                    <Label Content="Temperatura (°C):" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxTemperatura" HorizontalAlignment="Left" Height="23" Margin="162,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="temperatura"/>
+                    <Label Content="Humedad relativa (%):" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxHumedad" HorizontalAlignment="Left" Height="23" Margin="162,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="humedad_relativa"/>
+                    <Label Content="Radiacion solar (W/m2):" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxRadiacion" HorizontalAlignment="Left" Height="23" Margin="162,243,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="radiacion_solar"/>
+                    <Label Content="Evaporacion (mm):" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxEvaporacion" HorizontalAlignment="Left" Height="23" Margin="162,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="evaporacion"/>
+                    <Label Content="Precipitación ultimos 5 dias" HorizontalAlignment="Left" Margin="366,30,0,0" VerticalAlignment="Top" Width="301"/>
+                    <Label Content="Dia de mañana (mm):" HorizontalAlignment="Left" Margin="372,70,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxPrecipitacionM" HorizontalAlignment="Left" Height="23" Margin="524,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia1"/>
+                    <Label Content="Hoy (mm):" HorizontalAlignment="Left" Margin="372,112,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxPrecipitacionH" HorizontalAlignment="Left" Height="23" Margin="524,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia2"/>
+                    <Label Content="Un dia antes (mm):" HorizontalAlignment="Left" Margin="372,155,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxPrecipitacion1" HorizontalAlignment="Left" Height="23" Margin="524,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia3"/>
+                    <Label Content="Dos dia antes (mm):" HorizontalAlignment="Left" Margin="372,197,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxPrecipitacion2" HorizontalAlignment="Left" Height="23" Margin="524,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia4"/>
+                    <Label Content="Tres dia antes (mm):" HorizontalAlignment="Left" Margin="372,243,0,0" VerticalAlignment="Top" Width="147"/>
+                    <TextBox x:Name="boxPrecipitacion3" HorizontalAlignment="Left" Height="23" Margin="524,243,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="precipitacion_dia5"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabMitigación" Header="Mitigación" Controls:ControlsHelper.HeaderFontSize="16">
                 <Grid x:Name="gridMitigacion">
-                    <Label Content="Chancadores:" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxChancadores" HorizontalAlignment="Left" Height="23" Margin="126,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="chaxa_camion"/>
-                    <Label Content="Movitec:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxMovitecdia" HorizontalAlignment="Left" Height="23" Margin="126,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="movitec_camion"/>
-                    <Label Content="Dasdia:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="116"/>
-                    <TextBox x:Name="boxDasdia" HorizontalAlignment="Left" Height="23" Margin="126,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="das_camion"/>
-                    <Label Content="Cnorte:" HorizontalAlignment="Left" Margin="372,29,0,0" VerticalAlignment="Top" Width="116"/>
+                    <Label Content="Chancadores (cantidad):" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="153"/>
+                    <TextBox x:Name="boxChancadores" HorizontalAlignment="Left" Height="23" Margin="168,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="chaxa_camion"/>
+                    <Label Content="Movitec (cantidad):" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="153"/>
+                    <TextBox x:Name="boxMovitecdia" HorizontalAlignment="Left" Height="23" Margin="168,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="movitec_camion"/>
+                    <Label Content="Dasdia (cantidad):" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="153"/>
+                    <TextBox x:Name="boxDasdia" HorizontalAlignment="Left" Height="23" Margin="168,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="das_camion"/>
+                    <Label Content="Cnorte (m3):" HorizontalAlignment="Left" Margin="372,29,0,0" VerticalAlignment="Top" Width="116"/>
                     <TextBox x:Name="boxCnorte" HorizontalAlignment="Left" Height="23" Margin="488,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="cnorte_consumo_agua"/>
-                    <Label Content="Cmovil:" HorizontalAlignment="Left" Margin="372,71,0,0" VerticalAlignment="Top" Width="116"/>
+                    <Label Content="Cmovil (m3):" HorizontalAlignment="Left" Margin="372,71,0,0" VerticalAlignment="Top" Width="116"/>
                     <TextBox x:Name="boxCmovil" HorizontalAlignment="Left" Height="23" Margin="488,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="cmovil_consumo_agua"/>
-                    <Label Content="Cachimba 1:" HorizontalAlignment="Left" Margin="372,114,0,0" VerticalAlignment="Top" Width="116"/>
+                    <Label Content="Cachimba 1 (m3):" HorizontalAlignment="Left" Margin="372,114,0,0" VerticalAlignment="Top" Width="116"/>
                     <TextBox x:Name="boxCachimba1" HorizontalAlignment="Left" Height="23" Margin="488,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="cachimba1_consumo_agua"/>
-                    <Label Content="Cachimba 2:" HorizontalAlignment="Left" Margin="372,156,0,0" VerticalAlignment="Top" Width="116"/>
+                    <Label Content="Cachimba 2 (m3):" HorizontalAlignment="Left" Margin="372,156,0,0" VerticalAlignment="Top" Width="116"/>
                     <TextBox x:Name="boxCachimba2" HorizontalAlignment="Left" Height="23" Margin="488,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="cachimba2_consumo_agua"/>
-                    <Label Content="Gerencia:" HorizontalAlignment="Left" Margin="372,202,0,0" VerticalAlignment="Top" Width="116"/>
+                    <Label Content="Gerencia (m3):" HorizontalAlignment="Left" Margin="372,202,0,0" VerticalAlignment="Top" Width="116"/>
                     <TextBox x:Name="boxGerencia" HorizontalAlignment="Left" Height="23" Margin="488,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143" LostFocus="setValor" Tag="gerencia_consumo_agua"/>
                 </Grid>
             </TabItem>

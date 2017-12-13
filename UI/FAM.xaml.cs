@@ -61,11 +61,16 @@ namespace UI
 
         public void generarReglas(object sender, RoutedEventArgs e)
         {
+            btnGenerarReglas.IsEnabled = false;
+            btnValidacion.IsEnabled = false;
             int num_nrns = Int32.Parse(lblNumNrns.Content.ToString());
             string carpeta_archivos = directorio + "\\" + carpeta;
             string consola = directorio + "\\" + rutaArchivo("ConsolaFAM.exe");
 
             GeneracionReglas genReglas = new GeneracionReglas(carpeta_archivos, archv_dataset, consola, num_nrns, true);
+
+            btnGenerarReglas.IsEnabled = true;
+            btnValidacion.IsEnabled = true;
         }
 
         public void setNumNeuronas(object sender, DragCompletedEventArgs e)
@@ -77,6 +82,8 @@ namespace UI
 
         public void validacion(object sender, RoutedEventArgs e)
         {
+            btnGenerarReglas.IsEnabled = false;
+            btnValidacion.IsEnabled = false;
             directorio = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             int num_nrns = Int32.Parse(lblNumNrns.Content.ToString());
             string carpeta_archivos = "\"" + directorio + "\\" + carpeta + "\"";
@@ -86,6 +93,8 @@ namespace UI
             process.StartInfo.Arguments = "-v " + carpeta_archivos + " " + num_nrns;
             //process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
             process.Start();
+            btnGenerarReglas.IsEnabled = true;
+            btnValidacion.IsEnabled = true;
         }
 
         private string rutaArchivo(string archivo)

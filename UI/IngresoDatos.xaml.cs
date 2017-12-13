@@ -56,7 +56,7 @@ namespace UI
 
                 // solo se obtiene una fecha, por lo que las entradas se setearan una vez.
                 foreach (KeyValuePair<string, double[]> d in datos_dia)
-                    setEntradas(dia_actual, fecha, d.Value);
+                    setEntradas(dia_actual, fecha.AddYears(1), d.Value);
             }
 
             boxDias.SelectedIndex = 4;
@@ -190,17 +190,16 @@ namespace UI
             setEntrada(dia, "pala8", datos[18]);
             setEntrada(dia, "pala10", datos[19]);
             setEntrada(dia, "pala11", datos[20]);
-            setEntrada(dia, "pala11", datos[21]);
-            setEntrada(dia, "chancador1", datos[22]);
-            setEntrada(dia, "chancador2", datos[23]);
-            setEntrada(dia, "chaxa_camion", datos[24]);
-            setEntrada(dia, "movitec_camion", datos[25]);
-            setEntrada(dia, "das_camion", datos[26]);
-            setEntrada(dia, "cnorte_consumo_agua", datos[27]);
-            setEntrada(dia, "cmovil_consumo_agua", datos[28]);
-            setEntrada(dia, "cachimba1_consumo_agua", datos[29]);
-            setEntrada(dia, "cachimba2_consumo_agua", datos[30]);
-            setEntrada(dia, "gerencia_consumo_agua", datos[31]);
+            setEntrada(dia, "chancador1", datos[21]);
+            setEntrada(dia, "chancador2", datos[22]);
+            setEntrada(dia, "chaxa_camion", datos[23]);
+            setEntrada(dia, "movitec_camion", datos[24]);
+            setEntrada(dia, "das_camion", datos[25]);
+            setEntrada(dia, "cnorte_consumo_agua", datos[26]);
+            setEntrada(dia, "cmovil_consumo_agua", datos[27]);
+            setEntrada(dia, "cachimba1_consumo_agua", datos[28]);
+            setEntrada(dia, "cachimba2_consumo_agua", datos[29]);
+            setEntrada(dia, "gerencia_consumo_agua", datos[30]);
         }
 
         private void setEntradas(string dia)

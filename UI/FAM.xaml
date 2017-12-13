@@ -10,11 +10,11 @@
     <Grid>
         <Label Content="Numero de Neuronas:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="Configuración Red Neuronal FAM. Una vez entrenada la Red Neuronal SOM, se pueden generar las reglas y la validación de la red FAM." HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="725"/>
-        <Slider x:Name="slNumNrns" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Width="149" Minimum="3" Maximum="20" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Thumb.DragCompleted="setNumNeuronas"/>
-        <Label x:Name="lblNumNrns" Content="3" HorizontalAlignment="Left" Margin="164,135,0,0" VerticalAlignment="Top" Height="26" Width="26"/>
-        <Label Content="Generacion Reglas:" HorizontalAlignment="Left" Margin="247,90,0,0" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="btnGenerarReglas" Content="Generar reglas" HorizontalAlignment="Left" Margin="247,135,0,0" VerticalAlignment="Top" Width="180" Click="generarReglas"/>
-        <Label Content="Ejecutar Validacion:" HorizontalAlignment="Left" Margin="503,90,0,0" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="btnValidacion" Content="validación" HorizontalAlignment="Left" Margin="503,134,0,0" VerticalAlignment="Top" Width="180" Click="validacion"/>
+        <Slider x:Name="slNumNrns" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Width="671" Minimum="2" Maximum="100" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Thumb.DragCompleted="setNumNeuronas"/>
+        <Label x:Name="lblNumNrns" Content="2" HorizontalAlignment="Left" Margin="686,135,0,0" VerticalAlignment="Top" Height="26" Width="49"/>
+        <Label Content="Generacion Reglas:" HorizontalAlignment="Left" Margin="16,195,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="btnGenerarReglas" Content="Generar reglas" HorizontalAlignment="Left" Margin="16,240,0,0" VerticalAlignment="Top" Width="180" Click="generarReglas"/>
+        <Label Content="Ejecutar Validacion:" HorizontalAlignment="Left" Margin="272,195,0,0" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="btnValidacion" Content="validación" HorizontalAlignment="Left" Margin="272,239,0,0" VerticalAlignment="Top" Width="180" Click="validacion"/>
     </Grid>
 </UserControl>

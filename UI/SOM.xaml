@@ -7,28 +7,24 @@
              mc:Ignorable="d" 
              d:DesignWidth="770" Height="490">
     <Grid>
-        <Button x:Name="btnValidacion" Content="Entrenar" HorizontalAlignment="Left" Margin="280,376,0,0" VerticalAlignment="Top" Width="180" Click="validacion"/>
+        <Button x:Name="btnValidacion" Content="Entrenar" HorizontalAlignment="Left" Margin="280,356,0,0" VerticalAlignment="Top" Width="180" Click="validacion"/>
         <Label Content="Configuracion Red Neuronal SOM. A partir de su entrenamiento se obtendran las reglas para la Red Neuronal FAM." HorizontalAlignment="Left" Margin="21,19,0,0" VerticalAlignment="Top"/>
-        <Label Content="Nombre archivo entrenamiento" HorizontalAlignment="Left" Margin="21,74,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="243,75,0,0" TextWrapping="Wrap" Text="DatosEntrenamiento.csv" VerticalAlignment="Top" Width="169"/>
-        <Label Content="Nombre archivo entrenamiento" HorizontalAlignment="Left" Margin="21,74,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="t_rutaEntrenamiento" HorizontalAlignment="Left" Height="23" Margin="243,75,0,0" TextWrapping="Wrap" Text="DatosEntrenamiento.csv" VerticalAlignment="Top" Width="169"/>
-        <Label Content="Numero de Entradas" HorizontalAlignment="Left" Margin="21,105,0,0" VerticalAlignment="Top"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="t_numeroEntrada" HorizontalAlignment="Left" Height="23" Margin="243,107,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Numero de neuronas" HorizontalAlignment="Left" Margin="21,136,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" x:Name="t_numeroNeuronas" HorizontalAlignment="Left" Height="23" Margin="243,138,0,0" TextWrapping="Wrap" Text="1600" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Largo" HorizontalAlignment="Left" Margin="21,167,0,0" VerticalAlignment="Top"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" TextChanged="cambioValorLargo" x:Name="t_largo" HorizontalAlignment="Left" Height="23" Margin="243,169,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Ancho" HorizontalAlignment="Left" Margin="21,198,0,0" VerticalAlignment="Top"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" TextChanged="cambioValorAncho"  ToolTip="Tiene que ser un numero entero par" ToolTipService.ShowOnDisabled="True" x:Name="t_ancho" HorizontalAlignment="Left" Height="23" Margin="243,200,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Alfa" HorizontalAlignment="Left" Margin="21,229,0,0" VerticalAlignment="Top"/>
-        <TextBox TextChanged="cambioNumeroCiclos"  x:Name="t_alfa" HorizontalAlignment="Left" Height="23" Margin="243,230,0,0" TextWrapping="Wrap" Text="0.5" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Beta" HorizontalAlignment="Left" Margin="21,255,0,0" VerticalAlignment="Top"/>
-        <TextBox TextChanged="cambioNumeroCiclos"  x:Name="t_beta" HorizontalAlignment="Left" Height="23" Margin="243,257,0,0" TextWrapping="Wrap" Text="0.005" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Rango de la vecindad" HorizontalAlignment="Left" Margin="22,306,0,0" VerticalAlignment="Top"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="t_randoVecindad" HorizontalAlignment="Left" Height="23" Margin="243,309,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Guardar Configuracion RNA" HorizontalAlignment="Left" Margin="13,376,0,0" VerticalAlignment="Top" Width="192" Click="guardarEstado"/>
-        <Label  Content="Numero ciclos" HorizontalAlignment="Left" Margin="21,281,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="t_numeroCiclos" HorizontalAlignment="Left" Height="23" Margin="243,283,0,0" IsEnabled="False" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Numero de Entradas" HorizontalAlignment="Left" Margin="21,85,0,0" VerticalAlignment="Top"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="t_numeroEntrada" HorizontalAlignment="Left" Height="23" Margin="243,87,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label Content="Numero de neuronas" HorizontalAlignment="Left" Margin="21,116,0,0" VerticalAlignment="Top"/>
+        <TextBox IsEnabled="False" x:Name="t_numeroNeuronas" HorizontalAlignment="Left" Height="23" Margin="243,118,0,0" TextWrapping="Wrap" Text="1600" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Largo" HorizontalAlignment="Left" Margin="21,147,0,0" VerticalAlignment="Top"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" TextChanged="cambioValorLargo" x:Name="t_largo" HorizontalAlignment="Left" Height="23" Margin="243,149,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Ancho" HorizontalAlignment="Left" Margin="21,178,0,0" VerticalAlignment="Top"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" TextChanged="cambioValorAncho"  ToolTip="Tiene que ser un numero entero par" ToolTipService.ShowOnDisabled="True" x:Name="t_ancho" HorizontalAlignment="Left" Height="23" Margin="243,180,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Alfa" HorizontalAlignment="Left" Margin="21,209,0,0" VerticalAlignment="Top"/>
+        <TextBox TextChanged="cambioNumeroCiclos"  x:Name="t_alfa" HorizontalAlignment="Left" Height="23" Margin="243,210,0,0" TextWrapping="Wrap" Text="0.5" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Beta" HorizontalAlignment="Left" Margin="21,235,0,0" VerticalAlignment="Top"/>
+        <TextBox TextChanged="cambioNumeroCiclos"  x:Name="t_beta" HorizontalAlignment="Left" Height="23" Margin="243,237,0,0" TextWrapping="Wrap" Text="0.005" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Rango de la vecindad" HorizontalAlignment="Left" Margin="22,286,0,0" VerticalAlignment="Top"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="t_randoVecindad" HorizontalAlignment="Left" Height="23" Margin="243,289,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Guardar Configuracion RNA" HorizontalAlignment="Left" Margin="13,356,0,0" VerticalAlignment="Top" Width="192" Click="guardarEstado"/>
+        <Label  Content="Numero ciclos" HorizontalAlignment="Left" Margin="21,261,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="t_numeroCiclos" HorizontalAlignment="Left" Height="23" Margin="243,263,0,0" IsEnabled="False" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </UserControl>

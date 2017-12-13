@@ -10,9 +10,20 @@ namespace BaseDeDatos
     {
         public static Dictionary<string, double[]> getDatosValidacion(DateTime inicio, DateTime fin)
         {
-            Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin);
+            BD bd = new BD();
 
-            return getDatos(metereologicos, inicio, fin, false);
+            // si no se puede conectar, devolvemos valores por defecto.
+            if (bd.conectar())
+            {
+                bd.cerrar(); // cerramos la conexion de prueba.
+
+                Dictionary<string, double[]> metereologicos = Consultas.getDatosMeteorologicos(inicio, fin);
+                return getDatos(metereologicos, inicio, fin, false);
+            }
+            else
+            {
+                return Consultas.getDatosDefecto(inicio, fin);
+            }
         }
 
         public static Dictionary<string, double[]> getDatosEntrenamiento(DateTime inicio, DateTime fin)
@@ -502,6 +513,58 @@ namespace BaseDeDatos
                 }
 
                 bd.cerrar();
+            }
+
+            return datos;
+        }
+
+        public static Dictionary<string, double[]> getDatosDefecto(DateTime inicio, DateTime fin)
+        {
+            Dictionary<string, double[]> datos = new Dictionary<string, double[]>();
+            int num_cols = 32;
+            double[] datos_dia = new double[num_cols];
+
+            datos_dia[0] = inicio.Month;
+            datos_dia[1] = inicio.Hour;
+            datos_dia[2] = 5;
+            datos_dia[3] = 62;
+            datos_dia[4] = 15;
+            datos_dia[5] = 25;
+            datos_dia[6] = 0;
+            datos_dia[7] = 0;
+            datos_dia[8] = 0;
+            datos_dia[9] = 0;
+            datos_dia[10] = 0;
+            datos_dia[11] = 0;
+            datos_dia[12] = 0;
+            datos_dia[13] = 0;
+            datos_dia[14] = 0;
+            datos_dia[15] = 0;
+            datos_dia[16] = 0;
+            datos_dia[17] = 0;
+            datos_dia[18] = 0;
+            datos_dia[19] = 0;
+            datos_dia[20] = 0;
+            datos_dia[21] = 0;
+            datos_dia[22] = 0;
+            datos_dia[23] = 0;
+            datos_dia[24] = 0;
+            datos_dia[25] = 0;
+            datos_dia[26] = 0;
+            datos_dia[27] = 0;
+            datos_dia[28] = 0;
+            datos_dia[29] = 0;
+            datos_dia[30] = 0;
+            datos_dia[31] = 141;
+
+            DateTime fecha_actual = inicio;
+            int siguiente = 0;
+
+            while (fecha_actual < fin)
+            {
+                datos.Add(fecha_actual.ToString("yyyy-MM-dd"), datos_dia);
+                siguiente += 1;
+                fecha_actual = fecha_actual.AddDays(siguiente);
             }
 
             return datos;

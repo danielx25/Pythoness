@@ -52,6 +52,10 @@ namespace ValidacionRNA
 		void getProgreso(int& registro, double& aciertos_alerta, double& acertividad_alerta, double& aciertos_nivel, double& acertividad_nivel);
 
 		void getProgresoActivaciones(vector<pair<int, int>>& activaciones);
+		
+		double getAsertividadAlerta();
+
+		double getAsertividadNivel();
 
 		void actualizarAciertos(double prediccion, double valor_real, double& aciertos_alerta, double& aciertos_nivel);
 
@@ -78,5 +82,7 @@ namespace ValidacionRNA
 		vector<string> registros;
 		SistemaFAM* sfam;
 		bool debug_sfam;
+		double aser_alerta;
+		double aser_nivel;
 	};
 }

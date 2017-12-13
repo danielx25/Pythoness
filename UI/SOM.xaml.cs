@@ -120,9 +120,11 @@ namespace UI
 
         public void guardarEstado(object sender, RoutedEventArgs e)
         {
-            String direc = t_rutaEntrenamiento.Text;
+            //String direc = t_rutaEntrenamiento.Text;
+            String direc = "DatosEntrenamiento.csv";
             int numeroNeuronas = Convert.ToInt16(t_numeroNeuronas.Text);
-            int numeroEntradas = Convert.ToInt16(t_numeroEntrada.Text);
+            //int numeroEntradas = Convert.ToInt16(t_numeroEntrada.Text);
+            int numeroEntradas = 32;
             int largo = Convert.ToInt16(t_ancho.Text);
             int ancho = Convert.ToInt16(t_largo.Text);
             double alfa  = Convert.ToDouble(t_alfa.Text);
@@ -130,16 +132,17 @@ namespace UI
             int rangoVecindad = Convert.ToInt16(t_randoVecindad.Text);
             //ControladorSOM.iniciarSOM();
             ControladorSOM.cambiarValoresConfiguracion(direc, numeroEntradas, numeroNeuronas, largo, ancho, alfa, beta, rangoVecindad);
-            System.Console.WriteLine("funciona!!!");
-            System.Console.WriteLine(direc);
+            //System.Console.WriteLine("funciona!!!");
+            //System.Console.WriteLine(direc);
         }
 
         public void cargarValoresConfig()
         {
             Controladores.config valoresConfig;// = 
             ControladorSOM.obtenerValoresConfiguracion();
-            t_rutaEntrenamiento.Text = Convert.ToString((String)ControladorSOM.getDireccion());
-            t_numeroEntrada.Text = Convert.ToString(ControladorSOM.getNumeroEntradas());
+            //t_rutaEntrenamiento.Text = Convert.ToString((String)ControladorSOM.getDireccion());
+            //t_numeroEntrada.Text = Convert.ToString(ControladorSOM.getNumeroEntradas());
+            t_numeroEntrada.Text = "32";
             t_numeroNeuronas.Text = Convert.ToString(ControladorSOM.getNumetoNeuronas());
             t_ancho.Text = Convert.ToString(ControladorSOM.getAncho());
             t_largo.Text = Convert.ToString(ControladorSOM.getLargo());
